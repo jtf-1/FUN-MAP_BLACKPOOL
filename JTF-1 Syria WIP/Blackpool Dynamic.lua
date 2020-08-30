@@ -158,11 +158,18 @@ function SEF_InitializeMissionTable()
 	OperationBlackpool_AG = {}	
 	
 	--ABU MUSA ISLAND
+	--[[
 	OperationBlackpool_AG[1] = {				
 		TargetName = "Ja'Din_Aircraft",
 		TargetStatic = false,
 		TargetBriefing = "Mission Update \nPrimary Objective - Destroy Su-17 located near Tabqa Airfield  \nGrid DV65",
-	}				
+	}
+	]]--	
+	OperationBlackpool_AG[1] = {
+    TargetName = "Patrol-1",
+    TargetStatic = false,
+    TargetBriefing = "Mission Update \nTarget: ISIL Convoy\n\nOur deep cover operative has sent word that an ISIL convoy has been patrolling the city of Ein Eikorum in order to recruit and control the remaining populate. Take out the convoy patrolling the city using whatever means possible.\n\nLocation: N 35.22.11 E 36.24.22 (Map Grid: BV61)\nSuggested Munition(s): Laser guided munitions, Rockets, Retarded Bombs",
+  }			
 	OperationBlackpool_AG[2] = {
 		TargetName = "Deir_ez_Zor_11",
 		TargetStatic = false,
@@ -183,7 +190,21 @@ function SEF_InitializeMissionTable()
 		TargetStatic = true,
 		TargetBriefing = "Mission Update \n13 April 2018 \nTarget: Him_Shanshar Warehouses\n\nA Syrian government offensive to recapture the rebel-held Eastern Ghouta suburb began in February 2018. The offensive was condemned by Western media and governments for its use of chemical weapons. In retaliation the US Join Chiefs targeted 3 locations, one of which were 3 warehouses in Him_Shanshar. The warehouses contained parts of Syria’s chemical weapons cache. In April 2018, a long range strike using multiple cruise missiles was carried out.\n\nLocation: N 34.41.23 E 36.29.03 (Map Grid: BU64) \nSuggested Munition(s): Cruise Missiles / Long Range Glide Bombs",
   }
-	
+	OperationBlackpool_AG[6] = {
+    TargetName = "RussianCargo-1",
+    TargetStatic = false,
+    TargetBriefing = "Mission Update \nTarget: Russian Cargo Vessel\n\nDespite global sanctions against Syria, Russia has been sending arms and supplies to the current Syrian regime. A Russian cargo ship is currently on route from the West and intel suggest it plans to unload its cargo in the port of Latakia. Stop this vessel at all costs from reaching the port.\nPort Location: N 35.31.15 E 35.45.38 (Map Grid: YE53)\nSuggested Munition(s): Harpoon(s) & Laser guided munitions",
+  }
+  OperationBlackpool_AG[7] = {
+    TargetName = "Static Locomotive 1",
+    TargetStatic = true,
+    TargetBriefing = "Mission Update \nTarget: Locomotive\n\nA train suspected of transporting nuclear machinery needed to develop the Syrian nuclear weapons program is preparing to leave the city of Busra in South Syria. The city is heavily guarded with manpads and AAA. Your primary mission is to destroy the locomotive and cripple the train.\nLocation: N 32.31.5 E 36.28.38 (Map Grid: BS60)\nSuggested Munition(s): Unguided bombs Mk-83/Mk-84",
+  }
+  OperationBlackpool_AG[8] = {
+    TargetName = "BusraAirDefense1",
+    TargetStatic = false,
+    TargetBriefing = "Mission Update \nTarget: Manpads & AAA\n\nSyrian troops have fortified the city of Busra to guard a train suspected of transporting nuclear machinery needed to develop the Syrian nuclear weapons program. Your primary mission is to destroy all of the Manpads & AAA in the city.\nLocation: N 32.31.5 E 36.28.38 (Map Grid: BS60)\nSuggested Munition(s): Unguided bombs",
+  }
 	--Debug Code
 	--[[
 	trigger.action.outText("Target 1 Name: "..OperationBlackpool_AG[1].TargetName, 15)
@@ -639,7 +660,7 @@ end
 
 		--////GLOBAL VARIABLE INITIALISATION	
 		NumberOfCompletedMissions = 0
-		TotalScenarios = 5
+		TotalScenarios = 7
 		OperationComplete = false
 		OnShotSoundsEnabled = 0
 		SoundLockout = 0
@@ -672,7 +693,7 @@ end
 		
 		--////SCHEDULERS
 		--AI FLIGHT PUSH FLAGS
-		timer.scheduleFunction(SEF_CheckAIPushFlags, 53, timer.getTime() + 1)
+		--timer.scheduleFunction(SEF_CheckAIPushFlags, 53, timer.getTime() + 1)
 		--MISSION TARGET STATUS
 		timer.scheduleFunction(SEF_MissionTargetStatus, 53, timer.getTime() + 10)
 		--RED BOMBER ATTACKS - WAIT 10-15 MINUTES BEFORE STARTING
