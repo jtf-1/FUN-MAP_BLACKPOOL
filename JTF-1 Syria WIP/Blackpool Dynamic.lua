@@ -178,7 +178,7 @@ function SEF_InitializeMissionTable()
 	OperationBlackpool_AG[3] = {
 		TargetName = "Al_Tanf_Armor",
 		TargetStatic = false,
-		TargetBriefing = "Mission Update \nMay 18, 2017\nTarget: Militia Armor & troops\n\nA U.S. aircraft conducted airstrikes against vehicles, including a tank and bulldozer belonging to pro-government militias that were setting up fighting positions within the Al-Tanf deconfliction zone.\n\nLocation: N 35.17.29 E 40.09.09 (Map Grid: DT11)\nSuggested Munition(s): Armor piercing & cluster munitions.",
+		TargetBriefing = "Mission Update \nTarget: Militia Armor & troops\n\nA U.S. aircraft conducted airstrikes against vehicles, including a tank and bulldozer belonging to pro-government militias that were setting up fighting positions within the Al-Tanf deconfliction zone.\n\nLocation: N 33.32.19 E 38.07.34 (Map Grid: DT11)\nSuggested Munition(s): Armor piercing & cluster munitions.",
 	}						
 	OperationBlackpool_AG[4] = {
 		TargetName = "Barzah_SciCtr_1",

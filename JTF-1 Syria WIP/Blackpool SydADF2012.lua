@@ -110,11 +110,14 @@ Detection = DETECTION_AREAS:New( DetectionSetGroup, 30000 )
 -- Setup the A2A dispatcher, and initialize it.
 A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
 -- Set 100km as the radius to engage any target by airborne friendlies.
-A2ADispatcher:SetEngageRadius(100000) -- 100000 is the default value.
+A2ADispatcher:SetEngageRadius(80000) -- 100000 is the default value.
 -- Set 200km as the radius to ground control intercept.
-A2ADispatcher:SetGciRadius(100000) -- 200000 is the default value.
+A2ADispatcher:SetGciRadius(80000) -- 200000 is the default value.
 A2ADispatcher:SetDefaultTakeoffFromParkingCold()
 A2ADispatcher:SetDefaultLandingAtEngineShutdown()
+A2ADispatcher:SetDefaultFuelThreshold(0.20)
+A2ADispatcher:SetDefaultDamageThreshold(0.40)
+A2ADispatcher:SetDisengageRadius(100000)
 BorderZone = ZONE_POLYGON:New( "RED-BORDER", GROUP:FindByName( "SyAF-GCI" ) )
 A2ADispatcher:SetBorderZone( BorderZone )
 --SQNs
@@ -144,7 +147,7 @@ A2ADispatcher:SetSquadronGrouping( "South CAP", 2 ) --Qty=spawns per group
 A2ADispatcher:SetSquadronCap( "South CAP", SouthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
 A2ADispatcher:SetSquadronCapInterval( "South CAP", 1, 300, 900)
 
---A2ADispatcher:SetTacticalDisplay(true)
+A2ADispatcher:SetTacticalDisplay(true)
 A2ADispatcher:Start()
 
 
