@@ -119,6 +119,9 @@ A2ADispatcher:SetDefaultFuelThreshold(0.20)
 A2ADispatcher:SetDefaultDamageThreshold(0.40)
 A2ADispatcher:SetDisengageRadius(100000)
 BorderZone = ZONE_POLYGON:New( "RED-BORDER", GROUP:FindByName( "SyAF-GCI" ) )
+NorthCapZone = ZONE_POLYGON:New( "CAPzoneNorth", GROUP:FindByName( "CAP zone North" ) )
+SouthCapZone = ZONE_POLYGON:New( "CAPzoneSouth", GROUP:FindByName( "CAP zone South" ) )
+
 A2ADispatcher:SetBorderZone( BorderZone )
 --SQNs
 A2ADispatcher:SetSquadron( "54 Squadron", "Marj Ruhayyil", { "54 Squadron" },8) --mig23
@@ -147,7 +150,7 @@ A2ADispatcher:SetSquadronGrouping( "South CAP", 2 ) --Qty=spawns per group
 A2ADispatcher:SetSquadronCap( "South CAP", SouthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
 A2ADispatcher:SetSquadronCapInterval( "South CAP", 1, 300, 900)
 
-A2ADispatcher:SetTacticalDisplay(true)
+--A2ADispatcher:SetTacticalDisplay(true)
 A2ADispatcher:Start()
 
 

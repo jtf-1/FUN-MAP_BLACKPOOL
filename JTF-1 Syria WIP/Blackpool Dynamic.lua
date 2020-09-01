@@ -157,7 +157,6 @@ function SEF_InitializeMissionTable()
 	
 	OperationBlackpool_AG = {}	
 	
-	--ABU MUSA ISLAND
 	--[[
 	OperationBlackpool_AG[1] = {				
 		TargetName = "Ja'Din_Aircraft",
@@ -193,7 +192,7 @@ function SEF_InitializeMissionTable()
 	OperationBlackpool_AG[6] = {
     TargetName = "RussianCargo-1",
     TargetStatic = false,
-    TargetBriefing = "Mission Update \nTarget: Russian Cargo Vessel\n\nDespite global sanctions against Syria, Russia has been sending arms and supplies to the current Syrian regime. A Russian cargo ship is currently on route from the West and intel suggest it plans to unload its cargo in the port of Latakia. Stop this vessel at all costs from reaching the port.\nPort Location: N 35.31.15 E 35.45.38 (Map Grid: YE53)\nSuggested Munition(s): Harpoon(s) & Laser guided munitions",
+    TargetBriefing = "Mission Update \nTarget: Russian Cargo Vessel\n\nDespite global sanctions against Syria, Russia has been sending arms and supplies to the current Syrian regime. A Russian cargo ship is currently on route from the West and intel suggest it plans to unload its cargo in the port of Latakia. Stop this vessel from reaching the port.\nPort Location: N 35.31.15 E 35.45.38 (Map Grid: YE53)\nSuggested Munition(s): Harpoon(s) & Laser guided munitions",
   }
   OperationBlackpool_AG[7] = {
     TargetName = "Static Locomotive 1",
@@ -359,9 +358,9 @@ end
 
 function SEF_RadioMenuSetup()
 	--////Set Up Menu
-	-- table missionCommands.addSubMenuForCoalition(enum coalition.side, string name , table path)
-	-- table missionCommands.addCommand(string name, table/nil path, function functionToRun , any anyArguement)
-	-- table missionCommands.addCommandForCoalition(enum coalition.side, string name, table/nil path, function functionToRun , any anyArguement)
+	--table missionCommands.addSubMenuForCoalition(enum coalition.side, string name , table path)
+	--table missionCommands.addCommand(string name, table/nil path, function functionToRun , any anyArguement)
+	--table missionCommands.addCommandForCoalition(enum coalition.side, string name, table/nil path, function functionToRun , any anyArguement)
 
 	--////Setup Submenu For Support Requests
 	--SupportMenuMain = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Support", nil)
@@ -404,9 +403,9 @@ function SEF_RadioMenuSetup()
 	
 	
 	--////CAP Support Sector List
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Abu Musa Island", SupportMenuCAP, function() RequestFighterSupport('Abu Musa') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Sirri Island", SupportMenuCAP, function() RequestFighterSupport('Sirri') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Tunb Islands", SupportMenuCAP, function() RequestFighterSupport('Tunb') end, nil)
+	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Sector", SupportMenuCAP, function() RequestFighterSupport('Northern Syria') end, nil)
+	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Middle Sector", SupportMenuCAP, function() RequestFighterSupport('Central Syria') end, nil)
+	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Sector", SupportMenuCAP, function() RequestFighterSupport('Southern Syria') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuCAP, function() RequestFighterSupport('Bandar Lengeh') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuCAP, function() RequestFighterSupport('Larak') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuCAP, function() RequestFighterSupport('Qeshm') end, nil)

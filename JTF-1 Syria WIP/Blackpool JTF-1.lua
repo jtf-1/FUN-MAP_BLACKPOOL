@@ -10,8 +10,7 @@ _SETTINGS:SetPlayerMenuOff()
 
 GROUP:FindByName("CVN71"):PatrolRoute()
 GROUP:FindByName("LHA-1"):PatrolRoute()
-Patrol1 = GROUP:FindByName("Patrol-1")
-Patrol1:PatrolRoute()
+
 
 function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 
