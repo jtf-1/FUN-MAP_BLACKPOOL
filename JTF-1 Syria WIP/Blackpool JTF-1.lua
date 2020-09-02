@@ -73,6 +73,8 @@ end
 
 local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CSG_CarrierGrp_Roosevelt-1"), "Tanker_S3-B_Arco3")
 ArcoRoosevelt:SetTakeoffAir()
+ArcoRoosevelt:SetTACAN(106, "ARC")
+ArcoRoosevelt:SetRadio(317.106, "AM")
 ArcoRoosevelt:Start()
 
 -- END CARRIER TANKER SECTION

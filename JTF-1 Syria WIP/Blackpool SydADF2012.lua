@@ -7,9 +7,9 @@
 
 --Editable part v
 
-local SA6pc = 10
-local SA2pc = 10
-local SA3pc = 10
+local SA6pc = 5
+local SA2pc = 5
+local SA3pc = 5
 local SA10pc = 30
 local EWRpc = 40
 

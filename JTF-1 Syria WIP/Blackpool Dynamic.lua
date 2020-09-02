@@ -49,7 +49,7 @@ function SEF_ValidateMission()
 		if ( GROUP:FindByName(AGMissionTarget):IsAlive() == true ) then
 			--GROUP VALID
 			trigger.action.outSound('That Is Our Target.ogg')
-			trigger.action.outText(AGMissionBriefingText,30)			
+			trigger.action.outText(AGMissionBriefingText,45)			
 		elseif ( GROUP:FindByName(AGMissionTarget):IsAlive() == false or GROUP:FindByName(AGMissionTarget):IsAlive() == nil ) then
 			--GROUP NOT VALID
 			trigger.action.setUserFlag(ScenarioNumber,4)
@@ -65,7 +65,7 @@ function SEF_ValidateMission()
 		if ( StaticObject.getByName(AGMissionTarget) ~= nil and StaticObject.getByName(AGMissionTarget):isExist() == true ) then
 			--STATIC IS VALID
 			trigger.action.outSound('That Is Our Target.ogg')
-			trigger.action.outText(AGMissionBriefingText,30)								
+			trigger.action.outText(AGMissionBriefingText,45)								
 		elseif ( StaticObject.getByName(AGMissionTarget) == nil or StaticObject.getByName(AGMissionTarget):isExist() == false ) then
 			--STATIC TARGET NOT VALID, ASSUME TARGET ALREADY DESTROYED			
 			trigger.action.setUserFlag(ScenarioNumber,4)
@@ -167,42 +167,68 @@ function SEF_InitializeMissionTable()
 	OperationBlackpool_AG[1] = {
     TargetName = "Patrol-1",
     TargetStatic = false,
-    TargetBriefing = "Mission Update \nTarget: ISIL Convoy\n\nOur deep cover operative has sent word that an ISIL convoy has been patrolling the city of Ein Eikorum in order to recruit and control the remaining populate. Take out the convoy patrolling the city using whatever means possible.\n\nLocation: N 35.22.11 E 36.24.22 (Map Grid: BV61)\nSuggested Munition(s): Laser guided munitions, Rockets, Retarded Bombs",
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: ISIL CONVOY \n\nOUR DEEP COVER OPERATIVE HAS SENT WORD THAT AN ISIL CONVOY HAS BEEN PATROLLING THE CITY OF EIN EIKORUM IN ORDER TO RECRUIT AND CONTROL THE REMAINING POPULATE. TAKE OUT THE CONVOY PATROLLING THE CITY WITH WHATEVER MEANS NECESSARY. \n\nPORT LOCATION: N 35.22.11 E 36.24.22 (MAP GRID: BV61) \n\nSUGGESTED MUNITION(S): LASER GUIDED MUNITIONS, ROCKETS, RETARDED BOMBS",
   }			
 	OperationBlackpool_AG[2] = {
 		TargetName = "Deir_ez_Zor_11",
 		TargetStatic = false,
-		TargetBriefing = "Mission Update \n17 September 2016\nTarget: ISIL Militia ENE of Deir ez Zor Airport \nIn May 2015, ISIL militants launched an offensive, capturing both Palmyra and the area surrounding Deir ez-Zor, and cutting off the remaining supply line to Deir ez-Zor. The city was then effectively under siege by ISIL, leaving supplies to be solely delivered by transport helicopters. Consequently, ISIL began launching frequent attacks, which continued until 10 September 2017, against the Deir ez-Zor Airport with the aim of halting the delivery of supplies.\n\nLocation: N 35.17.29 E 40.09.09 (Map Grid: SE of Grid EV)\nSuggested Munition(s): Cluster munitions, extra fuel, and A-A missiles",
+		TargetBriefing = "MISSION UPDATE \n17 SEPTEMBER 2016 \n\nTARGET: ISIL MILITIA ENE OF DEIR EZ ZOR AIRPORT \n\nIN MAY 2015, ISIL MILITANTS LAUNCHED AN OFFENSIVE, CAPTURING BOTH PALMYRA AND THE AREA SURROUNDING DEIR EZ-ZOR, AND CUTTING OFF THE REMAINING SUPPLY LINE TO DEIR EZ-ZOR. THE CITY WAS THEN EFFECTIVELY UNDER SIEGE BY ISIL, LEAVING SUPPLIES TO BE SOLELY DELIVERED BY TRANSPORT HELICOPTERS. CONSEQUENTLY, ISIL BEGAN LAUNCHING FREQUENT ATTACKS, WHICH CONTINUED UNTIL 10 SEPTEMBER 2017, AGAINST THE DEIR EZ-ZOR AIRPORT WITH THE AIM OF HALTING THE DELIVERY OF SUPPLIES. \n\nLOCATION: N 35.17.29 E 40.09.09 (MAP GRID: SE OF GRID EV) \n\nSUGGESTED MUNITION(S): CLUSTER MUNITIONS, EXTRA FUEL, AND A-A MISSILES",
 	}	
 	OperationBlackpool_AG[3] = {
 		TargetName = "Al_Tanf_Armor",
 		TargetStatic = false,
-		TargetBriefing = "Mission Update \nTarget: Militia Armor & troops\n\nA U.S. aircraft conducted airstrikes against vehicles, including a tank and bulldozer belonging to pro-government militias that were setting up fighting positions within the Al-Tanf deconfliction zone.\n\nLocation: N 33.32.19 E 38.07.34 (Map Grid: DT11)\nSuggested Munition(s): Armor piercing & cluster munitions.",
+		TargetBriefing = "MISSION UPDATE \n\nMAY 18, 2017 \nTARGET: MILITIA ARMOR & TROOPS \n\nA U.S. AIRCRAFT CONDUCTED AIRSTRIKES AGAINST VEHICLES, INCLUDING A TANK AND BULLDOZER BELONGING TO PRO-GOVERNMENT MILITIAS THAT WERE SETTING UP FIGHTING POSITIONS WITHIN THE AL-TANF DECONFLICTION ZONE. \n\nLOCATION: N 33.32.19 E 38.07.34 (MAP GRID: DT11) \nSUGGESTED MUNITION(S): ARMOR PIERCING & CLUSTER MUNITIONS.",
 	}						
 	OperationBlackpool_AG[4] = {
 		TargetName = "Barzah_SciCtr_1",
 		TargetStatic = true,
-		TargetBriefing = "Mission Update \n13 April 2018 \nTarget: Barzah Science Center\n\nA Syrian government offensive to recapture the rebel-held Eastern Ghouta suburb began in February 2018. The offensive was condemned by Western media and governments for its use of chemical weapons. In retaliation the US Join Chiefs targeted 3 locations, one of which is the Barzah Science Center in northern Damascus. The center was found to be the center responsible for Syria's chemical weapons program. In April 2018, a long range strike using multiple cruise missiles was carried out.\n\nLocation: N 33.32.43 E 36.18.14 (Map Grid: BT41)\nSuggested Munition(s): Cruise Missiles / Long Range Glide Bombs / Laser guided munitions\nNotes: JTAC1 is on station for spotting & lasing.",
+		TargetBriefing = "MISSION UPDATE \n\n13 APRIL 2018 \nTARGET: BARZAH SCIENCE CENTER \n\nA SYRIAN GOVERNMENT OFFENSIVE TO RECAPTURE THE REBEL-HELD EASTERN GHOUTA SUBURB BEGAN IN FEBRUARY 2018. THE OFFENSIVE WAS CONDEMNED BY WESTERN MEDIA AND GOVERNMENTS FOR ITS USE OF CHEMICAL WEAPONS. IN RETALIATION THE US JOIN CHIEFS TARGETED 3 LOCATIONS, ONE OF WHICH IS THE BARZAH SCIENCE CENTER IN NORTHERN DAMASCUS. THE CENTER WAS FOUND TO BE THE CENTER RESPONSIBLE FOR SYRIA'S CHEMICAL WEAPONS PROGRAM. IN APRIL 2018, A LONG RANGE STRIKE USING MULTIPLE CRUISE MISSILES WAS CARRIED OUT. \n\nLOCATION: N 33.32.43 E 36.18.14 (MAP GRID: BT41) \n\nSUGGESTED MUNITION(S): CRUISE MISSILES / LONG RANGE GLIDE BOMBS / LASER GUIDED MUNITIONS \nNOTES: JTAC1 IS ON STATION FOR SPOTTING & LASING AND WILL ACTIVATE WHEN ON STATION.",
 	}					
 	OperationBlackpool_AG[5] = {
 		TargetName = "Him_Shanshar_1",
 		TargetStatic = true,
-		TargetBriefing = "Mission Update \n13 April 2018 \nTarget: Him_Shanshar Warehouses\n\nA Syrian government offensive to recapture the rebel-held Eastern Ghouta suburb began in February 2018. The offensive was condemned by Western media and governments for its use of chemical weapons. In retaliation the US Join Chiefs targeted 3 locations, one of which were 3 warehouses in Him_Shanshar. The warehouses contained parts of Syria’s chemical weapons cache. In April 2018, a long range strike using multiple cruise missiles was carried out.\n\nLocation: N 34.41.23 E 36.29.03 (Map Grid: BU64) \nSuggested Munition(s): Cruise Missiles / Long Range Glide Bombs",
+		TargetBriefing = "MISSION UPDATE \n\n13 APRIL 2018 \nTARGET: HIM_SHANSHAR WAREHOUSES \n\nA SYRIAN GOVERNMENT OFFENSIVE TO RECAPTURE THE REBEL-HELD EASTERN GHOUTA SUBURB BEGAN IN FEBRUARY 2018. THE OFFENSIVE WAS CONDEMNED BY WESTERN MEDIA AND GOVERNMENTS FOR ITS USE OF CHEMICAL WEAPONS. IN RETALIATION THE US JOIN CHIEFS TARGETED 3 LOCATIONS, ONE OF WHICH WERE 3 WAREHOUSES IN HIM_SHANSHAR. THE WAREHOUSES CONTAINED PARTS OF SYRIA’S CHEMICAL WEAPONS CACHE. IN APRIL 2018, A LONG RANGE STRIKE USING MULTIPLE CRUISE MISSILES WAS CARRIED OUT. \n\nLOCATION: N 34.41.23 E 36.29.03 (MAP GRID: BU64) \n\nSUGGESTED MUNITION(S): CRUISE MISSILES / LONG RANGE GLIDE BOMBS",
   }
 	OperationBlackpool_AG[6] = {
     TargetName = "RussianCargo-1",
     TargetStatic = false,
-    TargetBriefing = "Mission Update \nTarget: Russian Cargo Vessel\n\nDespite global sanctions against Syria, Russia has been sending arms and supplies to the current Syrian regime. A Russian cargo ship is currently on route from the West and intel suggest it plans to unload its cargo in the port of Latakia. Stop this vessel from reaching the port.\nPort Location: N 35.31.15 E 35.45.38 (Map Grid: YE53)\nSuggested Munition(s): Harpoon(s) & Laser guided munitions",
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: RUSSIAN CARGO VESSEL \n\nDESPITE GLOBAL SANCTIONS AGAINST SYRIA, RUSSIA HAS BEEN SENDING ARMS AND SUPPLIES TO THE CURRENT SYRIAN REGIME. A RUSSIAN CARGO SHIP IS CURRENTLY ON ROUTE FROM THE SOUTHWEST AND INTEL SUGGEST IT PLANS TO UNLOAD ITS CARGO IN THE PORT OF LATAKIA. STOP THIS VESSEL AT ALL COSTS FROM REACHING THE PORT. \n\nPORT LOCATION: N 35.31.15 E 35.45.38 (MAP GRID: YE53) \n\nSUGGESTED MUNITION(S): HARPOON(S) & LASER GUIDED MUNITIONS",
   }
   OperationBlackpool_AG[7] = {
     TargetName = "Static Locomotive 1",
     TargetStatic = true,
-    TargetBriefing = "Mission Update \nTarget: Locomotive\n\nA train suspected of transporting nuclear machinery needed to develop the Syrian nuclear weapons program is preparing to leave the city of Busra in South Syria. The city is heavily guarded with manpads and AAA. Your primary mission is to destroy the locomotive and cripple the train.\nLocation: N 32.31.5 E 36.28.38 (Map Grid: BS60)\nSuggested Munition(s): Unguided bombs Mk-83/Mk-84",
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: LOCOMOTIVE \n\nA TRAIN SUSPECTED OF TRANSPORTING NUCLEAR MACHINERY NEEDED TO DEVELOP THE SYRIAN NUCLEAR WEAPONS PROGRAM IS PREPARING TO LEAVE THE CITY OF BUSRA IN SOUTH SYRIA. THE CITY IS HEAVILY GUARDED WITH MANPADS AND AAA. YOUR PRIMARY MISSION IS TO DESTROY THE LOCOMOTIVE AND CRIPPLE THE TRAIN. \n\nLOCATION: N 32.31.5 E 36.28.38 (MAP GRID: BS60) \n\nSUGGESTED MUNITION(S): UNGUIDED BOMBS MK-83/MK-84",
   }
   OperationBlackpool_AG[8] = {
     TargetName = "BusraAirDefense1",
     TargetStatic = false,
-    TargetBriefing = "Mission Update \nTarget: Manpads & AAA\n\nSyrian troops have fortified the city of Busra to guard a train suspected of transporting nuclear machinery needed to develop the Syrian nuclear weapons program. Your primary mission is to destroy all of the Manpads & AAA in the city.\nLocation: N 32.31.5 E 36.28.38 (Map Grid: BS60)\nSuggested Munition(s): Unguided bombs",
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: MANPADS & AAA \n\nSYRIAN TROOPS HAVE FORTIFIED THE CITY OF BUSRA TO GUARD A TRAIN SUSPECTED OF TRANSPORTING NUCLEAR MACHINERY NEEDED TO DEVELOP THE SYRIAN NUCLEAR WEAPONS PROGRAM. YOUR PRIMARY MISSION IS TO DESTROY ALL OF THE MANPADS & AAA IN THE CITY. \n\nLOCATION: N 32.31.5 E 36.28.38 (MAP GRID: BS60) \n\nSUGGESTED MUNITION(S): UNGUIDED BOMBS",
+  }
+  OperationBlackpool_AG[9] = {
+    TargetName = "AleppoCitadel",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: ISIL MILITANTS IN AND AROUND ALEPPO CITADEL \n\nISIL TROOPS HAVE TAKEN OVER THE CITIDEL IN THE CITY OF ALEPPO. YOUR PRIMARY TARGETS ARE THE INFANTRY IN AND AROUND THE CITADEL. YOUR SECONDARY OBJECTIVE IS A SUSPECTED WEAPONS CONTAINER WITHIN THE CITIDEL ITSELF. AS THIS IS A NATION MONUMENT, MINIMAL DAMAGE TO THE STRUCTURES IS REQUIRED. \n\nLOCATION: N 36.11.57 E 37.09.46 (MAP GRID: CA30) \n\nSUGGESTED MUNITION(S): GUNS OR ROCKETS",
+  }
+  OperationBlackpool_AG[10] = {
+    TargetName = "PalmyraRomanTheatre",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \nTARGET: SYRIAN MOBILE AIR DEFENSES & AAA IN PALMYRA \n\nSYRIAN MOBILE AIR DEFENSES HAVE MOVED INTO THE ROMAN THEATER RUINS IN THE CITY OF PALMYRA. THESE AIR DEFENSE ASSETS ARE GUARDING THE PALMYRA AIRPORT WHICH IS A STAGING POINT FOR SYRIAN AIR FORCE. YOUR MISSION IS TO ELIMINATE ALL OF THE AIR DEFENSES. IF POSSIBLE, PRESERVE AS MUCH OF THE THEATER RUINS AS YOU CAN \n\nLOCATION: N 34.33.05 E 38.16.09(MAP GRID: DU32) \n\nSUGGESTED MUNITION(S): STAND OFF WEAPONS",
+  }
+  
+  OperationBlackpool_AG[11] = {
+    TargetName = "PALMYRACASTLE",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \nTARGET: MILITIA MORTAR SITES \n\nTWO MORTAR SITES HAVE BEEN SPOTTED IN OUR MOST RECENT SATALLITE PASS AROUND THE CASTLE IN THE CITY OF PALMYRA. YOUR MISSION IS TO DESTORY BOTH LOCATIONS AHEAD OF INBOUND ALLIED FORCES.\n\nLOCATION: N 34.33.45 E 38.15.26 (MAP GRID: DU32) \n\nSUGGESTED MUNITION(S): STAND OFF WEAPONS",
+  }
+   OperationBlackpool_AG[12] = {
+    TargetName = "AL-THAWRA_DAM_SCUD",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \nTARGET: THREE MISSILE LAUNCHERS \n\nSYRIAN FORCES HAVE CAPTURED THREE MEDIUM RANGE BALLISTIC MISSILE LAUNCHERS THAT WERE BEING MOVED BY TURKISH FORCES IN THE AREA. AT THE TIME NO WARHEADS WERE INSTALLED ON THE MISSLES. WE NEED YOU TO KNOCK OUT THOSE LAUNCHERS BEFORE SYRIAN FORCERS CAN OBTAIN ANY WARHEADS. THE LAUNCHERS ARE CURRENTLY BEING STAGED AT THE AL-THAWRA DAM. THE LAUNCHERS ARE BEING PROTECTED BY MULTIPLE AIR DEFENSES.\n\nLOCATION: N 35.51.41 E 38.33.31 (MAP GRID: DU32) \n\nSUGGESTED MUNITION(S): STAND OFF WEAPONS",
+  }
+   OperationBlackpool_AG[13] = {
+    TargetName = "DAMASCUSVIP",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \nTARGET: CONVOY CARRYING VIP TARGET \n\nDEEP COVER INTELLIGENCE HAS LEAREND THAT A PRIORITY TARGET, CODENAME INDIGO RAILROAD, IS FLYING IN TO DAMASCUS FOR A MEETING AT THE PRESIDENTIAL PALACE. YOUR MISSION IS TO DESTROY THE CONVOY TRAVELING BETWEEN THE MEZZEH AIRPORT AND THE PRESIDENTIAL PALACE TO THE NORTH.\n\nLOCATION: N 33.31.3 E 36.14.52 (MAP GRID: BT40-41) \n\nSUGGESTED MUNITION(S): PRECISION GUIDED WEAPONS",
   }
 	--Debug Code
 	--[[
@@ -659,7 +685,7 @@ end
 
 		--////GLOBAL VARIABLE INITIALISATION	
 		NumberOfCompletedMissions = 0
-		TotalScenarios = 7
+		TotalScenarios = 13
 		OperationComplete = false
 		OnShotSoundsEnabled = 0
 		SoundLockout = 0
