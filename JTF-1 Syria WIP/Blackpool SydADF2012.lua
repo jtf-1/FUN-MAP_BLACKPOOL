@@ -140,12 +140,12 @@ A2ADispatcher:SetSquadron( "Russia GCI", "Bassel Al-Assad", { "Russia GCI" },8) 
 A2ADispatcher:SetSquadronGrouping( "Russia GCI", 2 )
 A2ADispatcher:SetSquadronGci( "Russia GCI", 900, 1200 )
 
-A2ADispatcher:SetSquadron( "North CAP", "Hama", { "CAPnorth" },10) --mig29, Qty=total aircraft pool
+A2ADispatcher:SetSquadron( "North CAP", "Hama", { "CAPnorth" }) --mig29, Qty=total aircraft pool
 A2ADispatcher:SetSquadronGrouping( "North CAP", 2 ) --Qty=spawns per group
 A2ADispatcher:SetSquadronCap( "North CAP", NorthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
 A2ADispatcher:SetSquadronCapInterval( "North CAP", 1, 300, 900)
 
-A2ADispatcher:SetSquadron( "South CAP", "Al-Dumayr", { "CAPsouth" },10) --mig29, Qty=total aircraft pool
+A2ADispatcher:SetSquadron( "South CAP", "Al-Dumayr", { "CAPsouth" }) --mig29, Qty=total aircraft pool
 A2ADispatcher:SetSquadronGrouping( "South CAP", 2 ) --Qty=spawns per group
 A2ADispatcher:SetSquadronCap( "South CAP", SouthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
 A2ADispatcher:SetSquadronCapInterval( "South CAP", 1, 300, 900)

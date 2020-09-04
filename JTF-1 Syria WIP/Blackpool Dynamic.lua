@@ -49,7 +49,7 @@ function SEF_ValidateMission()
 		if ( GROUP:FindByName(AGMissionTarget):IsAlive() == true ) then
 			--GROUP VALID
 			trigger.action.outSound('That Is Our Target.ogg')
-			trigger.action.outText(AGMissionBriefingText,45)			
+			trigger.action.outText(AGMissionBriefingText, 45)			
 		elseif ( GROUP:FindByName(AGMissionTarget):IsAlive() == false or GROUP:FindByName(AGMissionTarget):IsAlive() == nil ) then
 			--GROUP NOT VALID
 			trigger.action.setUserFlag(ScenarioNumber,4)
@@ -65,7 +65,7 @@ function SEF_ValidateMission()
 		if ( StaticObject.getByName(AGMissionTarget) ~= nil and StaticObject.getByName(AGMissionTarget):isExist() == true ) then
 			--STATIC IS VALID
 			trigger.action.outSound('That Is Our Target.ogg')
-			trigger.action.outText(AGMissionBriefingText,45)								
+			trigger.action.outText(AGMissionBriefingText, 45)								
 		elseif ( StaticObject.getByName(AGMissionTarget) == nil or StaticObject.getByName(AGMissionTarget):isExist() == false ) then
 			--STATIC TARGET NOT VALID, ASSUME TARGET ALREADY DESTROYED			
 			trigger.action.setUserFlag(ScenarioNumber,4)
@@ -379,6 +379,534 @@ end
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 --////AI SUPPORT FLIGHT FUNCTIONS
 
+--[[
+
+SQ BLUE SEAD F-16C
+SQ BLUE CAS A-10C
+SQ BLUE ASS AJS37
+SQ BLUE CAP F-15C
+
+Flags
+
+5001 = Fighter Screen Enabled
+5002 = Close Air Support Enabled
+5003 = Anti-Ship Strike Enabled
+5004 = SEAD Enabled
+5005 = Pinpoint Strike Enabled
+5891 = Drone JTAC Enabled
+
+5010 = true if Fighter Screen active
+5020 = true if Close Air Support is active
+5030 = true if Anti Ship Strike is active
+5040 = true if SEAD Mission is active
+5050 = true if Pinpoint Strike Mission is active
+5892 - true if Drone support is active
+
+5011 = Fighter Screen Push Command
+5021 = Close Air Support Push Command
+5031 = Anti Ship Push Command
+5041 = SEAD Mission Push Command
+5051 = Pinpoint Strike Push Command
+
+]]--
+
+--////COMBAT AIR PATROL FIGHTER SCREEN
+function RequestFighterSupport(CAPSector)
+  
+  if ( trigger.misc.getUserFlag(5001) == 1 ) then 
+    if ( trigger.misc.getUserFlag(5010) == 0 ) then
+      
+      local RouteNumber = CAPSector
+      
+      BLUECAP1 = SPAWN
+        :New( "RT BLUE CAP "..RouteNumber )
+        :InitLimit( 2, 2 )
+        :InitRandomizeTemplate( { "SQ BLUE CAP F-15C" } )
+        :OnSpawnGroup(
+          function( SpawnGroup )                
+            RTBLUECAPGROUPNAME = SpawnGroup.GroupName
+            RTBLUECAPGROUPID = Group.getByName(RTBLUECAPGROUPNAME):getID()                        
+          end
+        )       
+        :Spawn()
+      
+      trigger.action.outText("Fighter Screen Launched",60)
+      --Set flag 5010 to 1
+      trigger.action.setUserFlag(5010,1)  
+      
+    elseif ( trigger.misc.getUserFlag(5010) == 1) then
+      --Check if the spawned Fighter Screen group is still alive or not
+            
+      if ( BLUECAP1:IsAlive() ) then
+        trigger.action.outText("Fighter Screen Is Currently Active, Further Support Is Unavailable",60)
+      else
+        trigger.action.setUserFlag(5010,0)
+        RequestFighterSupport(CAPSector)
+      end     
+    else      
+    end
+  else
+    trigger.action.outText("Fighter Screen Unavailable For This Mission",60)    
+  end
+end
+
+function AbortCAPMission()
+
+  if (trigger.misc.getUserFlag(5010) == 1 ) then
+    if ( GROUP:FindByName(RTBLUECAPGROUPNAME):IsAlive() ) then
+      --If Alive, Perform RTB command
+      local RTB = {}
+      --RTB.fromWaypointIndex = 2
+      RTB.goToWaypointIndex = 8
+                
+      local RTBTask = {id = 'SwitchWaypoint', params = RTB}
+      Group.getByName(RTBLUECAPGROUPNAME):getController():setOption(0, 3)
+      Group.getByName(RTBLUECAPGROUPNAME):getController():setCommand(RTBTask) 
+      
+      trigger.action.outText("Fighter Screen Is Returning To Base",60)
+    else
+      trigger.action.outText("Fighter Screen Does Not Have Fighters To Recall",60)
+    end
+  else
+    trigger.action.outText("Fighter Screen Has Not Been Deployed",60)
+  end
+end
+
+--////CLOSE AIR SUPPORT
+function RequestCASSupport(CASSector)
+
+  if ( trigger.misc.getUserFlag(5002) == 1 ) then
+    if ( trigger.misc.getUserFlag(5020) == 0 ) then
+
+      local RouteNumber = CASSector
+      
+      BLUECAS1 = SPAWN
+        :New( "RT BLUE CAS "..RouteNumber )
+        :InitLimit( 2, 2 )
+        :InitRandomizeTemplate( { "SQ BLUE CAS A-10C" } )
+        :OnSpawnGroup(
+          function( SpawnGroup )                
+            RTBLUECASGROUPNAME = SpawnGroup.GroupName
+            RTBLUECASGROUPID = Group.getByName(RTBLUECASGROUPNAME):getID()                        
+          end
+        )
+        :Spawn()
+      
+      trigger.action.outText("Close Air Support Launched",60)
+      --Set flag 5020 to 1
+      trigger.action.setUserFlag(5020,1)  
+      
+    elseif ( trigger.misc.getUserFlag(5020) == 1) then
+      --Check if the spawned Close Air Support group is still alive or not
+      
+      if ( BLUECAS1:IsAlive() ) then
+        trigger.action.outText("Close Air Support Is Currently Active, Further Support Is Unavailable",60)
+      else        
+        trigger.action.setUserFlag(5020,0)
+        RequestCASSupport(CASSector)
+      end   
+    else      
+    end
+  else
+    trigger.action.outText("Close Air Support Unavailable For This Mission",60)
+  end 
+end
+
+function AbortCASMission()
+
+  if ( trigger.misc.getUserFlag(5020) == 1 ) then
+    if ( GROUP:FindByName(RTBLUECASGROUPNAME):IsAlive() ) then
+      --If Alive, Perform RTB command
+      local RTB = {}
+      --RTB.fromWaypointIndex = 2
+      RTB.goToWaypointIndex = 5
+                
+      local RTBTask = {id = 'SwitchWaypoint', params = RTB}     
+      Group.getByName(RTBLUECASGROUPNAME):getController():setOption(0, 3) -- (0, 4) is weapons hold, (0, 3) is return fire
+      Group.getByName(RTBLUECASGROUPNAME):getController():setCommand(RTBTask) 
+      
+      trigger.action.outText("Close Air Support Is Returning To Base",60)
+    else
+      trigger.action.outText("Close Air Support Does Not Have Planes To Recall",60)
+    end
+  else
+    trigger.action.outText("Close Air Support Has Not Been Deployed",60)
+  end
+end
+
+--////ANTI-SHIPPING
+function RequestASSSupport(ASSSector)
+  
+  if ( trigger.misc.getUserFlag(5003) == 1 ) then 
+    if ( trigger.misc.getUserFlag(5030) == 0 ) then
+      
+      local RouteNumber = ASSSector
+      
+      BLUEASS1 = SPAWN
+        :New( "RT BLUE ASS "..RouteNumber )
+        :InitLimit( 2, 2 )
+        :InitRandomizeTemplate( { "SQ BLUE ASS AJS37" } ) --"SQ BLUE ASS AJS37", "SQ BLUE ASS F/A-18C"
+        :OnSpawnGroup(
+          function( SpawnGroup )                
+            RTBLUEASSGROUPNAME = SpawnGroup.GroupName
+            RTBLUEASSGROUPID = Group.getByName(RTBLUEASSGROUPNAME):getID()                        
+          end
+        )
+        :Spawn()          
+      
+      trigger.action.outText("Anti-Shipping Strike Launched",60)
+      --Set flag 5030 to 1
+      trigger.action.setUserFlag(5030,1)    
+      
+    elseif ( trigger.misc.getUserFlag(5030) == 1) then
+      --Check if the spawned Anti-Shipping group is still alive or not
+      
+      if ( BLUEASS1:IsAlive() ) then
+        trigger.action.outText("Anti-Shipping Is Currently Active, Further Support Is Unavailable",60)
+      else
+        trigger.action.setUserFlag(5030,0)
+        RequestASSSupport(ASSSector)
+      end   
+    else      
+    end
+  else
+    trigger.action.outText("Anti-Shipping Strike Unavailable For This Mission",60)  
+  end 
+end
+
+function AbortASSMission()
+
+  if ( trigger.misc.getUserFlag(5030) == 1 ) then
+    if ( GROUP:FindByName(RTBLUEASSGROUPNAME):IsAlive() ) then
+      --If Alive, Perform RTB command
+      local RTB = {}
+      --RTB.fromWaypointIndex = 2
+      RTB.goToWaypointIndex = 7
+                
+      local RTBTask = {id = 'SwitchWaypoint', params = RTB}
+      Group.getByName(RTBLUEASSGROUPNAME):getController():setOption(0, 3)
+      Group.getByName(RTBLUEASSGROUPNAME):getController():setCommand(RTBTask) 
+      
+      trigger.action.outText("Anti-Shipping Support Is Returning To Base",60)
+    else
+      trigger.action.outText("Anti-Shipping Support Does Not Have Planes To Recall",60)
+    end
+  else
+    trigger.action.outText("Anti-Shipping Support Has Not Been Deployed",60)
+  end
+end
+
+--////SEAD
+function RequestSEADSupport(SEADSector)
+  
+  if ( trigger.misc.getUserFlag(5004) == 1 ) then
+    if ( trigger.misc.getUserFlag(5040) == 0 ) then
+      
+      local RouteNumber = SEADSector
+      
+      BLUESEAD1 = SPAWN
+        :New( "RT BLUE SEAD "..RouteNumber )
+        :InitLimit( 2, 2 )
+        :InitRandomizeTemplate( { "SQ BLUE SEAD F-16C"} ) -- "SQ BLUE SEAD F/A-18C" 
+        :OnSpawnGroup(
+          function( SpawnGroup )                
+            RTBLUESEADGROUPNAME = SpawnGroup.GroupName
+            RTBLUESEADGROUPID = Group.getByName(RTBLUESEADGROUPNAME):getID()  
+                        
+          end
+        )
+        :Spawn()
+      
+      trigger.action.outText("SEAD Mission Launched",60)
+      --Set flag 5040 to 1
+      trigger.action.setUserFlag(5040,1)  
+      
+    elseif ( trigger.misc.getUserFlag(5040) == 1) then
+      --Check if the spawned SEAD group is still alive or not
+      
+      if ( BLUESEAD1:IsAlive() ) then
+        trigger.action.outText("SEAD Is Currently Active, Further Support Is Unavailable",60)
+      else
+        trigger.action.setUserFlag(5040,0)
+        RequestSEADSupport(SEADSector)
+      end   
+    else      
+    end
+  else
+    trigger.action.outText("SEAD Unavailable For This Mission",60)
+  end   
+end
+
+function AbortSEADMission()
+
+  if ( trigger.misc.getUserFlag(5040) == 1 ) then
+    if ( GROUP:FindByName(RTBLUESEADGROUPNAME):IsAlive() ) then
+      --If Alive, Perform RTB command
+      local RTB = {}
+      --RTB.fromWaypointIndex = 2
+      RTB.goToWaypointIndex = 5
+                
+      local RTBTask = {id = 'SwitchWaypoint', params = RTB}
+      Group.getByName(RTBLUESEADGROUPNAME):getController():setOption(0, 3)
+      Group.getByName(RTBLUESEADGROUPNAME):getController():setCommand(RTBTask)  
+      
+      trigger.action.outText("SEAD Support Is Returning To Base",60)
+    else
+      trigger.action.outText("SEAD Support Does Not Have Planes To Recall",60)
+    end
+  else
+    trigger.action.outText("SEAD Support Has Not Been Deployed",60)
+  end
+end
+
+
+--////PINPOINT STRIKE
+function RequestPINSupport(PinSector)
+  
+  if ( trigger.misc.getUserFlag(5005) == 1 ) then
+    if ( trigger.misc.getUserFlag(5050) == 0 ) then
+      
+      PINRouteNumber = PinSector
+      
+      BLUEPIN1 = SPAWN
+        :New( "RT BLUE PIN "..PINRouteNumber )
+        :InitLimit( 2, 2 )
+        :InitRandomizeTemplate( { "SQ BLUE PIN F-117A", "SQ BLUE PIN Tornado GR4", "SQ BLUE PIN F-15E" } )
+        :OnSpawnGroup(
+          function( SpawnGroup )                
+            RTBLUEPINGROUPNAME = SpawnGroup.GroupName
+            RTBLUEPINGROUPID = Group.getByName(RTBLUEPINGROUPNAME):getID()                        
+          end
+        )
+        :Spawn()
+      
+      trigger.action.outText("Pinpoint Strike Mission Launched",60)
+      --Set flag 5050 to 1
+      trigger.action.setUserFlag(5050,1)  
+      
+    elseif ( trigger.misc.getUserFlag(5050) == 1) then
+      --Check if the spawned Pinpoint Strike group is still alive or not
+      
+      if ( BLUEPIN1:IsAlive() ) then
+        trigger.action.outText("Pinpoint Strike Is Currently Active, Further Support Is Unavailable",60)
+      else
+        trigger.action.setUserFlag(5050,0)
+        RequestPINSupport(PinSector)
+      end   
+    else      
+    end
+  else
+    trigger.action.outText("Pinpoint Strike Unavailable For This Mission",60)
+  end 
+end
+
+function AbortPINMission()
+
+  if ( trigger.misc.getUserFlag(5050) == 1 ) then
+    if ( GROUP:FindByName(RTBLUEPINGROUPNAME):IsAlive() ) then
+      --If Alive, Perform RTB command
+      local RTB = {}
+      --RTB.fromWaypointIndex = 2
+      RTB.goToWaypointIndex = 6
+                
+      local RTBTask = {id = 'SwitchWaypoint', params = RTB}
+      Group.getByName(RTBLUEPINGROUPNAME):getController():setOption(0, 3)
+      Group.getByName(RTBLUEPINGROUPNAME):getController():setCommand(RTBTask) 
+      
+      trigger.action.outText("Pinpoint Strike Support Is Returning To Base",60)
+    else
+      trigger.action.outText("Pinpoint Strike Support Does Not Have Planes To Recall",60)
+    end
+  else
+    trigger.action.outText("Pinpoint Strike Support Has Not Been Deployed",60)
+  end
+end
+
+function SEF_PinpointStrikeTargetAcquisition()
+  
+  --See https://wiki.hoggitworld.com/view/DCS_task_bombing for further details
+  --CHECK TARGET IS IN THE SAME SECTOR THE FLIGHT WAS CALLED TO, GET DETAILS IF IT IS AND ABORT IF NOT
+  if ( AGMissionTarget ~= nil and string.find(AGMissionTarget, PINRouteNumber) ) then   
+    if ( AGTargetTypeStatic == true ) then
+      if ( StaticObject.getByName(AGMissionTarget):isExist() == true ) then
+        TargetGroupPIN = STATIC:FindByName(AGMissionTarget, false)
+        TargetCoordForStrike = TargetGroupPIN:GetCoordinate():GetVec2()
+          
+        local target = {}
+        target.point = TargetCoordForStrike
+        target.expend = "Two"
+        target.weaponType = 14
+        target.attackQty = 1
+        target.groupAttack = true
+        local engage = {id = 'Bombing', params = target}
+        Group.getByName(RTBLUEPINGROUPNAME):getController():pushTask(engage)
+        trigger.action.outText("The Pinpoint Strike Flight Reports Target Coordinates Are Locked In And They Are Engaging!", 15)  
+      else
+        trigger.action.outText("Pinpoint Strike Mission Unable To Locate Target, Aborting Mission", 15)
+        AbortPINMission()
+      end
+    elseif ( AGTargetTypeStatic == false ) then
+      if ( GROUP:FindByName(AGMissionTarget):IsAlive() == true ) then
+        TargetGroupPIN = GROUP:FindByName(AGMissionTarget, false)
+        TargetCoordForStrike = TargetGroupPIN:GetCoordinate():GetVec2()
+          
+        local target = {}
+        target.point = TargetCoordForStrike
+        target.expend = "Two"
+        target.weaponType = 14 -- See https://wiki.hoggitworld.com/view/DCS_enum_weapon_flag for other weapon launch codes
+        target.attackQty = 1
+        target.groupAttack = true
+        local engage = {id = 'Bombing', params = target}
+        Group.getByName(RTBLUEPINGROUPNAME):getController():pushTask(engage)
+        trigger.action.outText("The Pinpoint Strike Flight Reports Target Coordinates Are Locked In And They Are Engaging!", 15)    
+      else
+        trigger.action.outText("Pinpoint Strike Mission Unable To Locate Target", 15)
+        AbortPINMission()
+      end
+    else
+      trigger.action.outText("Pinpoint Strike Mission Unable To Locate Target", 15)
+      AbortPINMission()
+    end
+  else
+    trigger.action.outText("The Pinpoint Strike Flight Reports The Mission Target Is Not In Their Designated Sector", 15)
+    AbortPINMission()   
+  end 
+end
+
+--////DRONE JTAC
+function RequestDroneSupport(DRONESector)
+  
+  if ( trigger.misc.getUserFlag(5891) == 1 ) then 
+    if ( trigger.misc.getUserFlag(5892) == 0 ) then
+      
+      local RouteNumber = DRONESector
+      
+      BLUEDRONE1 = SPAWN
+        :New( "RT BLUE Drone "..RouteNumber )
+        :InitLimit( 1, 1 )
+        :InitRandomizeTemplate( { "SQ BLUE MQ-9 Reaper" } )
+        :OnSpawnGroup(
+          function( SpawnGroup )                
+            RTBLUEDRONEGROUPNAME = SpawnGroup.GroupName
+            RTBLUEDRONEGROUPID = Group.getByName(RTBLUEDRONEGROUPNAME):getID()                        
+          end
+        )       
+        :Spawn()
+      
+      trigger.action.outText("MQ-9 Reaper Aerial Drone Launched",60)
+      --Set flag 5892 to 1
+      trigger.action.setUserFlag(5892,1)  
+      
+    elseif ( trigger.misc.getUserFlag(5892) == 1) then
+      --Check if the spawned drone is still alive or not
+            
+      if ( BLUEDRONE1:IsAlive() ) then
+        trigger.action.outText("MQ-9 Reaper Aerial Drone Is Currently Active, Further Support Is Unavailable",60)
+      else
+        trigger.action.setUserFlag(5892,0)
+        RequestDroneSupport(DRONESector)
+      end     
+    else      
+    end
+  else
+    trigger.action.outText("MQ-9 Reaper Aerial Drone Unavailable For This Mission",60)    
+  end
+end
+
+function AbortDroneMission()
+
+  if (trigger.misc.getUserFlag(5892) == 1 ) then
+    if ( GROUP:FindByName(RTBLUEDRONEGROUPNAME):IsAlive() ) then
+      --If Alive, Perform RTB command
+      local RTB = {}
+      --RTB.fromWaypointIndex = 2
+      RTB.goToWaypointIndex = 3
+                
+      local RTBTask = {id = 'SwitchWaypoint', params = RTB}
+      Group.getByName(RTBLUEDRONEGROUPNAME):getController():setOption(0, 3)
+      Group.getByName(RTBLUEDRONEGROUPNAME):getController():setCommand(RTBTask) 
+      
+      trigger.action.outText("MQ-9 Reaper Aerial Drone Is Returning To Base",60)
+    else
+      trigger.action.outText("MQ-9 Reaper Aerial Drone Is Unable To Be Recalled",60)
+    end
+  else
+    trigger.action.outText("MQ-9 Reaper Aerial Drone Has Not Been Deployed",60)
+  end
+end
+
+--////AI FLAG SWITCHES ETC
+function SEF_CAPCommenceAttack()
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Fighter Screen Commence Attack", nil, function() trigger.action.setUserFlag(5011,1) end, nil)
+  trigger.action.outText("Fighter Screen Push Command Available",60)
+end
+
+function SEF_CASCommenceAttack()
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Close Air Support Commence Attack", nil, function() trigger.action.setUserFlag(5021,1) end, nil)
+  trigger.action.outText("Close Air Support Push Command Available",60)
+end
+
+function SEF_AntiShipCommenceAttack()
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Anti-Ship Strike Commence Attack", nil, function() trigger.action.setUserFlag(5031,1) end, nil)
+  trigger.action.outText("Anti-Ship Strike Push Command Available",60)
+end
+
+function SEF_SEADCommenceAttack()
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "SEAD Commence Attack", nil, function() trigger.action.setUserFlag(5041,1) end, nil)
+  trigger.action.outText("SEAD Push Command Available",60)
+end
+
+function SEF_PinpointStrikeCommenceAttack()
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Pinpoint Strike Commence Attack", nil, function() trigger.action.setUserFlag(5051,1) end, nil)
+  trigger.action.outText("Pinpoint Strike Push Command Available",60)
+end
+
+function SEF_CAPRemovePush()
+  missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Fighter Screen Commence Attack"})
+  trigger.action.setUserFlag(5011,0)
+end
+
+function SEF_CASRemovePush()
+  missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Close Air Support Commence Attack"})
+  trigger.action.setUserFlag(5021,0)
+end
+
+function SEF_ASSRemovePush()
+  missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Anti-Ship Strike Commence Attack"})
+  trigger.action.setUserFlag(5031,0)
+end
+
+function SEF_SEADRemovePush()
+  missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "SEAD Commence Attack"})
+  trigger.action.setUserFlag(5041,0)
+end
+
+function SEF_PINRemovePush()
+  missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Pinpoint Strike Commence Attack"})
+  trigger.action.setUserFlag(5051,0)
+end
+
+function SEF_CheckAIPushFlags( timeloop, time ) 
+  if ( trigger.misc.getUserFlag(5011) == 1 ) then
+    timer.scheduleFunction(SEF_CAPRemovePush, 53, timer.getTime() + 1)
+    return time + 2
+  elseif ( trigger.misc.getUserFlag(5021) == 1 ) then
+    timer.scheduleFunction(SEF_CASRemovePush, 53, timer.getTime() + 1)
+    return time + 2
+  elseif ( trigger.misc.getUserFlag(5031) == 1 ) then
+    timer.scheduleFunction(SEF_ASSRemovePush, 53, timer.getTime() + 1)
+    return time + 2
+  elseif ( trigger.misc.getUserFlag(5041) == 1 ) then
+    timer.scheduleFunction(SEF_SEADRemovePush, 53, timer.getTime() + 1)
+    return time + 2
+  elseif ( trigger.misc.getUserFlag(5051) == 1 ) then
+    timer.scheduleFunction(SEF_PINRemovePush, 53, timer.getTime() + 1)
+    return time + 2
+  else
+    return time + 2
+  end
+end
+
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 --////Radio Menu 
 
@@ -389,11 +917,11 @@ function SEF_RadioMenuSetup()
 	--table missionCommands.addCommandForCoalition(enum coalition.side, string name, table/nil path, function functionToRun , any anyArguement)
 
 	--////Setup Submenu For Support Requests
-	--SupportMenuMain = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Support", nil)
-	--SupportMenuAbort = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Abort Directives", nil)
-	--SupportMenuCAP  = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Fighter Support", SupportMenuMain)
+	SupportMenuMain = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Support", nil)
+	SupportMenuAbort = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Abort Directives", nil)
+	SupportMenuCAP  = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Fighter Support", SupportMenuMain)
 	--SupportMenuCAS  = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Close Air Support", SupportMenuMain)
-	--SupportMenuSEAD = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request SEAD Support", SupportMenuMain)
+	SupportMenuSEAD = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request SEAD Support", SupportMenuMain)
 	--SupportMenuASS = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Anti-Shipping Support", SupportMenuMain)
 	--SupportMenuPIN = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Pinpoint Strike", SupportMenuMain)
 	--SupportMenuDrone = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request MQ-9 Reaper Drone", SupportMenuMain)
@@ -407,10 +935,10 @@ function SEF_RadioMenuSetup()
 	
 	
 	--////AI Support Flights Mission Abort Codes
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Fighter Screen", SupportMenuAbort, function() AbortCAPMission() end, nil)	
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Fighter Screen", SupportMenuAbort, function() AbortCAPMission() end, nil)	
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Close Air Support", SupportMenuAbort, function() AbortCASMission() end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Anti-Shipping", SupportMenuAbort, function() AbortASSMission() end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission SEAD", SupportMenuAbort, function() AbortSEADMission() end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission SEAD", SupportMenuAbort, function() AbortSEADMission() end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Pinpoint Strike", SupportMenuAbort, function() AbortPINMission() end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission MQ-9 Reaper Drone", SupportMenuAbort, function() AbortDroneMission() end, nil)	
 	
@@ -429,9 +957,9 @@ function SEF_RadioMenuSetup()
 	
 	
 	--////CAP Support Sector List
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Sector", SupportMenuCAP, function() RequestFighterSupport('Northern Syria') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Middle Sector", SupportMenuCAP, function() RequestFighterSupport('Central Syria') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Sector", SupportMenuCAP, function() RequestFighterSupport('Southern Syria') end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Syria", SupportMenuCAP, function() RequestFighterSupport('North Syria') end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Central Syria", SupportMenuCAP, function() RequestFighterSupport('Central Syria') end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Syria", SupportMenuCAP, function() RequestFighterSupport('South Syria') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuCAP, function() RequestFighterSupport('Bandar Lengeh') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuCAP, function() RequestFighterSupport('Larak') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuCAP, function() RequestFighterSupport('Qeshm') end, nil)
@@ -461,9 +989,9 @@ function SEF_RadioMenuSetup()
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar-e-Jask", SupportMenuCAS2, function() RequestCASSupport('Bandar-e-Jask') end, nil)
 	
 	--////SEAD Support Sector List
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Abu Musa Island", SupportMenuSEAD, function() RequestSEADSupport('Abu Musa') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Sirri Island", SupportMenuSEAD, function() RequestSEADSupport('Sirri') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Tunb Islands", SupportMenuSEAD, function() RequestSEADSupport('Tunb') end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Syria", SupportMenuSEAD, function() RequestSEADSupport('North Syria') end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Central Syria", SupportMenuSEAD, function() RequestSEADSupport('Central Syria') end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Syria", SupportMenuSEAD, function() RequestSEADSupport('South Syria') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuSEAD, function() RequestSEADSupport('Bandar Lengeh') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuSEAD, function() RequestSEADSupport('Larak') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuSEAD, function() RequestSEADSupport('Qeshm') end, nil)
@@ -695,10 +1223,10 @@ end
 		_SETTINGS:SetImperial()
 		
 		--////ENABLE CAP/CAS/ASS/SEAD/PIN/DRONE
-		--trigger.action.setUserFlag(5001,1)
+		trigger.action.setUserFlag(5001,1)
 		--trigger.action.setUserFlag(5002,1)
 		--trigger.action.setUserFlag(5003,1)
-		--trigger.action.setUserFlag(5004,1)
+		trigger.action.setUserFlag(5004,1)
 		--trigger.action.setUserFlag(5005,1)
 		--trigger.action.setUserFlag(5891,1)
 		--////ENABLE RED BOMBER ATTACKS
@@ -718,7 +1246,7 @@ end
 		
 		--////SCHEDULERS
 		--AI FLIGHT PUSH FLAGS
-		--timer.scheduleFunction(SEF_CheckAIPushFlags, 53, timer.getTime() + 1)
+		timer.scheduleFunction(SEF_CheckAIPushFlags, 53, timer.getTime() + 1)
 		--MISSION TARGET STATUS
 		timer.scheduleFunction(SEF_MissionTargetStatus, 53, timer.getTime() + 10)
 		--RED BOMBER ATTACKS - WAIT 10-15 MINUTES BEFORE STARTING
