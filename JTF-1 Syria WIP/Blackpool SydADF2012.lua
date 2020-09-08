@@ -182,7 +182,7 @@ SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Bravo)
   local fg=FLIGHTGROUP:New("Cobra 1")
   fg:AddMission(mission)  
-end, {},600, 900, .8)
+end, {},300, 600, .8)
 
 SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
@@ -200,7 +200,7 @@ SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Bravo)
   local fg=FLIGHTGROUP:New("Hawg 1")
   fg:AddMission(mission) 
-end, {},1500, 1500, .8)
+end, {},500, 1000, .8)
 
 --Aleppo
 SPAWN:New('defenders'):InitLimit(8,0):SpawnScheduled(600,.9)
