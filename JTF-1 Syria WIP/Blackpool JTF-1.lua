@@ -50,12 +50,12 @@ TableSpawnSupport = { -- {spawnobjectname, spawnzone}
 	{spawnobject = "Tanker_KC135MPRS_Shell3", spawnzone = ZONE:New("AR-XC")},
 	{spawnobject = "Tanker_KC135_Texaco3", spawnzone = ZONE:New("AR-XC")},
 	{spawnobject = "Tanker_C130_Arco3", spawnzone = ZONE:New("AR-XC")},
-	{spawnobject = "AWACS_DARKSTAR", spawnzone = ZONE:New("AWACS")},
+	--{spawnobject = "AWACS_DARKSTAR", spawnzone = ZONE:New("AWACS")},
 	{spawnobject = "Tanker_KC135MPRS_Shell2", spawnzone = ZONE:New("AR-YE")},
   {spawnobject = "Tanker_KC135_Texaco2", spawnzone = ZONE:New("AR-YE")},
   {spawnobject = "Tanker_C130_Arco2", spawnzone = ZONE:New("AR-YE")},
   {spawnobject = "AWACS_MAGIC", spawnzone = ZONE:New("AWACS-2")},
-  {spawnobject = "Ja'Din_Aircraft", spawnzone = ZONE:New("Ja'Din_Trigger")},
+  {spawnobject = "Ja'Din_Aircraft", spawnzone = ZONE:New("Ja'Din_Trigger")},  
 }
 
 ------------------------------
@@ -82,6 +82,35 @@ ArcoRoosevelt:Start()
 -- BEGIN RANGE SECTION
 
 -- BEGIN ACM/BFM SECTION
+
+-- BEGIN ATIS SECTION
+
+--[[
+ATIS at Incirlik Airport on 143.00 MHz AM.
+function Relay1()
+local Relay1 = SPAWN:New( "Radio Relay Incirlik" )
+  :InitLimit( 1, 1 )
+Relay1:InitRandomizeTemplate( Radio_Relay_Template )
+  :InitUnControlled( true )
+  :InitRadioFrequency(129.65)
+  :SpawnAtParkingSpot("Incirlik", {110}, SPAWN.Takeoff.Hot)
+  :Spawn()
+end
+]]--
+atisIncirlik=ATIS:New("Incirlik", 129.65)
+--atisIncirlik:SetRadioRelayUnitName("Radio Relay Incirlik")
+atisIncirlik:Start()
+
+
+--atisRamat=ATIS:New("Ramat David", 122.15)
+--atisRamat:SetRadioRelayUnitName("Radio Relay Ramat David")
+--atisRamat:Start()
+
+--atisHatay=ATIS:New("Hatay", 121.25)
+--atisHatay:Start()
+
+--atisPalmyra=ATIS:New("Palmyra", 118.8)
+--atisPalmyra:Start()
 
 --local SpawnBfm.groupName = nil
 

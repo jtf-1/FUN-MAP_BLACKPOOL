@@ -110,52 +110,53 @@ Detection = DETECTION_AREAS:New( DetectionSetGroup, 30000 )
 -- Setup the A2A dispatcher, and initialize it.
 A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
 -- Set 100km as the radius to engage any target by airborne friendlies.
-A2ADispatcher:SetEngageRadius(80000) -- 100000 is the default value.
+A2ADispatcher:SetEngageRadius(120000) -- radius to engage any target by airborne friendlies
 -- Set 200km as the radius to ground control intercept.
-A2ADispatcher:SetGciRadius(80000) -- 200000 is the default value.
+A2ADispatcher:SetGciRadius(60000) -- radius to check if a target can be engaged by an ground controlled intercept
 A2ADispatcher:SetDefaultTakeoffFromParkingCold()
 A2ADispatcher:SetDefaultLandingAtEngineShutdown()
 A2ADispatcher:SetDefaultFuelThreshold(0.20)
 A2ADispatcher:SetDefaultDamageThreshold(0.40)
 A2ADispatcher:SetDisengageRadius(100000)
+A2ADispatcher:SetDefaultCapLimit( 1 ) -- Maximum 2 CAP per squadron.
+A2ADispatcher:SetDefaultOverhead(.5)
 BorderZone = ZONE_POLYGON:New( "RED-BORDER", GROUP:FindByName( "SyAF-GCI" ) )
 NorthCapZone = ZONE_POLYGON:New( "CAPzoneNorth", GROUP:FindByName( "CAP zone North" ) )
 SouthCapZone = ZONE_POLYGON:New( "CAPzoneSouth", GROUP:FindByName( "CAP zone South" ) )
-
 A2ADispatcher:SetBorderZone( BorderZone )
+
 --SQNs
-A2ADispatcher:SetSquadron( "54 Squadron", "Marj Ruhayyil", { "54 Squadron" },8) --mig23
-A2ADispatcher:SetSquadronGrouping( "54 Squadron", 2 )
-A2ADispatcher:SetSquadronGci( "54 Squadron", 900, 1200 )
-
-A2ADispatcher:SetSquadron( "698 Squadron", "Al-Dumayr", { "698 Squadron" },8) --mig29a
-A2ADispatcher:SetSquadronGrouping( "698 Squadron", 2 )
-A2ADispatcher:SetSquadronGci( "698 Squadron", 900, 1200 )
-
-A2ADispatcher:SetSquadron( "695 Squadron", "Al-Dumayr", { "695 Squadron" },8) --mig23
-A2ADispatcher:SetSquadronGrouping( "695 Squadron", 2 )
-A2ADispatcher:SetSquadronGci( "695 Squadron", 900, 1200 )
-
-A2ADispatcher:SetSquadron( "Russia GCI", "Bassel Al-Assad", { "Russia GCI" },8) --su30
-A2ADispatcher:SetSquadronGrouping( "Russia GCI", 2 )
-A2ADispatcher:SetSquadronGci( "Russia GCI", 900, 1200 )
-
 A2ADispatcher:SetSquadron( "North CAP", "Hama", { "CAPnorth" }) --mig29, Qty=total aircraft pool
 A2ADispatcher:SetSquadronGrouping( "North CAP", 2 ) --Qty=spawns per group
-A2ADispatcher:SetSquadronCap( "North CAP", NorthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
-A2ADispatcher:SetSquadronCapInterval( "North CAP", 1, 300, 900)
+A2ADispatcher:SetSquadronCap2( "North CAP", 800, 1200, 3000, 8000, "Baro", NorthCapZone, 600, 700, 6000, 8000, "Baro")
+A2ADispatcher:SetSquadronCapInterval( "North CAP", 1, 900, 1200)
+
+A2ADispatcher:SetSquadron( "Russia GCI", "Bassel Al-Assad", { "Russia GCI" }) --su30
+A2ADispatcher:SetSquadronGrouping( "Russia GCI", 1 )--Qty=spawns per group
+A2ADispatcher:SetSquadronGci2( "Russia GCI", 800, 1200, 2000, 5000, "Baro" )
+
+A2ADispatcher:SetSquadron( "695 Squadron", "Rene Mouawad", { "695 Squadron" }) --mig23
+A2ADispatcher:SetSquadronGrouping( "695 Squadron", 1 )--Qty=spawns per group
+A2ADispatcher:SetSquadronGci2( "695 Squadron", 800, 1200, 2000, 5000, "Baro" )
 
 A2ADispatcher:SetSquadron( "South CAP", "Al-Dumayr", { "CAPsouth" }) --mig29, Qty=total aircraft pool
 A2ADispatcher:SetSquadronGrouping( "South CAP", 2 ) --Qty=spawns per group
-A2ADispatcher:SetSquadronCap( "South CAP", SouthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
-A2ADispatcher:SetSquadronCapInterval( "South CAP", 1, 300, 900)
+A2ADispatcher:SetSquadronCap2( "South CAP", 800, 1200, 3000, 8000, "Baro", SouthCapZone, 600, 700, 6000, 8000, "Baro")
+A2ADispatcher:SetSquadronCapInterval( "South CAP", 1, 900, 1200)
 
---A2ADispatcher:SetTacticalDisplay(true)
+A2ADispatcher:SetSquadron( "54 Squadron", "Marj Ruhayyil", { "54 Squadron" }) --mig23
+A2ADispatcher:SetSquadronGrouping( "54 Squadron", 1 )--Qty=spawns per group
+A2ADispatcher:SetSquadronGci2( "54 Squadron", 800, 1200, 2000, 5000, "Baro" )
+
+A2ADispatcher:SetSquadron( "698 Squadron", "Rayak", { "698 Squadron" }) --mig29a
+A2ADispatcher:SetSquadronGrouping( "698 Squadron", 1 )--Qty=spawns per group
+A2ADispatcher:SetSquadronGci2( "698 Squadron", 800, 1200, 2000, 5000, "Baro" )
+
+
+A2ADispatcher:SetTacticalDisplay(true)
 A2ADispatcher:Start()
 
 
--- add the MOOSE SET_GROUP to the IADS
---redIADS:addMooseSetGroup(DetectionSetGroup)
 
 local Zone={}
 Zone.Alpha   = ZONE:New("Aleppo")   --Core.Zone#ZONE
