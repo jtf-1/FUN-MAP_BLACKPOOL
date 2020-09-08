@@ -71,28 +71,28 @@ end
 
 --////SAVE FUNCTION FOR UNITS
 function SEF_SaveUnitIntermentTable(timeloop, time)
-	IntermentMissionStr = IntegratedserializeWithCycles("SnowfoxUnitInterment", SnowfoxUnitInterment)
-	writemission(IntermentMissionStr, "SnowfoxUnitInterment.lua")
+	IntermentMissionStr = IntegratedserializeWithCycles("BlackpoolUnitInterment", BlackpoolUnitInterment)
+	writemission(IntermentMissionStr, "BlackpoolUnitInterment.lua")
 	--trigger.action.outText("Progress Has Been Saved", 15)	
 	return time + SaveScheduleUnits
 end
 
 function SEF_SaveUnitIntermentTableNoArgs()
-	IntermentMissionStr = IntegratedserializeWithCycles("SnowfoxUnitInterment", SnowfoxUnitInterment)
-	writemission(IntermentMissionStr, "SnowfoxUnitInterment.lua")		
+	IntermentMissionStr = IntegratedserializeWithCycles("BlackpoolUnitInterment", BlackpoolUnitInterment)
+	writemission(IntermentMissionStr, "BlackpoolUnitInterment.lua")		
 end
 
 --////SAVE FUNCTION FOR STATICS
 function SEF_SaveStaticIntermentTable(timeloop, time)
-	IntermentMissionStrStatic = IntegratedserializeWithCycles("SnowfoxStaticInterment", SnowfoxStaticInterment)
-	writemission(IntermentMissionStrStatic, "SnowfoxStaticInterment.lua")
+	IntermentMissionStrStatic = IntegratedserializeWithCycles("BlackpoolStaticInterment", BlackpoolStaticInterment)
+	writemission(IntermentMissionStrStatic, "BlackpoolStaticInterment.lua")
 	--trigger.action.outText("Progress Has Been Saved", 15)	
 	return time + SaveScheduleUnits
 end
 
 function SEF_SaveStaticIntermentTableNoArgs()
-	IntermentMissionStrStatic = IntegratedserializeWithCycles("SnowfoxStaticInterment", SnowfoxStaticInterment)
-	writemission(IntermentMissionStrStatic, "SnowfoxStaticInterment.lua")	
+	IntermentMissionStrStatic = IntegratedserializeWithCycles("BlackpoolStaticInterment", BlackpoolStaticInterment)
+	writemission(IntermentMissionStrStatic, "BlackpoolStaticInterment.lua")	
 end
 
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -102,38 +102,38 @@ SEFDeletedUnitCount = 0
 SEFDeletedStaticCount = 0
 
 --////LOAD UNITS
-if file_exists("SnowfoxUnitInterment.lua") then
+if file_exists("BlackpoolUnitInterment.lua") then
 	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Abu Musa", "Sirri Island", "Tunb Island", "Tunb Kochak", "Bandar Lengeh", "Qeshm Island", "Havadarya", "Bandar Abbas", "Larak Island", "Seerik", "Bandar-e-Jask", "Minab", "RED SAM" } ):FilterActive(true):FilterStart()
 	DeadUnitsList:HandleEvent(EVENTS.Dead)
 	
-	dofile("SnowfoxUnitInterment.lua")
+	dofile("BlackpoolUnitInterment.lua")
 	
-	UnitIntermentTableLength = SEF_GetTableLength(SnowfoxUnitInterment)
+	UnitIntermentTableLength = SEF_GetTableLength(BlackpoolUnitInterment)
 		
 	for i = 1, UnitIntermentTableLength do
-		--trigger.action.outText("Unit Interment Element "..i.." Is "..SnowfoxUnitInterment[i], 15)		
-		Unit.getByName(SnowfoxUnitInterment[i]):destroy()
+		--trigger.action.outText("Unit Interment Element "..i.." Is "..BlackpoolUnitInterment[i], 15)		
+		Unit.getByName(BlackpoolUnitInterment[i]):destroy()
 		SEFDeletedUnitCount = SEFDeletedUnitCount + 1		
 	end			
 else
 	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Abu Musa", "Sirri Island", "Tunb Island", "Tunb Kochak", "Bandar Lengeh", "Qeshm Island", "Havadarya", "Bandar Abbas", "Larak Island", "Seerik", "Bandar-e-Jask", "Minab", "RED SAM" } ):FilterActive(true):FilterStart()
 	DeadUnitsList:HandleEvent(EVENTS.Dead)		
-	SnowfoxUnitInterment = {}	
+	BlackpoolUnitInterment = {}	
 	UnitIntermentTableLength = 0	
 end
 --////LOAD STATICS
-if file_exists("SnowfoxStaticInterment.lua") then
+if file_exists("BlackpoolStaticInterment.lua") then
 	
-	dofile("SnowfoxStaticInterment.lua")
+	dofile("BlackpoolStaticInterment.lua")
 		
-	StaticIntermentTableLength = SEF_GetTableLength(SnowfoxStaticInterment)
+	StaticIntermentTableLength = SEF_GetTableLength(BlackpoolStaticInterment)
 	
 	for i = 1, StaticIntermentTableLength do
-		StaticObject.getByName(SnowfoxStaticInterment[i]):destroy()		
+		StaticObject.getByName(BlackpoolStaticInterment[i]):destroy()		
 		SEFDeletedStaticCount = SEFDeletedStaticCount + 1
 	end	
 else
-	SnowfoxStaticInterment = {}
+	BlackpoolStaticInterment = {}
 	StaticIntermentTableLength = 0	
 end
 
@@ -166,12 +166,12 @@ function DeadUnitsList:OnEventDead(EventData)
 		if ( DEADUNITOBJECTCATEGORY == 1 ) then -- UNIT
 			if ( DEADUNITCATEGORY == 2 or DEADUNITCATEGORY == 3 ) then -- GROUND_UNIT or SHIP
 				UnitIntermentTableLength = UnitIntermentTableLength + 1				
-				SnowfoxUnitInterment[UnitIntermentTableLength] = DEADUNITNAME			
+				BlackpoolUnitInterment[UnitIntermentTableLength] = DEADUNITNAME			
 			else
 			end
 		elseif ( DEADUNITOBJECTCATEGORY == 3 ) then -- STATIC
 			StaticIntermentTableLength = StaticIntermentTableLength + 1			
-			SnowfoxStaticInterment[StaticIntermentTableLength] = DEADUNITNAME		
+			BlackpoolStaticInterment[StaticIntermentTableLength] = DEADUNITNAME		
 		else
 		end		
 	else

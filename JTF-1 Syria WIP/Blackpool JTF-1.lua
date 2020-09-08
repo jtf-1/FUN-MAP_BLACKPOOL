@@ -55,7 +55,6 @@ TableSpawnSupport = { -- {spawnobjectname, spawnzone}
   {spawnobject = "Tanker_KC135_Texaco2", spawnzone = ZONE:New("AR-YE")},
   {spawnobject = "Tanker_C130_Arco2", spawnzone = ZONE:New("AR-YE")},
   {spawnobject = "AWACS_MAGIC", spawnzone = ZONE:New("AWACS-2")},
-  {spawnobject = "Ja'Din_Aircraft", spawnzone = ZONE:New("Ja'Din_Trigger")},  
 }
 
 ------------------------------

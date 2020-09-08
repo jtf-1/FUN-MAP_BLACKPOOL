@@ -960,12 +960,7 @@ function SEF_RadioMenuSetup()
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Syria", SupportMenuCAP, function() RequestFighterSupport('North Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Central Syria", SupportMenuCAP, function() RequestFighterSupport('Central Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Syria", SupportMenuCAP, function() RequestFighterSupport('South Syria') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuCAP, function() RequestFighterSupport('Bandar Lengeh') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuCAP, function() RequestFighterSupport('Larak') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuCAP, function() RequestFighterSupport('Qeshm') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Havadarya", SupportMenuCAP, function() RequestFighterSupport('Havadarya') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Abbas", SupportMenuCAP, function() RequestFighterSupport('Bandar Abbas') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Minab", SupportMenuCAP, function() RequestFighterSupport('Minab') end, nil)
+
 	
 	--SupportMenuCAP2 = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Other Sectors", SupportMenuCAP)
 	
@@ -976,12 +971,7 @@ function SEF_RadioMenuSetup()
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Abu Musa Island", SupportMenuCAS, function() RequestCASSupport('Abu Musa') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Sirri Island", SupportMenuCAS, function() RequestCASSupport('Sirri') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Tunb Islands", SupportMenuCAS, function() RequestCASSupport('Tunb') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuCAS, function() RequestCASSupport('Bandar Lengeh') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuCAS, function() RequestCASSupport('Larak') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuCAS, function() RequestCASSupport('Qeshm') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Havadarya", SupportMenuCAS, function() RequestCASSupport('Havadarya') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Abbas", SupportMenuCAS, function() RequestCASSupport('Bandar Abbas') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Minab", SupportMenuCAS, function() RequestCASSupport('Minab') end, nil)
+
 	
 	--SupportMenuCAS2 = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Other Sectors", SupportMenuCAS)
 	
@@ -992,12 +982,7 @@ function SEF_RadioMenuSetup()
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Syria", SupportMenuSEAD, function() RequestSEADSupport('North Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Central Syria", SupportMenuSEAD, function() RequestSEADSupport('Central Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Syria", SupportMenuSEAD, function() RequestSEADSupport('South Syria') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuSEAD, function() RequestSEADSupport('Bandar Lengeh') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuSEAD, function() RequestSEADSupport('Larak') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuSEAD, function() RequestSEADSupport('Qeshm') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Havadarya", SupportMenuSEAD, function() RequestSEADSupport('Havadarya') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Abbas", SupportMenuSEAD, function() RequestSEADSupport('Bandar Abbas') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Minab", SupportMenuSEAD, function() RequestSEADSupport('Minab') end, nil)
+
 	
 	--SupportMenuSEAD2 = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Other Sectors", SupportMenuSEAD)
 	
@@ -1008,22 +993,13 @@ function SEF_RadioMenuSetup()
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Abu Musa Island", SupportMenuASS, function() RequestASSSupport('Abu Musa') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Sirri Island", SupportMenuASS, function() RequestASSSupport('Sirri') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuASS, function() RequestASSSupport('Bandar Lengeh') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuASS, function() RequestASSSupport('Qeshm') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Havadarya", SupportMenuASS, function() RequestASSSupport('Havadarya') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Seerik", SupportMenuASS, function() RequestASSSupport('Seerik') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar-e-Jask", SupportMenuASS, function() RequestASSSupport('Bandar-e-Jask') end, nil)
+
 	
 	--////PIN Support Sector List
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Abu Musa Island", SupportMenuPIN, function() RequestPINSupport('Abu Musa') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Sirri Island", SupportMenuPIN, function() RequestPINSupport('Sirri') end, nil)
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Tunb Islands", SupportMenuPIN, function() RequestPINSupport('Tunb') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Lengeh", SupportMenuPIN, function() RequestPINSupport('Bandar Lengeh') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Larak Island", SupportMenuPIN, function() RequestPINSupport('Larak') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Qeshm Island", SupportMenuPIN, function() RequestPINSupport('Qeshm') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Havadarya", SupportMenuPIN, function() RequestPINSupport('Havadarya') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Bandar Abbas", SupportMenuPIN, function() RequestPINSupport('Bandar Abbas') end, nil)
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Minab", SupportMenuPIN, function() RequestPINSupport('Minab') end, nil)
-	
+
 	--SupportMenuPIN2 = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Other Sectors", SupportMenuPIN)
 	
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Seerik", SupportMenuPIN2, function() RequestPINSupport('Seerik') end, nil)

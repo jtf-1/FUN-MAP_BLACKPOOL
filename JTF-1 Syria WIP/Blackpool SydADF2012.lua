@@ -153,7 +153,7 @@ A2ADispatcher:SetSquadronGrouping( "698 Squadron", 1 )--Qty=spawns per group
 A2ADispatcher:SetSquadronGci2( "698 Squadron", 800, 1200, 2000, 5000, "Baro" )
 
 
-A2ADispatcher:SetTacticalDisplay(true)
+A2ADispatcher:SetTacticalDisplay(false)
 A2ADispatcher:Start()
 
 
