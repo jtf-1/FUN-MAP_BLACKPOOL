@@ -103,7 +103,7 @@ SEFDeletedStaticCount = 0
 
 --////LOAD UNITS
 if file_exists("BlackpoolUnitInterment.lua") then
-	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Abu Musa", "Sirri Island", "Tunb Island", "Tunb Kochak", "Bandar Lengeh", "Qeshm Island", "Havadarya", "Bandar Abbas", "Larak Island", "Seerik", "Bandar-e-Jask", "Minab", "RED SAM" } ):FilterActive(true):FilterStart()
+	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Aleppo", "Al_Tanf", "al-Thawra_Dam", "Barzah_SciCtr", "Busra", "Damascus", "Deir_ez_Zor", "EWR", "Him_Shanshar", "PalmyraCastle", "PalmyraRomanTheatre", "Ein_Elkorum", "Russian", "SAM", "Static" } ):FilterActive(true):FilterStart()
 	DeadUnitsList:HandleEvent(EVENTS.Dead)
 	
 	dofile("BlackpoolUnitInterment.lua")
@@ -116,7 +116,7 @@ if file_exists("BlackpoolUnitInterment.lua") then
 		SEFDeletedUnitCount = SEFDeletedUnitCount + 1		
 	end			
 else
-	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Abu Musa", "Sirri Island", "Tunb Island", "Tunb Kochak", "Bandar Lengeh", "Qeshm Island", "Havadarya", "Bandar Abbas", "Larak Island", "Seerik", "Bandar-e-Jask", "Minab", "RED SAM" } ):FilterActive(true):FilterStart()
+	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Aleppo", "Al_Tanf", "al-Thawra_Dam", "Barzah_SciCtr", "Busra", "Damascus", "Deir_ez_Zor", "EWR", "Him_Shanshar", "PalmyraCastle", "PalmyraRomanTheatre", "Ein_Elkorum", "Russian", "SAM", "Static"  } ):FilterActive(true):FilterStart()
 	DeadUnitsList:HandleEvent(EVENTS.Dead)		
 	BlackpoolUnitInterment = {}	
 	UnitIntermentTableLength = 0	
@@ -154,7 +154,7 @@ function DeadUnitsList:OnEventDead(EventData)
 	local DEADUNITOBJECTCATEGORY = EventData.IniObjectCategory 	-- 1 UNIT / 2 WEAPON / 3 STATIC / 4 BASE / 5 SCENERY / 6 CARGO
 	local DEADUNITCATEGORY = EventData.IniCategory				-- 0 AIRPLANE / 1 HELICOPTER / 2 GROUND_UNIT / 3 SHIP / 4 STRUCTURE
 	
-	--[[
+--[[
 	--Debug Zone
 	trigger.action.outText("Dead Unit Name: "..DEADUNITNAME, 15)
 	trigger.action.outText("Dead Unit Coalition: "..DEADUNITCOALITION, 15)
