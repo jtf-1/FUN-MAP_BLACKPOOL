@@ -157,7 +157,7 @@ A2ADispatcher:SetTacticalDisplay(false)
 A2ADispatcher:Start()
 
 
-
+--[[
 local Zone={}
 Zone.Alpha   = ZONE:New("Aleppo")   --Core.Zone#ZONE
 Zone.Bravo   = ZONE:New("Golan")   --Core.Zone#ZONE
@@ -165,6 +165,8 @@ Zone.Bravo   = ZONE:New("Golan")   --Core.Zone#ZONE
 --Zone.Delta   = ZONE:New("Zone Delta")   --Core.Zone#ZONE
 -- Set of all zones defined in the ME
 local AllZones=SET_ZONE:New():FilterOnce()
+
+
 
 SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
@@ -202,6 +204,7 @@ SCHEDULER:New( nil, function()
   fg:AddMission(mission) 
 end, {},500, 1000, .8)
 
+
 --Aleppo
 SPAWN:New('defenders'):InitLimit(8,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers'):InitLimit(8,0):SpawnScheduled(600,.9)
@@ -212,3 +215,78 @@ SPAWN:New('attackers-1'):InitLimit(8,0):SpawnScheduled(600,.9)
 SPAWN:New('defenders-2'):InitLimit(7,0):SpawnScheduled(600,.9)
 SPAWN:New('defenders-3'):InitLimit(7,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-4'):InitLimit(8,0):SpawnScheduled(600,.9)
+]]--
+
+------------------------
+-- SUPPORT UNIT START --
+------------------------
+
+GROUP:FindByName("CVN71"):PatrolRoute()
+GROUP:FindByName("LHA-1"):PatrolRoute()
+
+local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CSG_CarrierGrp_Roosevelt-1"), "Tanker_S3-B_Arco3")
+ArcoRoosevelt:SetTakeoffAir()
+ArcoRoosevelt:SetTACAN(106, "ARC")
+ArcoRoosevelt:SetRadio(317.106, "AM")
+ArcoRoosevelt:SetCallsign(2,1)
+ArcoRoosevelt:Start()
+
+function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
+
+  --local SupportSpawn = _args[1]
+  local SupportSpawnObject = SPAWN:New( SupportSpawn.spawnobject )
+    
+  SupportSpawnObject:InitLimit( 1, 50 )
+  
+    :OnSpawnGroup(
+      function ( SpawnGroup )
+        local SpawnIndex = SupportSpawnObject:GetSpawnIndexFromGroup( SpawnGroup )
+        local CheckTanker = SCHEDULER:New( nil, 
+        function ()
+      if SpawnGroup then
+        if SpawnGroup:IsNotInZone( SupportSpawn.spawnzone ) then
+          SupportSpawnObject:ReSpawn( SpawnIndex )
+        end
+      end
+        end,
+        {}, 0, 60 )
+      end
+    )
+    :InitRepeatOnLanding()
+    :Spawn()
+
+
+end -- function
+
+----------------------------------------------------
+--- define table of respawning support aircraft ---
+----------------------------------------------------
+
+TableSpawnSupport = { -- {spawnobjectname, spawnzone, spawncallsign}
+  {spawnobject = "Tanker_KC135MPRS_Shell3", spawnzone = ZONE:New("AR-XC")},
+  {spawnobject = "Tanker_KC135_Texaco3", spawnzone = ZONE:New("AR-XC")},
+  {spawnobject = "Tanker_C130_Arco3", spawnzone = ZONE:New("AR-XC")},
+  {spawnobject = "AWACS_DARKSTAR", spawnzone = ZONE:New("AWACS")},
+  {spawnobject = "Tanker_KC135MPRS_Shell2", spawnzone = ZONE:New("AR-YF")},
+  {spawnobject = "Tanker_KC135_Texaco2", spawnzone = ZONE:New("AR-YF")},
+  {spawnobject = "Tanker_C130_Arco2", spawnzone = ZONE:New("AR-YF")},
+  {spawnobject = "AWACS_MAGIC", spawnzone = ZONE:New("AWACS-2")},
+}
+
+------------------------------
+--- spawn support aircraft ---
+------------------------------
+
+for i, v in ipairs( TableSpawnSupport ) do
+  SpawnSupport ( v )
+  
+end
+
+------------------------
+-- ATIS SECTION START --
+------------------------
+
+
+atisIncirlik=ATIS:New("Incirlik", 129.65)
+--atisIncirlik:SetRadioRelayUnitName("Radio Relay Incirlik")
+atisIncirlik:Start()

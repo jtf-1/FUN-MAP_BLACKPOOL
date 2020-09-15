@@ -2,22 +2,23 @@ env.info( '*** JTF-1 SYRIA Fun Map MOOSE script ***' )
 env.info( '*** JTF-1 MOOSE MISSION SCRIPT START ***' )
 
 
-local JtfAdmin = true --activate admin menu option in admin slots
+--local JtfAdmin = true --activate admin menu option in admin slots
 
 _SETTINGS:SetPlayerMenuOff()
 
 -- BEGIN FUNCTIONS SECTION
 
-GROUP:FindByName("CVN71"):PatrolRoute()
-GROUP:FindByName("LHA-1"):PatrolRoute()
+--GROUP:FindByName("CVN71"):PatrolRoute()
+--GROUP:FindByName("LHA-1"):PatrolRoute()
 
 
 function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 
   --local SupportSpawn = _args[1]
   local SupportSpawnObject = SPAWN:New( SupportSpawn.spawnobject )
-
+    
   SupportSpawnObject:InitLimit( 1, 50 )
+  
     :OnSpawnGroup(
       function ( SpawnGroup )
         local SpawnIndex = SupportSpawnObject:GetSpawnIndexFromGroup( SpawnGroup )
@@ -46,14 +47,14 @@ end -- function
 --- define table of respawning support aircraft ---
 ----------------------------------------------------
 
-TableSpawnSupport = { -- {spawnobjectname, spawnzone}
+TableSpawnSupport = { -- {spawnobjectname, spawnzone, spawncallsign}
 	{spawnobject = "Tanker_KC135MPRS_Shell3", spawnzone = ZONE:New("AR-XC")},
 	{spawnobject = "Tanker_KC135_Texaco3", spawnzone = ZONE:New("AR-XC")},
 	{spawnobject = "Tanker_C130_Arco3", spawnzone = ZONE:New("AR-XC")},
-	--{spawnobject = "AWACS_DARKSTAR", spawnzone = ZONE:New("AWACS")},
-	{spawnobject = "Tanker_KC135MPRS_Shell2", spawnzone = ZONE:New("AR-YE")},
-  {spawnobject = "Tanker_KC135_Texaco2", spawnzone = ZONE:New("AR-YE")},
-  {spawnobject = "Tanker_C130_Arco2", spawnzone = ZONE:New("AR-YE")},
+	{spawnobject = "AWACS_DARKSTAR", spawnzone = ZONE:New("AWACS")},
+	{spawnobject = "Tanker_KC135MPRS_Shell2", spawnzone = ZONE:New("AR-YF")},
+  {spawnobject = "Tanker_KC135_Texaco2", spawnzone = ZONE:New("AR-YF")},
+  {spawnobject = "Tanker_C130_Arco2", spawnzone = ZONE:New("AR-YF")},
   {spawnobject = "AWACS_MAGIC", spawnzone = ZONE:New("AWACS-2")},
 }
 
@@ -70,11 +71,6 @@ end
 
 -- BEGIN CARRIER TANKER SECTION
 
-local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CSG_CarrierGrp_Roosevelt-1"), "Tanker_S3-B_Arco3")
-ArcoRoosevelt:SetTakeoffAir()
-ArcoRoosevelt:SetTACAN(106, "ARC")
-ArcoRoosevelt:SetRadio(317.106, "AM")
-ArcoRoosevelt:Start()
 
 -- END CARRIER TANKER SECTION
 
