@@ -155,7 +155,7 @@ ctld.pickupZones = {
     { "pickzone2", "green", -1, "yes", 0 },
     { "pickzone3", "green", -1, "yes", 0 },
     { "pickzone4", "green", -1, "yes", 0 },
-    { "pickzone5", "none", -1, "no", 0 },
+    { "pickzone5", "green", -1, "yes", 0 },
     { "pickzone6", "none", -1, "no", 0 },
     { "pickzone7", "none", -1, "no", 0 },
     { "pickzone8", "none", -1, "no", 0 },

@@ -148,7 +148,7 @@ A2ADispatcher:SetSquadron( "54 Squadron", "Marj Ruhayyil", { "54 Squadron" }) --
 A2ADispatcher:SetSquadronGrouping( "54 Squadron", 1 )--Qty=spawns per group
 A2ADispatcher:SetSquadronGci2( "54 Squadron", 800, 1200, 2000, 5000, "Baro" )
 
-A2ADispatcher:SetSquadron( "698 Squadron", "Rayak", { "698 Squadron" }) --mig29a
+A2ADispatcher:SetSquadron( "698 Squadron", "Mezzeh", { "698 Squadron" }) --mig29a
 A2ADispatcher:SetSquadronGrouping( "698 Squadron", 1 )--Qty=spawns per group
 A2ADispatcher:SetSquadronGci2( "698 Squadron", 800, 1200, 2000, 5000, "Baro" )
 
@@ -216,6 +216,12 @@ SPAWN:New('defenders-2'):InitLimit(7,0):SpawnScheduled(600,.9)
 SPAWN:New('defenders-3'):InitLimit(7,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-4'):InitLimit(8,0):SpawnScheduled(600,.9)
 ]]--
+------------------------
+-- PATROL UNIT START --
+------------------------
+
+GROUP:FindByName("Sub1"):PatrolRoute()
+GROUP:FindByName("Tartus - Speedboats"):PatrolRoute()
 
 ------------------------
 -- SUPPORT UNIT START --
@@ -223,6 +229,7 @@ SPAWN:New('attackers-4'):InitLimit(8,0):SpawnScheduled(600,.9)
 
 GROUP:FindByName("CVN71"):PatrolRoute()
 GROUP:FindByName("LHA-1"):PatrolRoute()
+
 
 local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CSG_CarrierGrp_Roosevelt-1"), "Tanker_S3-B_Arco3")
 ArcoRoosevelt:SetTakeoffAir()
