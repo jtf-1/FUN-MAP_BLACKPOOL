@@ -240,6 +240,21 @@ function SEF_InitializeMissionTable()
     TargetStatic = false,
     TargetBriefing = "MISSION UPDATE \n\nTARGET: UNKNOWN SUBMARINE \n\n AN UNKNOWN SUBMARINE HAS BEEN SPOTTED NEAR TRIPOLI. WE DON’T HAVE ANY AVAILABLE VESSELS THAT CAN BE TASKED WITH A SEARCH AN DSTROY MISSION. YOU RMISSION IS TO LOCATE THE SUB AND IF POSSIBLE DISABLE IT. \n\nLOCATION: N 34.30.13 E 35.50.18 (MAP GRID: YD51-62) \n\nSUGGESTED MUNITION(S): LASER GUIDED BOMBS, ROCKETS, GUNS",
   }
+  OperationBlackpool_AG[16] = {
+    TargetName = "SouthInsurgentCamp",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: ISIL TRAINING CAMP \n\n SATELLITE IMAGING FOUND A ISIL TRAINING CAMP SETUP IN THE HILLS SOUTH OF BAALBEK IN THE SOUTHERN ZONE OF SYRIA. TAKE OUT ALL INSURGENTS AND VEHICLES AT THIS LOCATION. \n\nLOCATION: N 33.55.11 E 36.13.52 (MAP GRID: BT45) \n\nSUGGESTED MUNITION(S): UNGUIDED MUNITIONS",
+  }
+  OperationBlackpool_AG[17] = {
+    TargetName = "FakeUNcargo",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: TWIN PROP CARGO PLANE \n\n OUR SOURCES HAVE DISCOVERED THAT A SYRIAN CARGO PLANE IS FLYING FROM KHALKHALAH AIRPORT TO RYAK AIRPORT IN SOUTHERN SYRIA. WE BELIEVE THEY ARE RUNNING WEAPONS INTO THE AREA SUPPORTING LOCAL TERRORISTS GROUPS STATIONED IN BERUIT. FIND AND VISUALLY IDENTIFY THE PLANE, THEN TRY AND FORCE THEM TO LAND. IF THEY WILL NOT LAND, YOU ARE AUTHORIZED TO BRING THEM DOWN. \n\nLOCATION: SOUTHERN SYRIA (MAP GRID: BS76-YC74) \n\nSUGGESTED MUNITION(S): IR GUIDED MISSLES OR GUNS",
+  }
+   OperationBlackpool_AG[18] = {
+    TargetName = "Beirut – RaodOutpost",
+    TargetStatic = true,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: INSURGENT ROAD OUTPOST \n\n INSURGETS HAVE SETUP A ROAD OUTPOST ON HWY-30, A 3MI ESE OUT OF BEIRUT. DESTORY THE OUTPOST WITH MINIMAL COLLATERAL DAMAGE. \n\nLOCATION: N 33.48.48 E 35.37.11 (MAP GRID: YC44) \n\nSUGGESTED MUNITION(S): LIGHT PRECISION GUIDED MUNITIONS",
+  }
   
 	--Debug Code
 	--[[
@@ -274,117 +289,113 @@ local function CheckObjectiveRequest()
 end
 
 function TargetReport()
-			
-	if (AGTargetTypeStatic == false and AGMissionTarget ~=nil) then
-		TargetGroup = GROUP:FindByName(AGMissionTarget)	
-		
-		if (GROUP:FindByName(AGMissionTarget):IsAlive() == true) then
-		
-			TargetRemainingUnits = Group.getByName(AGMissionTarget):getSize()	
-			
-			MissionPlayersBlue = SET_CLIENT:New():FilterCoalitions("blue"):FilterActive():FilterOnce()
-			
-			MissionPlayersBlue:ForEachClient(
-				function(Client)
-					if Client:IsAlive() == true then
-						ClientPlayerName = Client:GetPlayerName()	  
-						ClientUnitName = Client:GetName()			  
-						ClientGroupName = Client:GetClientGroupName() 			
-						ClientGroupID = Client:GetClientGroupID()	   	
-				
-						PlayerUnit = UNIT:FindByName(ClientUnitName)		
-					
-						PlayerCoord = PlayerUnit:GetCoordinate()
-						TargetCoord = TargetGroup:GetCoordinate()
-						TargetHeight = math.floor(TargetGroup:GetCoordinate():GetLandHeight() * 100)/100
-						TargetHeightFt = math.floor(TargetHeight * 3.28084)
-						PlayerDistance = PlayerCoord:Get2DDistance(TargetCoord)
+      
+  if (AGTargetTypeStatic == false and AGMissionTarget ~=nil) then
+    TargetGroup = GROUP:FindByName(AGMissionTarget) 
+    
+    if (GROUP:FindByName(AGMissionTarget):IsAlive() == true) then
+    
+      TargetRemainingUnits = Group.getByName(AGMissionTarget):getSize() 
+      
+      MissionPlayersBlue = SET_CLIENT:New():FilterCoalitions("blue"):FilterActive():FilterOnce()
+      
+      MissionPlayersBlue:ForEachClient(
+        function(Client)
+          if Client:IsAlive() == true then
+            ClientPlayerName = Client:GetPlayerName()   
+            ClientUnitName = Client:GetName()       
+            ClientGroupName = Client:GetClientGroupName()       
+            ClientGroupID = Client:GetClientGroupID()     
+        
+            PlayerUnit = UNIT:FindByName(ClientUnitName)    
+          
+            PlayerCoord = PlayerUnit:GetCoordinate()
+            TargetCoord = TargetGroup:GetCoordinate()
+            TargetHeight = math.floor(TargetGroup:GetCoordinate():GetLandHeight() * 100)/100
+            TargetHeightFt = math.floor(TargetHeight * 3.28084)
+            PlayerDistance = PlayerCoord:Get2DDistance(TargetCoord)
 
-						TargetVector = PlayerCoord:GetDirectionVec3(TargetCoord)
-						TargetBearing = PlayerCoord:GetAngleRadians (TargetVector)	
-					
-						PlayerBR = PlayerCoord:GetBRText(TargetBearing, PlayerDistance, SETTINGS:SetImperial())
-					
-						--List the amount of units remaining in the group
-						if (TargetRemainingUnits > 1) then
-							SZMessage = "There are "..TargetRemainingUnits.." targets remaining for this mission" 
-						elseif (TargetRemainingUnits == 1) then
-							SZMessage = "There is "..TargetRemainingUnits.." target remaining for this mission" 
-						elseif (TargetRemainingUnits == nil) then					
-							SZMessage = "Unable To Determine Group Size"
-						else			
-							SZMessage = "Nothing to report"		
-						end		
-					
-						BRMessage = "Target bearing "..PlayerBR
-						ELEMessage = "Elevation "..TargetHeight.."m".." / "..TargetHeightFt.."ft"
-					--[[
-						_SETTINGS:SetLL_Accuracy(0)
-						CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
-						_SETTINGS:SetLL_Accuracy(3)
-						CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
-						_SETTINGS:SetLL_Accuracy(2)
-						CoordStringLLDMSDS = TargetCoord:\(SETTINGS:SetImperial())
-						  ]]--
-						--trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)							
-				    trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..ELEMessage, 30)              
-				
-					else						
-					end				
-				end
-			)
-		else
-			trigger.action.outText("Target Report Unavailable", 15)
-		end
-		
-	elseif (AGTargetTypeStatic == true and AGMissionTarget ~=nil) then
-		TargetGroup = STATIC:FindByName(AGMissionTarget, false)
-		
-		MissionPlayersBlue = SET_CLIENT:New():FilterCoalitions("blue"):FilterActive():FilterOnce()
+            TargetVector = PlayerCoord:GetDirectionVec3(TargetCoord)
+            TargetBearing = PlayerCoord:GetAngleRadians (TargetVector)  
+          
+            PlayerBR = PlayerCoord:GetBRText(TargetBearing, PlayerDistance, SETTINGS:SetImperial())
+          
+            --List the amount of units remaining in the group
+            if (TargetRemainingUnits > 1) then
+              SZMessage = "There are "..TargetRemainingUnits.." targets remaining for this mission" 
+            elseif (TargetRemainingUnits == 1) then
+              SZMessage = "There is "..TargetRemainingUnits.." target remaining for this mission" 
+            elseif (TargetRemainingUnits == nil) then         
+              SZMessage = "Unable To Determine Group Size"
+            else      
+              SZMessage = "Nothing to report"   
+            end   
+          
+            BRMessage = "Target bearing "..PlayerBR
+            ELEMessage = "Elevation "..TargetHeight.."m".." / "..TargetHeightFt.."ft"
+          
+            _SETTINGS:SetLL_Accuracy(0)
+            CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
+            _SETTINGS:SetLL_Accuracy(3)
+            CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
+            --_SETTINGS:SetLL_Accuracy(2)
+            --CoordStringLLDMSDS = TargetCoord:ToStringLLDMSDS(SETTINGS:SetImperial())
+            
+            trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..ELEMessage, 30)              
+          else            
+          end       
+        end
+      )
+    else
+      trigger.action.outText("Target Report Unavailable", 15)
+    end
+    
+  elseif (AGTargetTypeStatic == true and AGMissionTarget ~=nil) then
+    TargetGroup = STATIC:FindByName(AGMissionTarget, false)
+    
+    MissionPlayersBlue = SET_CLIENT:New():FilterCoalitions("blue"):FilterActive():FilterOnce()
 
-		MissionPlayersBlue:ForEachClient(
-			function(Client)
-				if Client:IsAlive() == true then
-					ClientPlayerName = Client:GetPlayerName()	
-					ClientUnitName = Client:GetName()			
-					ClientGroupName = Client:GetClientGroupName()				
-					ClientGroupID = Client:GetClientGroupID()
-				
-					PlayerUnit = UNIT:FindByName(ClientUnitName)		
-					
-					PlayerCoord = PlayerUnit:GetCoordinate()
-					TargetCoord = TargetGroup:GetCoordinate()
-					TargetHeight = math.floor(TargetGroup:GetCoordinate():GetLandHeight() * 100)/100
-					TargetHeightFt = math.floor(TargetHeight * 3.28084)
-					PlayerDistance = PlayerCoord:Get2DDistance(TargetCoord)
-					
-					TargetVector = PlayerCoord:GetDirectionVec3(TargetCoord)
-					TargetBearing = PlayerCoord:GetAngleRadians (TargetVector)	
-										
-					PlayerBR = PlayerCoord:GetBRText(TargetBearing, PlayerDistance, SETTINGS:SetImperial())
+    MissionPlayersBlue:ForEachClient(
+      function(Client)
+        if Client:IsAlive() == true then
+          ClientPlayerName = Client:GetPlayerName() 
+          ClientUnitName = Client:GetName()     
+          ClientGroupName = Client:GetClientGroupName()       
+          ClientGroupID = Client:GetClientGroupID()
+        
+          PlayerUnit = UNIT:FindByName(ClientUnitName)    
+          
+          PlayerCoord = PlayerUnit:GetCoordinate()
+          TargetCoord = TargetGroup:GetCoordinate()
+          TargetHeight = math.floor(TargetGroup:GetCoordinate():GetLandHeight() * 100)/100
+          TargetHeightFt = math.floor(TargetHeight * 3.28084)
+          PlayerDistance = PlayerCoord:Get2DDistance(TargetCoord)
+          
+          TargetVector = PlayerCoord:GetDirectionVec3(TargetCoord)
+          TargetBearing = PlayerCoord:GetAngleRadians (TargetVector)  
+                    
+          PlayerBR = PlayerCoord:GetBRText(TargetBearing, PlayerDistance, SETTINGS:SetImperial())
 
-					BRMessage = "Target bearing "..PlayerBR
-					ELEMessage = "Elevation "..TargetHeight.."m".." / "..TargetHeightFt.."ft"
-					--[[
-					_SETTINGS:SetLL_Accuracy(0)
-					CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
-					_SETTINGS:SetLL_Accuracy(3)
-					CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
-					_SETTINGS:SetLL_Accuracy(2)
-					CoordStringLLDMSDS = TargetCoord:ToStringLLDMSDS(SETTINGS:SetImperial())
-					--]]
-					--trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)
-					trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..ELEMessage, 30)             
-												
-				else
-				end				
-			end
-		)		
-	elseif ( OperationComplete == true ) then
-		trigger.action.outText("The Operation Has Been Completed, There Are No Further Targets", 15)	
-	else
-		trigger.action.outText("No Target Information Available", 15)
-	end
+          BRMessage = "Target bearing "..PlayerBR
+          ELEMessage = "Elevation "..TargetHeight.."m".." / "..TargetHeightFt.."ft"
+          
+          _SETTINGS:SetLL_Accuracy(0)
+          CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
+          _SETTINGS:SetLL_Accuracy(3)
+          CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
+          --_SETTINGS:SetLL_Accuracy(2)
+          --CoordStringLLDMSDS = TargetCoord:ToStringLLDMSDS(SETTINGS:SetImperial())
+          
+          trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..ELEMessage, 30)             
+        else
+        end       
+      end
+    )   
+  elseif ( OperationComplete == true ) then
+    trigger.action.outText("The Operation Has Been Completed, There Are No Further Targets", 15)  
+  else
+    trigger.action.outText("No Target Information Available", 15)
+  end
 end
 --////End On Demand Mission Information
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -482,7 +493,7 @@ function AbortCAPMission()
     trigger.action.outText("Fighter Screen Has Not Been Deployed",60)
   end
 end
-
+--[[
 --////CLOSE AIR SUPPORT
 function RequestCASSupport(CASSector)
 
@@ -606,7 +617,7 @@ function AbortASSMission()
     trigger.action.outText("Anti-Shipping Support Has Not Been Deployed",60)
   end
 end
-
+]]--
 --////SEAD
 function RequestSEADSupport(SEADSector)
   
@@ -670,7 +681,7 @@ function AbortSEADMission()
   end
 end
 
-
+--[[
 --////PINPOINT STRIKE
 function RequestPINSupport(PinSector)
   
@@ -845,13 +856,13 @@ function AbortDroneMission()
     trigger.action.outText("MQ-9 Reaper Aerial Drone Has Not Been Deployed",60)
   end
 end
-
+]]--
 --////AI FLAG SWITCHES ETC
 function SEF_CAPCommenceAttack()
   missionCommands.addCommandForCoalition(coalition.side.BLUE, "Fighter Screen Commence Attack", nil, function() trigger.action.setUserFlag(5011,1) end, nil)
   trigger.action.outText("Fighter Screen Push Command Available",60)
 end
-
+--[[
 function SEF_CASCommenceAttack()
   missionCommands.addCommandForCoalition(coalition.side.BLUE, "Close Air Support Commence Attack", nil, function() trigger.action.setUserFlag(5021,1) end, nil)
   trigger.action.outText("Close Air Support Push Command Available",60)
@@ -861,22 +872,22 @@ function SEF_AntiShipCommenceAttack()
   missionCommands.addCommandForCoalition(coalition.side.BLUE, "Anti-Ship Strike Commence Attack", nil, function() trigger.action.setUserFlag(5031,1) end, nil)
   trigger.action.outText("Anti-Ship Strike Push Command Available",60)
 end
-
+]]--
 function SEF_SEADCommenceAttack()
   missionCommands.addCommandForCoalition(coalition.side.BLUE, "SEAD Commence Attack", nil, function() trigger.action.setUserFlag(5041,1) end, nil)
   trigger.action.outText("SEAD Push Command Available",60)
 end
-
+--[[
 function SEF_PinpointStrikeCommenceAttack()
   missionCommands.addCommandForCoalition(coalition.side.BLUE, "Pinpoint Strike Commence Attack", nil, function() trigger.action.setUserFlag(5051,1) end, nil)
   trigger.action.outText("Pinpoint Strike Push Command Available",60)
 end
-
+]]--
 function SEF_CAPRemovePush()
   missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Fighter Screen Commence Attack"})
   trigger.action.setUserFlag(5011,0)
 end
-
+--[[
 function SEF_CASRemovePush()
   missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Close Air Support Commence Attack"})
   trigger.action.setUserFlag(5021,0)
@@ -886,17 +897,17 @@ function SEF_ASSRemovePush()
   missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Anti-Ship Strike Commence Attack"})
   trigger.action.setUserFlag(5031,0)
 end
-
+]]--
 function SEF_SEADRemovePush()
   missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "SEAD Commence Attack"})
   trigger.action.setUserFlag(5041,0)
 end
-
+--[[
 function SEF_PINRemovePush()
   missionCommands.removeItemForCoalition(coalition.side.BLUE, {[1] = nil, [2] = "Pinpoint Strike Commence Attack"})
   trigger.action.setUserFlag(5051,0)
 end
-
+]]--
 function SEF_CheckAIPushFlags( timeloop, time ) 
   if ( trigger.misc.getUserFlag(5011) == 1 ) then
     timer.scheduleFunction(SEF_CAPRemovePush, 53, timer.getTime() + 1)
@@ -1200,7 +1211,7 @@ end
 
 		--////GLOBAL VARIABLE INITIALISATION	
 		NumberOfCompletedMissions = 0
-		TotalScenarios = 15
+		TotalScenarios = 18
 		OperationComplete = false
 		OnShotSoundsEnabled = 0
 		SoundLockout = 0
