@@ -255,6 +255,11 @@ function SEF_InitializeMissionTable()
     TargetStatic = true,
     TargetBriefing = "MISSION UPDATE \n\nTARGET: INSURGENT ROAD OUTPOST \n\n INSURGETS HAVE SETUP A ROAD OUTPOST ON HWY-30, A 3MI ESE OUT OF BEIRUT. DESTORY THE OUTPOST WITH MINIMAL COLLATERAL DAMAGE. \n\nLOCATION: N 33.48.48 E 35.37.11 (MAP GRID: YC44) \n\nSUGGESTED MUNITION(S): LIGHT PRECISION GUIDED MUNITIONS",
   }
+  OperationBlackpool_AG[19] = {
+    TargetName = "Bomber1",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: 2x SU-24M Bombers \n\n A SYRIAN FLIGHT OF SU-24 BOMBERS HAS BEEN SPOTTED RUNNING A NORTH/SOUTH PATTERN FROM MARJ RUHAYYIL TO HAMA. INTERCEPT THE BOMBERS BEOFRE THEY CAN STRIKE ALLIED ASSETS. \n\nSUGGESTED MUNITION(S): MEDIUM-RANGE AIR-TO-AIR MISSILE",
+  }
   
 	--Debug Code
 	--[[
@@ -1211,7 +1216,7 @@ end
 
 		--////GLOBAL VARIABLE INITIALISATION	
 		NumberOfCompletedMissions = 0
-		TotalScenarios = 18
+		TotalScenarios = 19
 		OperationComplete = false
 		OnShotSoundsEnabled = 0
 		SoundLockout = 0
