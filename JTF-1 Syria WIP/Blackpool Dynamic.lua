@@ -1227,7 +1227,7 @@ end
 
 		--////GLOBAL VARIABLE INITIALISATION	
 		NumberOfCompletedMissions = 0
-		TotalScenarios = 20
+		TotalScenarios = 21
 		OperationComplete = false
 		OnShotSoundsEnabled = 0
 		SoundLockout = 0
