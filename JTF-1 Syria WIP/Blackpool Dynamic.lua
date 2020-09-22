@@ -270,6 +270,31 @@ function SEF_InitializeMissionTable()
     TargetStatic = false,
     TargetBriefing = "MISSION UPDATE \n\nTARGET: INSURGETNS IN CONTACT WITH ALLIED PATROL \n\n AN US CONVOY PUSHING SOUTH FROM HATAY HAS REQUESTD CAS SUPPORT IN THE TOWN OF JISR ASH-SHUGHUR. CONTACT WARRIOR 1-1 ON LEFT 10 (294.700 AM) WHEN ON STATION. \n\nLOCATION: N 35.48.52 E 36.19.04 (MAP GRID: BV56) \n\nSUGGESTED MUNITION(S): UNRESTRICTED",
   }
+  OperationBlackpool_AG[22] = {
+    TargetName = "Tartus – Subs",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: TWO SUBS \n\n A PAIR OF RUSSIAN ATTACK SUBS HAVE BEEN SPOTTED BUNKERING IN TARTUS HARBOR. IF RUSSIAN SUBS ARE TAKING PORT IN SYRAIA WE SHOULD EXPECT TO SEE OTHER RUSSIAN FORCES SOON. \n\nLOCATION: N 34.54.16 E 35.51.46 (MAP GRID: YD66) \n\nSUGGESTED MUNITION(S): MEDIUM & HEAVY BOMBS",
+  }
+  OperationBlackpool_AG[23] = {
+    TargetName = "Tartus – Cargo",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: THREE CARGO VESSELS IN PORT \n\n ONE OF OUR SOURCES HAVE CONFIRMED THAT RUSSIA IS OFFLOADING WEAPONS AND PROVISIONS IN TARTUS HARBOR DESPITE SYRIAN SANCTIONS. ELIMINATE THE THREE (3) SHIPS IN THE HARBOR.\n\nLOCATION: N 34.54.16 E 35.51.46 (MAP GRID: YD66) \n\nSUGGESTED MUNITION(S): MEDIUM & HEAVY BOMBS",
+  }
+  OperationBlackpool_AG[24] = {
+    TargetName = "WestFarp - Mi8",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: TWO MI-8 \n\n TWO MI-8 HELOS ARE RUNNING SUPPLIES FROM THE KUZNETSOV BG TO THE RUSSIAN FARP. ELIMINATE THE HELOS.\n\nLOCATION: APROX N 35.50.23 E 31.31.08 (MAP GRID: N/A) \n\nSUGGESTED MUNITION(S): MEDIUM-RANGE AIR-TO-AIR MISSILE",
+  }
+  OperationBlackpool_AG[25] = {
+    TargetName = "WestFarp - Mi24",
+    TargetStatic = false,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: TWO MI-24 \n\n TWO MI-24 HELOS HAVE BEEN SPOTTED ON RADAR PATROLLING THE TURKISH COAST TO THE EAST OF THE RUSSIN FARM. ELIMINATE THE HELOS.\n\nLOCATION: APROX N 36.08.17 E 33.12.29 (MAP GRID: N/A) \n\nSUGGESTED MUNITION(S): MEDIUM-RANGE AIR-TO-AIR MISSILE",
+  }
+  OperationBlackpool_AG[26] = {
+    TargetName = "WestFarp - Command Post",
+    TargetStatic = true,
+    TargetBriefing = "MISSION UPDATE \n\nTARGET: FARP COMMAND POST \n\n WE NEED TO SLOW DOWN OPERATIONS AT THE RUSSIAN FARP. DESTORY THE COMMAND POST NEAR THE FARP.\n\nLOCATION: APROX N 36.13.27 E 32.20.22 (MAP GRID: N/A) \n\nSUGGESTED MUNITION(S): GBU-31 OR EQUIVILENT",
+  }
   
   
 	--Debug Code
@@ -998,6 +1023,7 @@ function SEF_RadioMenuSetup()
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Syria", SupportMenuCAP, function() RequestFighterSupport('North Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Central Syria", SupportMenuCAP, function() RequestFighterSupport('Central Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Syria", SupportMenuCAP, function() RequestFighterSupport('South Syria') end, nil)
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Kuznetsov", SupportMenuCAP, function() RequestFighterSupport('Kuznetsov') end, nil)
 
 	
 	--SupportMenuCAP2 = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Other Sectors", SupportMenuCAP)
@@ -1020,7 +1046,8 @@ function SEF_RadioMenuSetup()
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "North Syria", SupportMenuSEAD, function() RequestSEADSupport('North Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Central Syria", SupportMenuSEAD, function() RequestSEADSupport('Central Syria') end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "South Syria", SupportMenuSEAD, function() RequestSEADSupport('South Syria') end, nil)
-
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Kuznetsov", SupportMenuSEAD, function() RequestSEADSupport('Kuznetsov') end, nil)
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "WestFarp", SupportMenuSEAD, function() RequestSEADSupport('WestFarp') end, nil)
 	
 	--SupportMenuSEAD2 = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Other Sectors", SupportMenuSEAD)
 	
@@ -1227,7 +1254,7 @@ end
 
 		--////GLOBAL VARIABLE INITIALISATION	
 		NumberOfCompletedMissions = 0
-		TotalScenarios = 21
+		TotalScenarios = 26
 		OperationComplete = false
 		OnShotSoundsEnabled = 0
 		SoundLockout = 0
