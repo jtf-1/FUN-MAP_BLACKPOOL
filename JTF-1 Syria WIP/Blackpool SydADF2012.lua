@@ -267,7 +267,7 @@ SPAWN:New('WestFarp - Mi8'):InitLimit(2,0):SpawnScheduled(600,.9)
 -- PATROL UNIT START --
 ------------------------
 
-GROUP:FindByName("Sub1"):PatrolRoute()
+GROUP:FindByName("Tripoli - Sub"):PatrolRoute()
 GROUP:FindByName("Tartus - Speedboats"):PatrolRoute()
 GROUP:FindByName("WestFarp - Speedboats"):PatrolRoute()
 

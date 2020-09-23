@@ -103,7 +103,7 @@ SEFDeletedStaticCount = 0
 
 --////LOAD UNITS
 if file_exists("BlackpoolUnitInterment.lua") then
-	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Aleppo", "Al_Tanf", "al-Thawra_Dam", "Barzah_SciCtr", "Busra", "Damascus", "Deir_ez_Zor", "EWR", "Him_Shanshar", "PalmyraCastle", "PalmyraRomanTheatre", "Ein_Elkorum", "Russian", "SAM", "Static" } ):FilterActive(true):FilterStart()
+	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Aleppo", "Al_Tanf", "al-Thawra_Dam", "Barzah_SciCtr", "Busra", "Damascus", "Deir_ez_Zor", "EWR", "Him_Shanshar", "PalmyraCastle", "PalmyraRomanTheatre", "Ein_Elkorum", "Russian", "SAM", "Static", "WestFarp", "Kuznetsov", "Tartus", "Lake Qaraoun", "Jisr", "Beirut", "SouthInsurgentCamp", "Tripoli" } ):FilterActive(true):FilterStart()
 	DeadUnitsList:HandleEvent(EVENTS.Dead)
 	
 	dofile("BlackpoolUnitInterment.lua")
@@ -116,7 +116,7 @@ if file_exists("BlackpoolUnitInterment.lua") then
 		SEFDeletedUnitCount = SEFDeletedUnitCount + 1		
 	end			
 else
-	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Aleppo", "Al_Tanf", "al-Thawra_Dam", "Barzah_SciCtr", "Busra", "Damascus", "Deir_ez_Zor", "EWR", "Him_Shanshar", "PalmyraCastle", "PalmyraRomanTheatre", "Ein_Elkorum", "Russian", "SAM", "Static"  } ):FilterActive(true):FilterStart()
+	DeadUnitsList = SET_UNIT:New():FilterCoalitions("red"):FilterCategories("ground"):FilterPrefixes( { "Aleppo", "Al_Tanf", "al-Thawra_Dam", "Barzah_SciCtr", "Busra", "Damascus", "Deir_ez_Zor", "EWR", "Him_Shanshar", "PalmyraCastle", "PalmyraRomanTheatre", "Ein_Elkorum", "Russian", "SAM", "Static", "WestFarp", "Kuznetsov", "Tartus", "Lake Qaraoun", "Jisr", "Beirut", "SouthInsurgentCamp", "Tripoli" } ):FilterActive(true):FilterStart()
 	DeadUnitsList:HandleEvent(EVENTS.Dead)		
 	BlackpoolUnitInterment = {}	
 	UnitIntermentTableLength = 0	

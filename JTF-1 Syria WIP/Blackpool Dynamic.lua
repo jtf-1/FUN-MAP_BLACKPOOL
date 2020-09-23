@@ -236,7 +236,7 @@ function SEF_InitializeMissionTable()
     TargetBriefing = "MISSION UPDATE \n\nTARGET: SPEEDBOATS PATROLLING TARTUS HARBOR \n\n TWO SPEEDBOATS HAVE BEEN REPORTED PATROLLING TARTUS PORT AT HIGH SPEED. LOCATE AND DESTROY/DISABLE THE BOATS. \n\nLOCATION: N 34.54.16 E 35.51.46 (MAP GRID: YD66) \n\nSUGGESTED MUNITION(S): LASER GUIDED BOMBS, ROCKETS, GUNS",
   }
   OperationBlackpool_AG[15] = {
-    TargetName = "Sub1",
+    TargetName = "Tripoli - Sub",
     TargetStatic = false,
     TargetBriefing = "MISSION UPDATE \n\nTARGET: UNKNOWN SUBMARINE \n\n AN UNKNOWN SUBMARINE HAS BEEN SPOTTED NEAR TRIPOLI. WE DON’T HAVE ANY AVAILABLE VESSELS THAT CAN BE TASKED WITH A SEARCH AN DSTROY MISSION. YOU RMISSION IS TO LOCATE THE SUB AND IF POSSIBLE DISABLE IT. \n\nLOCATION: N 34.30.13 E 35.50.18 (MAP GRID: YD51-62) \n\nSUGGESTED MUNITION(S): LASER GUIDED BOMBS, ROCKETS, GUNS",
   }
@@ -316,17 +316,17 @@ end
 --////ON DEMAND MISSION INFORMATION
 
 local function CheckObjectiveRequest()
-	
-	if ( AGMissionBriefingText ~= nil ) then
-		trigger.action.outText(AGMissionBriefingText, 15)
-		trigger.action.outSound('That Is Our Target.ogg')
-	elseif ( OperationComplete == true ) then
-		trigger.action.outText("The Operation Has Been Completed, There Are No Further Objectives", 15)
-	elseif ( AGMissionBriefingText == nil and OperationComplete == false ) then
-		trigger.action.outText("Check Objective Request Error - No Briefing Available And Operation Is Not Completed", 15)
-	else
-		trigger.action.outText("Check Objective Request Error - Unexpected Result Occured", 15)
-	end	
+  
+  if ( AGMissionBriefingText ~= nil ) then
+    trigger.action.outText(AGMissionBriefingText, 15)
+    trigger.action.outSound('That Is Our Target.ogg')
+  elseif ( OperationComplete == true ) then
+    trigger.action.outText("The Operation Has Been Completed, There Are No Further Objectives", 15)
+  elseif ( AGMissionBriefingText == nil and OperationComplete == false ) then
+    trigger.action.outText("Check Objective Request Error - No Briefing Available And Operation Is Not Completed", 15)
+  else
+    trigger.action.outText("Check Objective Request Error - Unexpected Result Occured", 15)
+  end 
 end
 
 function TargetReport()
@@ -379,10 +379,11 @@ function TargetReport()
             CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
             _SETTINGS:SetLL_Accuracy(3)
             CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
-            --_SETTINGS:SetLL_Accuracy(2)
+           -- _SETTINGS:SetLL_Accuracy(2)
             --CoordStringLLDMSDS = TargetCoord:ToStringLLDMSDS(SETTINGS:SetImperial())
             
-            trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..ELEMessage, 30)              
+            trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..ELEMessage, 30)
+            trigger.action.outSound('radiobeep.ogg')              
           else            
           end       
         end
