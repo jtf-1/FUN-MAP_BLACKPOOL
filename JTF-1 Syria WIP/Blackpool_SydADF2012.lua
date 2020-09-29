@@ -160,7 +160,7 @@ A2ADispatcher:SetSquadronGrouping( "698 Squadron", 1 )--Qty=spawns per group
 A2ADispatcher:SetSquadronGci2( "698 Squadron", 800, 1200, 2000, 5000, "Baro" )
 
 
-A2ADispatcher:SetTacticalDisplay(true)
+A2ADispatcher:SetTacticalDisplay(false)
 A2ADispatcher:Start()
 
 ----------------------------
@@ -198,7 +198,7 @@ A2ADispatcher2:SetSquadron( "GCIwest", "Kuznetsov-1", { "GCIwest" }) --mig29a
 A2ADispatcher2:SetSquadronGrouping( "GCIwest", 2 )--Qty=spawns per group
 A2ADispatcher2:SetSquadronGci2( "GCIwest", 800, 1200, 2000, 5000, "Baro" )
 
-A2ADispatcher2:SetTacticalDisplay(true)
+A2ADispatcher2:SetTacticalDisplay(false)
 A2ADispatcher2:Start()
 
 -----------
@@ -283,6 +283,7 @@ SPAWN:New('JTAC2 - StaticAAA'):InitLimit(2,0):SpawnScheduled(600,1)
 local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_KC135MPRS_Shell3" )
    :InitLimit( 1, 99 )
+   :InitRepeatOnLanding()
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Shell3 )
@@ -291,8 +292,8 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      )
      local Tanker_KC135_Texaco3 = SPAWN
    :New( "Tanker_KC135_Texaco3" )
-   --:InitRadioFrequency(276.15)
    :InitLimit( 1, 99 )
+   :InitRepeatOnLanding()
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Texaco3 )
@@ -302,6 +303,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      local Tanker_C130_Arco3 = SPAWN
    :New( "Tanker_C130_Arco3" )
    :InitLimit( 1, 99 )
+   :InitRepeatOnLanding()
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Arco3 )
@@ -311,6 +313,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      local Tanker_KC135MPRS_Shell2 = SPAWN
    :New( "Tanker_KC135MPRS_Shell2" )
    :InitLimit( 1, 99 )
+   :InitRepeatOnLanding()
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Shell2 )
@@ -321,6 +324,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_KC135_Texaco2" )
    --:InitRadioFrequency(317.725)
    :InitLimit( 1, 99 )
+   :InitRepeatOnLanding()
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Texaco2 )
@@ -330,6 +334,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      local Tanker_C130_Arco2 = SPAWN
    :New( "Tanker_C130_Arco2" )
    :InitLimit( 1, 99 )
+   :InitRepeatOnLanding()
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Arco2 )
