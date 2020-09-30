@@ -284,6 +284,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_KC135MPRS_Shell3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
+   :InitRadioFrequency(276.1)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Shell3 )
@@ -294,6 +295,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_KC135_Texaco3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
+   :InitRadioFrequency(276.15)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Texaco3 )
@@ -304,6 +306,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_C130_Arco3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
+   :InitRadioFrequency(276.125)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Arco3 )
@@ -314,6 +317,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_KC135MPRS_Shell2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
+   :InitRadioFrequency(317.775)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Shell2 )
@@ -325,6 +329,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    --:InitRadioFrequency(317.725)
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
+   :InitRadioFrequency(317.725)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Texaco2 )
@@ -335,6 +340,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_C130_Arco2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
+   :InitRadioFrequency(317.75)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Arco2 )
@@ -403,6 +409,8 @@ end -- function
 ------------------------
 -- ATIS SECTION START --
 ------------------------
+--[[
 atisIncirlik=ATIS:New("Incirlik", 129.65)
 --atisIncirlik:SetRadioRelayUnitName("Radio Relay Incirlik")
 atisIncirlik:Start()
+]]--
