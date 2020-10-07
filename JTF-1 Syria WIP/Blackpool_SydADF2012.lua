@@ -200,7 +200,7 @@ A2ADispatcher2:SetSquadronGci2( "GCIwest", 800, 1200, 2000, 5000, "Baro" )
 
 A2ADispatcher2:SetTacticalDisplay(false)
 A2ADispatcher2:Start()
-
+--[[
 -----------
 -- ZONES --
 -----------
@@ -212,6 +212,7 @@ local AllZones=SET_ZONE:New():FilterOnce()
 -----------------
 -- AI MISSIONS --
 -----------------
+
 SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
   local fg=FLIGHTGROUP:New("2 Squadron")
@@ -247,7 +248,7 @@ SCHEDULER:New( nil, function()
   local fg=FLIGHTGROUP:New("Hawg 1")
   fg:AddMission(mission) 
 end, {},500, 1000, .8)
-
+]]--
 ----------------------
 -- RESPAWNING UNITS --
 ----------------------
@@ -262,6 +263,7 @@ SPAWN:New('defenders-3'):InitLimit(7,0):SpawnScheduled(600,.9)
 SPAWN:New('defenders-5'):InitLimit(2,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-4'):InitLimit(12,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-2'):InitLimit(4,0):SpawnScheduled(900,.9)
+
 -- West FARP
 SPAWN:New('WestFarp - Mi24'):InitLimit(4,0):SpawnScheduled(1800,.9)
 SPAWN:New('WestFarp - Mi8'):InitLimit(4,0):SpawnScheduled(1800,.9)

@@ -157,13 +157,6 @@ function SEF_InitializeMissionTable()
 	
 	OperationBlackpool_AG = {}	
 	
-	--[[
-	OperationBlackpool_AG[1] = {				
-		TargetName = "Ja'Din_Aircraft",
-		TargetStatic = false,
-		TargetBriefing = "Mission Update \nPrimary Objective - Destroy Su-17 located near Tabqa Airfield  \nGrid DV65",
-	}
-	]]--	
 	OperationBlackpool_AG[1] = {
     TargetName = "Ein_Elkorum - Patrol",
     TargetStatic = false,
