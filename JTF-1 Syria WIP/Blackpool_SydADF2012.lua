@@ -265,8 +265,8 @@ SPAWN:New('attackers-4'):InitLimit(12,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-2'):InitLimit(4,0):SpawnScheduled(900,.9)
 
 -- West FARP
-SPAWN:New('WestFarp - Mi24'):InitLimit(4,0):SpawnScheduled(1800,.9)
-SPAWN:New('WestFarp - Mi8'):InitLimit(4,0):SpawnScheduled(1800,.9)
+SPAWN:New('WestFarp-Mi24'):InitLimit(4,0):SpawnScheduled(1800,.9)
+SPAWN:New('WestFarp-Mi8'):InitLimit(4,0):SpawnScheduled(1800,.9)
 
 ------------------------
 -- RANGE UNIT RESPAWN --
@@ -360,9 +360,9 @@ SPAWN:New('AWACS_BEAR'):InitLimit(1,99):SpawnScheduled(60,1):InitRepeatOnEngineS
 -----------------
 -- UNIT PATROL --
 -----------------
-GROUP:FindByName("Tripoli - Sub"):PatrolRoute()
-GROUP:FindByName("Tartus - Speedboats"):PatrolRoute()
-GROUP:FindByName("WestFarp - Speedboats"):PatrolRoute()
+GROUP:FindByName("Tripoli-Sub"):PatrolRoute()
+GROUP:FindByName("Tartus-Speedboats"):PatrolRoute()
+GROUP:FindByName("WestFarp-Speedboats"):PatrolRoute()
 
 -------------------------
 -- SUPPORT UNIT PATROL --
