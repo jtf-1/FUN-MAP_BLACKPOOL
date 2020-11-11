@@ -163,7 +163,7 @@ A2ADispatcher:SetSquadronGci2( "698 Squadron", 800, 1200, 2000, 5000, "Baro" )
 A2ADispatcher:SetTacticalDisplay(false)
 A2ADispatcher:Start()
 
---[[
+
 ----------------------------
 -- WEST REDFOR DISPATCHER --
 ----------------------------
@@ -201,7 +201,7 @@ A2ADispatcher2:SetSquadronGci2( "GCIwest", 800, 1200, 2000, 5000, "Baro" )
 
 A2ADispatcher2:SetTacticalDisplay(false)
 A2ADispatcher2:Start()
-]]--
+
 --[[
 -----------
 -- ZONES --
@@ -267,8 +267,8 @@ SPAWN:New('attackers-4'):InitLimit(12,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-2'):InitLimit(4,0):SpawnScheduled(900,.9)
 
 -- West FARP
-SPAWN:New('WestFarp-Mi24'):InitLimit(4,0):SpawnScheduled(1800,.9)
---SPAWN:New('WestFarp-Mi8'):InitLimit(4,0):SpawnScheduled(1800,.9)
+SPAWN:New('WestFarp-Mi24'):InitLimit(4,2):SpawnScheduled(1800,.9)
+SPAWN:New('WestFarp-Mi8'):InitLimit(4,2):SpawnScheduled(1800,.9)
 
 ------------------------
 -- RANGE UNIT RESPAWN --
@@ -357,7 +357,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
 -----------------
 SPAWN:New('AWACS_MAGIC'):InitLimit(1,99):SpawnScheduled(60,1):InitRepeatOnEngineShutDown()
 SPAWN:New('AWACS_DARKSTAR'):InitLimit(1,99):SpawnScheduled(60,1):InitRepeatOnEngineShutDown()
---SPAWN:New('AWACS_BEAR'):InitLimit(1,99):SpawnScheduled(60,1):InitRepeatOnEngineShutDown()
+SPAWN:New('AWACS_BEAR'):InitLimit(1,99):SpawnScheduled(60,1):InitRepeatOnEngineShutDown()
 
 -----------------
 -- UNIT PATROL --
@@ -371,7 +371,7 @@ GROUP:FindByName("WestFarp-Speedboats"):PatrolRoute()
 -------------------------
 GROUP:FindByName("CVN71"):PatrolRoute()
 GROUP:FindByName("LHA-1"):PatrolRoute()
---GROUP:FindByName("Kuznetsov"):PatrolRoute()
+GROUP:FindByName("Kuznetsov"):PatrolRoute()
 
 ---------------------
 -- RECOVERY TNAKER --
