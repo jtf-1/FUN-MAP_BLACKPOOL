@@ -202,7 +202,6 @@ A2ADispatcher2:SetSquadronGci2( "GCIwest", 800, 1200, 2000, 5000, "Baro" )
 A2ADispatcher2:SetTacticalDisplay(false)
 A2ADispatcher2:Start()
 
---[[
 -----------
 -- ZONES --
 -----------
@@ -250,7 +249,7 @@ SCHEDULER:New( nil, function()
   local fg=FLIGHTGROUP:New("Hawg 1")
   fg:AddMission(mission) 
 end, {},500, 1000, .8)
-]]--
+
 ----------------------
 -- RESPAWNING UNITS --
 ----------------------
