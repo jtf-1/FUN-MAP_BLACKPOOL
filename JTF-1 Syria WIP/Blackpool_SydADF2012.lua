@@ -7,10 +7,10 @@
 
 --Editable part v
 
-local SA6pc = 5
-local SA2pc = 5
-local SA3pc = 5
-local SA10pc = 50
+local SA6pc = 10
+local SA2pc = 10
+local SA3pc = 10
+local SA10pc = 66
 local EWRpc = 25
 
 --Editable part ^
@@ -95,7 +95,7 @@ local EWRtoDestroy = EWRcount - EWRtoKeep
 -- REDFOR IADS --
 -----------------
 redIADS = SkynetIADS:create('SYRIA')
-redIADS:setUpdateInterval(15)
+redIADS:setUpdateInterval(10)
 redIADS:addEarlyWarningRadarsByPrefix('EWR')
 redIADS:addSAMSitesByPrefix('SAM')
 redIADS:getSAMSitesByNatoName('SA-2'):setGoLiveRangeInPercent(80)
@@ -266,19 +266,21 @@ SPAWN:New('attackers-4'):InitLimit(12,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-2'):InitLimit(4,0):SpawnScheduled(900,.9)
 
 -- West FARP
-SPAWN:New('WestFarp-Mi24'):InitLimit(4,2):SpawnScheduled(1800,.9)
-SPAWN:New('WestFarp-Mi8'):InitLimit(4,2):SpawnScheduled(1800,.9)
+SPAWN:New('WestFarp-Mi24'):InitLimit(4,2):SpawnScheduled(1800,.9):InitRepeatOnLanding()
+SPAWN:New('WestFarp-Mi8'):InitLimit(4,2):SpawnScheduled(1800,.9):InitRepeatOnEngineShutDown()
 
 ------------------------
 -- RANGE UNIT RESPAWN --
 ------------------------
-SPAWN:New('JTAC2 - StoppedArmor'):InitLimit(10,0):SpawnScheduled(600,1)
-SPAWN:New('JTAC2 - LightPatrol'):InitLimit(4,0):SpawnScheduled(600,1)
-SPAWN:New('JTAC2 - HeavyPatrol'):InitLimit(4,0):SpawnScheduled(600,1)
-SPAWN:New('JTAC2 - SAM'):InitLimit(7,0):SpawnScheduled(600,.9)
-SPAWN:New('JTAC2 - StaticAAA'):InitLimit(2,0):SpawnScheduled(600,1)
-SPAWN:New('Range - Stopped'):InitLimit(15,0):SpawnScheduled(600,1)
-SPAWN:New('JTAC2 - StaticAAA'):InitLimit(2,0):SpawnScheduled(600,1)
+SPAWN:New('JTAC2 - StoppedArmor'):InitLimit(10,1):SpawnScheduled(300,1)
+SPAWN:New('JTAC2 - LightPatrol'):InitLimit(4,1):SpawnScheduled(300,1)
+SPAWN:New('JTAC2 - HeavyPatrol'):InitLimit(4,1):SpawnScheduled(300,1)
+SPAWN:New('JTAC2 - SAM'):InitLimit(7,1):SpawnScheduled(300,1)
+SPAWN:New('JTAC2 - StaticAAA'):InitLimit(2,1):SpawnScheduled(300,1)
+SPAWN:New('Range - Stopped'):InitLimit(15,1):SpawnScheduled(300,1)
+SPAWN:New('JTAC2 - StaticAAA'):InitLimit(2,1):SpawnScheduled(300,1)
+SPAWN:New('JTAC2 - Bofors'):InitLimit(3,1):SpawnScheduled(300,1)
+
 
 ------------------
 -- TANKER START --

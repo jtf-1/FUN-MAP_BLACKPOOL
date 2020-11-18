@@ -456,7 +456,7 @@ function SkynetIADS:create(name)
 	iads.debugOutput.addedEWRadar = false
 	iads.debugOutput.hasNoPower = false
 	iads.debugOutput.addedSAMSite = false
-	iads.debugOutput.warnings = true
+	iads.debugOutput.warnings = false
 	iads.debugOutput.harmDefence = false
 	iads.debugOutput.samSiteStatusEnvOutput = false
 	iads.debugOutput.earlyWarningRadarStatusEnvOutput = false
