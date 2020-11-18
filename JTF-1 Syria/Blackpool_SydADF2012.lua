@@ -7,11 +7,12 @@
 
 --Editable part v
 
-local SA6pc = 15
-local SA2pc = 15
-local SA3pc = 15
+local SA6pc = 5
+local SA2pc = 5
+local SA3pc = 5
 local SA10pc = 66
-local EWRpc = 100
+local SA15pc = 100
+local EWRpc = 60
 
 --Editable part ^
 
@@ -19,13 +20,15 @@ SA6sam=SET_GROUP:New():FilterPrefixes("SAM-SA6"):FilterActive(true):FilterOnce()
 SA2sam=SET_GROUP:New():FilterPrefixes("SAM-SA2"):FilterActive(true):FilterOnce()
 SA3sam=SET_GROUP:New():FilterPrefixes("SAM-SA3"):FilterActive(true):FilterOnce()
 SA10sam=SET_GROUP:New():FilterPrefixes("SAM-SA10"):FilterActive(true):FilterOnce()
+SA15sam=SET_GROUP:New():FilterPrefixes("SAM-SA15"):FilterActive(true):FilterOnce()
 EWR=SET_GROUP:New():FilterPrefixes("EWR"):FilterActive(true):FilterStart()
---All=SET_GROUP:New():FilterActive(true):FilterStart()
+All=SET_GROUP:New():FilterActive(true):FilterStart()
 
 local SA6count=SA6sam:Count()
 local SA3count=SA3sam:Count()
 local SA2count=SA2sam:Count()
 local SA10count=SA10sam:Count()
+local SA15count=SA15sam:Count()
 local EWRcount=EWR:Count()
 
 
@@ -80,6 +83,18 @@ local SA10toDestroy = SA10count - SA10toKeep
   end
 --end
 
+local SA15toKeep = UTILS.Round(SA15count/100*SA15pc, 0)
+
+--if SA10toKeep>0 then
+local SA15toDestroy = SA15count - SA15toKeep
+  for i = 1, SA15toDestroy do
+    local grpObj = SA15sam:GetRandom()
+    --env.info(grpObj:GetName())
+    grpObj:Destroy(true)
+
+  end
+--end
+
 local EWRtoKeep = UTILS.Round(EWRcount/100*EWRpc, 0)
 
 --if EWRtoKeep>0 then
@@ -95,12 +110,19 @@ local EWRtoDestroy = EWRcount - EWRtoKeep
 -- REDFOR IADS --
 -----------------
 redIADS = SkynetIADS:create('SYRIA')
-redIADS:setUpdateInterval(10)
+redIADS:setUpdateInterval(15)
 redIADS:addEarlyWarningRadarsByPrefix('EWR')
 redIADS:addSAMSitesByPrefix('SAM')
 redIADS:getSAMSitesByNatoName('SA-2'):setGoLiveRangeInPercent(80)
 redIADS:getSAMSitesByNatoName('SA-3'):setGoLiveRangeInPercent(80)
 redIADS:getSAMSitesByNatoName('SA-10'):setGoLiveRangeInPercent(80)
+redIADS:getSAMSitesByNatoName('SA-15'):setGoLiveRangeInPercent(80)
+local sa151 = redIADS:getSAMSiteByGroupName('SAM-SA15-1')
+redIADS:getSAMSiteByGroupName('SAM-SA10'):addPointDefence(sa151)
+local sa152 = redIADS:getSAMSiteByGroupName('SAM-SA15-2')
+redIADS:getSAMSiteByGroupName('SAM-SA10-1'):addPointDefence(sa152)
+local sa153 = redIADS:getSAMSiteByGroupName('SAM-SA15-3')
+redIADS:getSAMSiteByGroupName('SAM-SA10-2'):addPointDefence(sa153)
 redIADS:activate()    
 
 ----------------------------
@@ -163,7 +185,6 @@ A2ADispatcher:SetSquadronGci2( "698 Squadron", 800, 1200, 2000, 5000, "Baro" )
 A2ADispatcher:SetTacticalDisplay(false)
 A2ADispatcher:Start()
 
-
 ----------------------------
 -- WEST REDFOR DISPATCHER --
 ----------------------------
@@ -174,7 +195,7 @@ DetectionSetGroup2:FilterStart()
 -- Setup the detection and group targets to a 30km range!
 Detection2 = DETECTION_AREAS:New( DetectionSetGroup2, 30000 )
 -- Setup the A2A dispatcher, and initialize it.
-A2ADispatcher2 = AI_A2A_DISPATCHER:New( Detection )
+A2ADispatcher2 = AI_A2A_DISPATCHER:New( Detection2 )
 -- Set 100km as the radius to engage any target by airborne friendlies.
 A2ADispatcher2:SetEngageRadius(120000) -- radius to engage any target by airborne friendlies
 -- Set 200km as the radius to ground control intercept.
@@ -209,6 +230,7 @@ local Zone={}
 Zone.Alpha   = ZONE:New("Aleppo")   --Core.Zone#ZONE
 Zone.Bravo   = ZONE:New("Golan")   --Core.Zone#ZONE
 local AllZones=SET_ZONE:New():FilterOnce()
+
 
 -----------------
 -- AI MISSIONS --
@@ -249,6 +271,7 @@ SCHEDULER:New( nil, function()
   local fg=FLIGHTGROUP:New("Hawg 1")
   fg:AddMission(mission) 
 end, {},500, 1000, .8)
+
 
 ----------------------
 -- RESPAWNING UNITS --
