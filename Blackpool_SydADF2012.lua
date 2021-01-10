@@ -157,7 +157,8 @@ A2ADispatcher:SetBorderZone( BorderZone )
 A2ADispatcher:SetSquadron( "North CAP", "Hama", { "CAPnorth" }) --mig29, Qty=total aircraft pool
 A2ADispatcher:SetSquadronGrouping( "North CAP", 2 ) --Qty=spawns per group
 A2ADispatcher:SetSquadronTakeoffInAir("North CAP", 2000)
-A2ADispatcher:SetSquadronCap2( "North CAP", 800, 1200, 3000, 8000, "Baro", NorthCapZone, 600, 700, 6000, 8000, "Baro")
+--A2ADispatcher:SetSquadronCap2( "North CAP", 800, 1200, 3000, 8000, "BARO", NorthCapZone, 600, 700, 6000, 8000, "BARO")
+A2ADispatcher:SetSquadronCap( "North CAP", NorthCapZone, 6000, 10000, 600, 800, 800, 1200, "BARO" )
 A2ADispatcher:SetSquadronCapInterval( "North CAP", 1, 900, 1200)
 
 A2ADispatcher:SetSquadron( "Russia GCI", "Bassel Al-Assad", { "Russia GCI" }) --su30
@@ -175,7 +176,8 @@ A2ADispatcher:SetSquadronGci2( "695 Squadron", 800, 1200, 2000, 5000, "Baro" )
 A2ADispatcher:SetSquadron( "South CAP", "Al-Dumayr", { "CAPsouth" }) --mig29, Qty=total aircraft pool
 A2ADispatcher:SetSquadronGrouping( "South CAP", 2 ) --Qty=spawns per group
 A2ADispatcher:SetSquadronTakeoffInAir("South CAP", 2000)
-A2ADispatcher:SetSquadronCap2( "South CAP", 800, 1200, 3000, 8000, "Baro", SouthCapZone, 600, 700, 6000, 8000, "Baro")
+--A2ADispatcher:SetSquadronCap2( "South CAP", 800, 1200, 3000, 8000, "BARO", SouthCapZone, 600, 700, 6000, 8000, "BARO")
+A2ADispatcher:SetSquadronCap( "South CAP", SouthCapZone, 6000, 10000, 600, 800, 800, 1200, "BARO" )
 A2ADispatcher:SetSquadronCapInterval( "South CAP", 1, 900, 1200)
 
 A2ADispatcher:SetSquadron( "54 Squadron", "Marj Ruhayyil", { "54 Squadron" }) --mig23
@@ -292,7 +294,7 @@ SCHEDULER:New( nil, function()
   fg:AddMission(mission)
   end, {},1800, 3600, .8)
 
---[[
+
 ----------------------
 -- RESPAWNING UNITS --
 ----------------------
@@ -307,10 +309,10 @@ SPAWN:New('defenders-3'):InitLimit(7,0):SpawnScheduled(600,.9)
 SPAWN:New('defenders-5'):InitLimit(2,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-4'):InitLimit(12,0):SpawnScheduled(600,.9)
 SPAWN:New('attackers-2'):InitLimit(4,0):SpawnScheduled(900,.9)
-]]--
+
 -- West FARP
---SPAWN:New('WestFarp-Mi24'):InitLimit(4,2):SpawnScheduled(1800,.9):InitRepeatOnLanding()
---SPAWN:New('WestFarp-Mi8'):InitLimit(4,2):SpawnScheduled(1800,.9):InitRepeatOnEngineShutDown()
+SPAWN:New('WestFarp-Mi24'):InitLimit(4,2):SpawnScheduled(1800,.9):InitRepeatOnLanding()
+--SPAWN:New('WestFarp-Mi8'):InitLimit(4,2):SpawnScheduled(1800,.9):InitRepeatOnLanding()
 
 ------------------------
 -- RANGE UNIT RESPAWN --
