@@ -410,6 +410,10 @@ SPAWN:New('AWACS_DARKSTAR'):InitLimit(1,99):SpawnScheduled(60,1):InitRepeatOnEng
 -----------------
 GROUP:FindByName("Tripoli-Sub"):PatrolRoute()
 GROUP:FindByName("Tartus-Speedboats"):PatrolRoute()
+GROUP:FindByName("Naval-1"):PatrolRoute()
+GROUP:FindByName("Naval-2"):PatrolRoute()
+GROUP:FindByName("Naval-3"):PatrolRoute()
+GROUP:FindByName("Naval-4"):PatrolRoute()
 --GROUP:FindByName("WestFarp-Speedboats"):PatrolRoute()
 
 -------------------------

@@ -1,5 +1,5 @@
 ----------------------------------------------------------
-SaveScheduleUnits = 150 --Seconds between each table write
+SaveScheduleUnits = 180 --Seconds between each table write
 ----------------------------------------------------------
   
 function IntegratedbasicSerialize(s)
@@ -156,7 +156,7 @@ function DeadUnitsList:OnEventDead(EventData)
   trigger.action.outText("Dead Unit Coalition: "..DEADUNITCOALITION, 15)
   trigger.action.outText("Dead Unit Category: "..DEADUNITCATEGORY, 15)
   trigger.action.outText("Dead Unit Object Category: "..DEADUNITOBJECTCATEGORY, 15) 
-  ]]--
+ ]]--
   
   if ( DEADUNITCOALITION == 1 ) then    
     if ( DEADUNITOBJECTCATEGORY == 1 ) then -- UNIT
