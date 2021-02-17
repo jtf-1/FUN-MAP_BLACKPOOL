@@ -151,11 +151,11 @@ ctld.JTAC_lock = "all" -- "vehicle" OR "troop" OR "all" forces JTAC to only lock
 
 --pickupZones = { "Zone name or Ship Unit Name", "smoke color", "limit (-1 unlimited)", "ACTIVE (yes/no)", "side (0 = Both sides / 1 = Red / 2 = Blue )", flag number (optional) }
 ctld.pickupZones = {
-    { "pickzone1", "green", -1, "yes", 0 },
-    { "pickzone2", "green", -1, "yes", 0 },
-    { "pickzone3", "green", -1, "yes", 0 },
-    { "pickzone4", "green", -1, "yes", 0 },
-    { "pickzone5", "green", -1, "yes", 0 },
+    { "pickzone1", "white", -1, "yes", 0 },
+    { "pickzone2", "white", -1, "yes", 0 },
+    { "pickzone3", "none", -1, "no", 0 },
+    { "pickzone4", "none", -1, "no", 0 },
+    { "pickzone5", "none", -1, "no", 0 },
     { "pickzone6", "none", -1, "no", 0 },
     { "pickzone7", "none", -1, "no", 0 },
     { "pickzone8", "none", -1, "no", 0 },
