@@ -65,7 +65,7 @@ ctld.enabledFOBBuilding = true -- if true, you can load a crate INTO a C-130 tha
 -- In future i'd like it to be a FARP but so far that seems impossible...
 -- You can also enable troop Pickup at FOBS
 
-ctld.cratesRequiredForFOB = 3 -- The amount of crates required to build a FOB. Once built, helis can spawn crates at this outpost to be carried and deployed in another area.
+ctld.cratesRequiredForFOB = 1 -- The amount of crates required to build a FOB. Once built, helis can spawn crates at this outpost to be carried and deployed in another area.
 -- The large crates can only be loaded and dropped by large aircraft, like the C-130 and listed in ctld.vehicleTransportEnabled
 -- Small FOB crates can be moved by helicopter. The FOB will require ctld.cratesRequiredForFOB larges crates and small crates are 1/3 of a large fob crate
 -- To build the FOB entirely out of small crates you will need ctld.cratesRequiredForFOB * 3
@@ -74,7 +74,7 @@ ctld.troopPickupAtFOB = true -- if true, troops can also be picked up at a creat
 
 ctld.buildTimeFOB = 120 --time in seconds for the FOB to be built
 
-ctld.crateWaitTime = 120 -- time in seconds to wait before you can spawn another crate
+ctld.crateWaitTime = 7200 -- time in seconds to wait before you can spawn another crate
 
 ctld.forceCrateToBeMoved = true -- a crate must be picked up at least once and moved before it can be unpacked. Helps to reduce crate spam
 
@@ -91,7 +91,7 @@ ctld.allowRandomAiTeamPickups = false -- Allows the AI to randomize the loading 
 
 ctld.minimumHoverHeight = 5 -- Lowest allowable height for crate hover
 ctld.maximumHoverHeight = 20 -- Highest allowable height for crate hover
-ctld.maxDistanceFromCrate = 10 -- Maximum distance from from crate for hover
+ctld.maxDistanceFromCrate = 20 -- Maximum distance from from crate for hover
 ctld.hoverTime = 3 -- Time to hold hover above a crate for loading in seconds
 
 -- end of Simulated Sling load configuration
@@ -153,8 +153,8 @@ ctld.JTAC_lock = "all" -- "vehicle" OR "troop" OR "all" forces JTAC to only lock
 ctld.pickupZones = {
     { "pickzone1", "white", -1, "yes", 0 },
     { "pickzone2", "white", -1, "yes", 0 },
-    { "pickzone3", "none", -1, "no", 0 },
-    { "pickzone4", "none", -1, "no", 0 },
+    { "pickzone3", "none", -1, "yes", 0 },
+    { "pickzone4", "none", -1, "yes", 0 },
     { "pickzone5", "none", -1, "no", 0 },
     { "pickzone6", "none", -1, "no", 0 },
     { "pickzone7", "none", -1, "no", 0 },
@@ -392,6 +392,7 @@ ctld.logisticUnits = {
 ctld.vehicleTransportEnabled = {
     "76MD", -- the il-76 mod doesnt use a normal - sign so il-76md wont match... !!!! GRR
     "C-130",
+    "Hercules",
 }
 
 

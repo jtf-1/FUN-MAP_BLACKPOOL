@@ -120,16 +120,3 @@ function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 
 end -- function
 
-------------------------
--- ATIS SECTION START --
-------------------------
---
-atisIncirlik=ATIS:New(AIRBASE.Syria.Incirlik, 129.65)
---atisIncirlik:SetRadioRelayUnitName("Radio Relay Incirlik")
-atisIncirlik:Start()
-
-
-atisMegiddo=ATIS:New(AIRBASE.Syria.Megiddo, 132.500)
-atisMegiddo:Start()
-
-

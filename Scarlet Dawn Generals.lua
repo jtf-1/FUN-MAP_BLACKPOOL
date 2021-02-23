@@ -56,8 +56,8 @@ SyAAFAirforceGeneralName	= "General Issam Hallaq"
 
 BlueStrikeFrequencyMin 	= 1200	
 BlueStrikeFrequencyMax 	= 2400	
-RedStrikeFrequencyMin 	= 1200	
-RedStrikeFrequencyMax 	= 2400
+RedStrikeFrequencyMin 	= 43200	
+RedStrikeFrequencyMax 	= 86400
 
 SYAAFAN26BGROUPNAME = ""
 IRIAFMI8GROUPNAME = ""
@@ -112,7 +112,7 @@ SEF_AIRBASES = {
 	"Wujah Al Hajar"
 }
 
-SEF_OFFLIMITSAIRBASESFORRED 	= { "Incirlik", "Ramat David" }
+SEF_OFFLIMITSAIRBASESFORRED 	= { "Incirlik", "Ramat David", "Haifa" }
 							
 SEF_OFFLIMITSAIRBASESFORBLUE 	= { "Palmyra", "Tabqa" }
 								

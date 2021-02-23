@@ -32,12 +32,12 @@ if ( Group.getByName("Tartus - Navy") ) then
 	GROUP:FindByName("Tartus - Navy"):PatrolRoute()
 end
 
-local airbossRoosevelt=AIRBOSS:New("CVN-71 Theodore Roosevelt")
-AIRBOSS:SetTACAN(71, X, RSV)
-AIRBOSS:SetICLS(1, RSV)
-airbossRoosevelt:Start()
+--local airbossRoosevelt=AIRBOSS:New("CVN-71 Theodore Roosevelt")
+--AIRBOSS:SetTACAN(71, X, RSV)
+--AIRBOSS:SetICLS(1, RSV)
+--airbossRoosevelt:Start()
 
-local airbossTarawa=AIRBOSS:New("LHA-1")
-AIRBOSS:SetTACAN(1, X, TWA)
-AIRBOSS:SetICLS(2, TWA)
-airbossTarawa:Start()
+--local airbossTarawa=AIRBOSS:New("LHA-1")
+--AIRBOSS:SetTACAN(1, X, TWA)
+--AIRBOSS:SetICLS(2, TWA)
+--airbossTarawa:Start()
