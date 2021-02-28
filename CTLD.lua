@@ -53,7 +53,7 @@ ctld.enableFastRopeInsertion = true -- allows you to drop troops by fast rope
 ctld.fastRopeMaximumHeight = 18.28 -- in meters which is 60 ft max fast rope (not rappell) safe height
 
 ctld.vehiclesForTransportRED = { "BRDM-2", "BTR_D" } -- vehicles to load onto Il-76 - Alternatives {"Strela-1 9P31","BMP-1"}
-ctld.vehiclesForTransportBLUE = { "M1045 HMMWV TOW", "M1043 HMMWV Armament" } -- vehicles to load onto c130 - Alternatives {"M1128 Stryker MGS","M1097 Avenger"}
+ctld.vehiclesForTransportBLUE = { "M1045 HMMWV TOW", "M1097 Avenger" } -- vehicles to load onto c130 - Alternatives {"M1128 Stryker MGS","M1097 Avenger"}
 
 ctld.aaLaunchers = 3 -- controls how many launchers to add to the kub/buk when its spawned.
 ctld.hawkLaunchers = 5 -- controls how many launchers to add to the hawk when its spawned.
@@ -74,7 +74,7 @@ ctld.troopPickupAtFOB = true -- if true, troops can also be picked up at a creat
 
 ctld.buildTimeFOB = 120 --time in seconds for the FOB to be built
 
-ctld.crateWaitTime = 7200 -- time in seconds to wait before you can spawn another crate
+ctld.crateWaitTime = 300 -- time in seconds to wait before you can spawn another crate
 
 ctld.forceCrateToBeMoved = true -- a crate must be picked up at least once and moved before it can be unpacked. Helps to reduce crate spam
 
@@ -124,7 +124,7 @@ ctld.JTAC_smokeOn_BLUE = true -- enables marking of target with smoke for BLUE f
 ctld.JTAC_smokeColour_RED = 4 -- RED side smoke colour -- Green = 0 , Red = 1, White = 2, Orange = 3, Blue = 4
 ctld.JTAC_smokeColour_BLUE = 1 -- BLUE side smoke colour -- Green = 0 , Red = 1, White = 2, Orange = 3, Blue = 4
 
-ctld.JTAC_jtacStatusF10 = true -- enables F10 JTAC Status menu
+ctld.JTAC_jtacStatusF10 = false -- enables F10 JTAC Status menu
 
 ctld.JTAC_location = true -- shows location of target in JTAC message
 ctld.location_DMS = false -- shows coordinates as Degrees Minutes Seconds instead of Degrees Decimal minutes
@@ -299,6 +299,13 @@ ctld.transportPilotNames = {
     "MEDEVAC BLUE #19",
     "MEDEVAC BLUE #20",
     "MEDEVAC BLUE #21",
+    
+    "Hercules1",
+    "Hercules2",
+    "Hercules3",
+    "Hercules4",
+    "Hercules5",
+    "Hercules6",
 
     -- *** AI transports names (different names only to ease identification in mission) ***
 
