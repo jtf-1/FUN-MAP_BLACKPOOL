@@ -73,7 +73,7 @@ function SEF_GetTableLength(Table)
 	for _ in pairs(Table) do TableLengthCount = TableLengthCount + 1 end
 	return TableLengthCount
 end
-
+--[[
 --////SAVE FUNCTION FOR UNITS
 function SEF_SaveUnitIntermentTable(timeloop, time)
 	IntermentMissionStr = IntegratedserializeWithCycles("ScarletDawnUnitInterment", ScarletDawnUnitInterment)
@@ -99,7 +99,7 @@ function SEF_SaveStaticIntermentTableNoArgs()
 	IntermentMissionStrStatic = IntegratedserializeWithCycles("ScarletDawnStaticInterment", ScarletDawnStaticInterment)
 	writemission(IntermentMissionStrStatic, "ScarletDawnStaticInterment.lua")	
 end
-
+]]--
 function SEF_SaveAirbasesTable(timeloop, time)
 	SEF_PERSISTENTAIRBASES(PersistentAirbases)
 	AirbaseStr = IntegratedserializeWithCycles("ScarletDawnAirbases", ScarletDawnAirbases)
@@ -145,7 +145,7 @@ PersistentAirbases = {
 	--"Ramat David",
 	"Rayak",
 	"Rene Mouawad",
-	--"Tabqa",
+	"Tabqa",
 	"Taftanaz",
 	"Wujah Al Hajar",
 }
@@ -184,7 +184,7 @@ end
 
 SEFDeletedUnitCount = 0
 SEFDeletedStaticCount = 0
-
+--[[
 --////LOAD UNITS
 if file_exists("ScarletDawnUnitInterment.lua") then	
 	
@@ -231,7 +231,7 @@ else
 end
 
 trigger.action.outText("Persistent World Functions Have Removed "..SEFDeletedUnitCount.." Units and "..SEFDeletedStaticCount.." Static Objects", 15)
-
+]]--
 --////LOAD AIRBASES
 if file_exists("ScarletDawnAirbases.lua") then
 
@@ -276,8 +276,8 @@ end
 
 --SCHEDULE
 --trigger.action.outText("Persistent World Functions Schedulers Are Currently Disabled", 15)
-timer.scheduleFunction(SEF_SaveUnitIntermentTable, 53, timer.getTime() + SaveScheduleUnits)
-timer.scheduleFunction(SEF_SaveStaticIntermentTable, 53, timer.getTime() + (SaveScheduleUnits + 3))
+--timer.scheduleFunction(SEF_SaveUnitIntermentTable, 53, timer.getTime() + SaveScheduleUnits)
+--timer.scheduleFunction(SEF_SaveStaticIntermentTable, 53, timer.getTime() + (SaveScheduleUnits + 3))
 timer.scheduleFunction(SEF_SaveAirbasesTable, 53, timer.getTime() + (SaveScheduleUnits + 5))
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------

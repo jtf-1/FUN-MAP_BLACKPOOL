@@ -59,6 +59,7 @@ REDSQUADRON5GROUPNAME = ""
 BlueSquadronName1 = "USN Fighter"
 BlueSquadronName2 = "USAF Fighter"
 BlueSquadronName3 = "IAF Fighter"
+BlueSquadronName4 = "USMC Fighter"  --CAP Group for Phase 2
 
 BLUESQUADRON1GROUPNAME = ""
 BLUESQUADRON2GROUPNAME = ""
@@ -74,21 +75,21 @@ RedRespawnTimerInitialMax = 450
 
 BlueRespawnTimerMin = 600
 BlueRespawnTimerMax = 1200
-RedRespawnTimerMin  = 900
-RedRespawnTimerMax  = 1500
+RedRespawnTimerMin  = 900 --900
+RedRespawnTimerMax  = 1500 --1500
 
 RedFlightLevelMin = 5
-RedFlightLevelMax = 11
+RedFlightLevelMax = 30
 BlueFlightLevelMin = 5
-BlueFlightLevelMax = 11
+BlueFlightLevelMax = 30
 
-RedPatrolWaypointDistance = 46300
+RedPatrolWaypointDistance = 60000 --46300
 RedPatrolWaypointInitial = 18520
 
 BluePatrolWaypointDistance = 46300
 BluePatrolWaypointInitial = 18520
 
-EngagementDistance = 74080
+EngagementDistance = 90000
 
 CleanupTime = 300
 
@@ -347,7 +348,6 @@ BLUESQUADRON3_DATA[2] = {
 	TimeStamp 	= nil,
 	Vec2		= nil
 }
-
 USAEFCAP_DATA = {}
 USAEFCAP_DATA[1] = {
 	TimeStamp 	= nil,
@@ -742,7 +742,7 @@ function SEF_REDSQUADRON1_INITIALISE()
 				SEF_REDSQUADRON1_SPAWN("Kuweires", AlphaDestinationAirbase)						
 			elseif ( Airbase.getByName("Jirah"):getCoalition() == 1 and JirahPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON1_SPAWN("Jirah", AlphaDestinationAirbase)			
-			else			
+			elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then			
 				SEF_REDSQUADRON1_SPAWN("Tabqa", AlphaDestinationAirbase)				
 			end		
 		elseif ( AlphaPrimaryAirbase == "Aleppo" ) then
@@ -770,7 +770,7 @@ function SEF_REDSQUADRON1_INITIALISE()
 				SEF_REDSQUADRON1_SPAWN("Kuweires", AlphaDestinationAirbase)
 			elseif ( Airbase.getByName("Jirah"):getCoalition() == 1 and JirahPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON1_SPAWN("Jirah", AlphaDestinationAirbase)
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON1_SPAWN("Tabqa", AlphaDestinationAirbase)
 			end		
 		elseif ( AlphaPrimaryAirbase == "Kuweires" ) then
@@ -798,7 +798,7 @@ function SEF_REDSQUADRON1_INITIALISE()
 				SEF_REDSQUADRON1_SPAWN("Aleppo", AlphaDestinationAirbase)			
 			elseif ( Airbase.getByName("Jirah"):getCoalition() == 1 and JirahPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON1_SPAWN("Jirah", AlphaDestinationAirbase)			
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON1_SPAWN("Tabqa", AlphaDestinationAirbase)				
 			end		
 		elseif ( AlphaPrimaryAirbase == "Jirah" ) then
@@ -826,12 +826,12 @@ function SEF_REDSQUADRON1_INITIALISE()
 				SEF_REDSQUADRON1_SPAWN("Aleppo", AlphaDestinationAirbase)			
 			elseif ( Airbase.getByName("Kuweires"):getCoalition() == 1 and KuweiresPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON1_SPAWN("Kuweires", AlphaDestinationAirbase)			
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON1_SPAWN("Tabqa", AlphaDestinationAirbase)				
 			end			
-		elseif ( AlphaPrimaryAirbase == "Tabqa" ) then
+		elseif ( AlphaPrimaryAirbase == "Tabqa" and Airbase.getByName("Tabqa"):getCoalition() == 1 ) then
 			SEF_REDSQUADRON1_SPAWN("Tabqa", AlphaDestinationAirbase)
-		else			
+    elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 			SEF_REDSQUADRON1_SPAWN("Tabqa", AlphaDestinationAirbase)
 		end		
 	else
@@ -903,10 +903,14 @@ function SEF_REDSQUADRON1_DEPLOYMENT()
 		--Case 1110: Set Alpha To Minakh And Patrol Minakh, Hold The Forward Line
 		AlphaPrimaryAirbase = "Minakh"
 		AlphaDestinationAirbase = "Minakh"
-	else
+  elseif (Airbase.getByName("Tabqa"):getCoalition() == 1 and Airbase.getByName("Minakh"):getCoalition() ~= 1 and Airbase.getByName("Aleppo"):getCoalition() ~= 1 and Airbase.getByName("Kuweires"):getCoalition() ~= 1 and Airbase.getByName("Jirah"):getCoalition() ~= 1 ) then
 		--Case 0000: Set Alpha To Tabqa And Patrol Jirah, We Are Trying To Recapture Jirah
 		AlphaPrimaryAirbase = "Tabqa"
 		AlphaDestinationAirbase = "Jirah"
+	else
+	   --Case 0000: Set Alpha To Palmyra And Patrol Tabqa, We Are Trying To Recapture Tabqa
+    AlphaPrimaryAirbase = "Palmyra"
+    AlphaDestinationAirbase = "Tabqa"
 	end
 	--END ALPHA			
 end
@@ -2946,7 +2950,7 @@ function SEF_REDSQUADRON2_INITIALISE()
 				SEF_REDSQUADRON2_SPAWN("Al Qusayr", BetaDestinationAirbase)						
 			elseif ( Airbase.getByName("Abu al-Duhur"):getCoalition() == 1 and AbuDuhurPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON2_SPAWN("Abu al-Duhur", BetaDestinationAirbase)							
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON2_SPAWN("Tabqa", BetaDestinationAirbase)			
 			end		
 		--////
@@ -2975,7 +2979,7 @@ function SEF_REDSQUADRON2_INITIALISE()
 				SEF_REDSQUADRON2_SPAWN("Al Qusayr", BetaDestinationAirbase)						
 			elseif ( Airbase.getByName("Abu al-Duhur"):getCoalition() == 1 and AbuDuhurPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON2_SPAWN("Abu al-Duhur", BetaDestinationAirbase)				
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON2_SPAWN("Tabqa", BetaDestinationAirbase)			
 			end		
 		--////
@@ -3004,7 +3008,7 @@ function SEF_REDSQUADRON2_INITIALISE()
 				SEF_REDSQUADRON2_SPAWN("Hama", BetaDestinationAirbase)						
 			elseif ( Airbase.getByName("Abu al-Duhur"):getCoalition() == 1 and AbuDuhurPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON2_SPAWN("Abu al-Duhur", BetaDestinationAirbase)				
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON2_SPAWN("Tabqa", BetaDestinationAirbase)				
 			end			
 		--////
@@ -3033,13 +3037,13 @@ function SEF_REDSQUADRON2_INITIALISE()
 				SEF_REDSQUADRON2_SPAWN("Hama", BetaDestinationAirbase)						
 			elseif ( Airbase.getByName("Al Qusayr"):getCoalition() == 1 and AlQusayrPerimeterCount == 0 ) then			
 				SEF_REDSQUADRON2_SPAWN("Al Qusayr", BetaDestinationAirbase)				
-			else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 				SEF_REDSQUADRON2_SPAWN("Tabqa", BetaDestinationAirbase)					
 			end
 		--////		
-		elseif ( BetaPrimaryAirbase == "Tabqa" ) then
+		elseif ( BetaPrimaryAirbase == "Tabqa" and Airbase.getByName("Tabqa"):getCoalition() == 1 ) then
 			SEF_REDSQUADRON2_SPAWN("Tabqa", BetaDestinationAirbase)
-		else			
+      elseif ( Airbase.getByName("Tabqa"):getCoalition() == 1 ) then      
 			SEF_REDSQUADRON2_SPAWN("Tabqa", BetaDestinationAirbase)
 		end		
 	else
@@ -3113,7 +3117,7 @@ function SEF_REDSQUADRON2_DEPLOYMENT()
 		BetaDestinationAirbase = "Bassel Al-Assad"
 	else
 		--Case 0000: Set Beta To Tabqa And Patrol Abu al-Duhur As We Need That Link Back
-		BetaPrimaryAirbase = "Tabqa"
+		BetaPrimaryAirbase = "Palmyra"
 		BetaDestinationAirbase = "Abu al-Duhur"
 	end	
 	--END BETA	

@@ -3830,13 +3830,6 @@ function SEF_RadioMenuSetup()
 	SupportMenuPIN = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request A Pinpoint Strike", SupportMenuMain)
 	SupportMenuDRONE = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request An MQ-9 Reaper Drone", SupportMenuMain)
 	
-	--////Setup Menu Option To Get The Current Objective
-	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", nil, function() CheckObjectiveRequest() end, nil)
-	--////Target Report to get target numbers and coordinates 
-	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
-	--////Drop Smoke On The Target
-	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", nil, function() SEF_TargetSmoke() end, nil)
-	
 	--////AI Support Flights Mission Abort Codes
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Fighter Screen", SupportMenuAbort, function() AbortCAPMission() end, nil)	
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Close Air Support", SupportMenuAbort, function() AbortCASMission() end, nil)
@@ -3855,7 +3848,12 @@ function SEF_RadioMenuSetup()
 	--ScarletDawnClearCarrierTankers  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Clear Carrier Deck Of Tankers", BlackpoolOptions, function() SEF_ClearAITankersFromCarrierDeck() end, nil)
 	ScarletDawnPhaseCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Battle Phase", BlackpoolOptions, function() SEF_BattlePhaseCheck() end, nil)
 	ScarletDawnSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", BlackpoolOptions, function() SEF_SkipScenario() end, nil)	
-	
+	 --////Setup Menu Option To Get The Current Objective
+  ScarletDawnCheckObj = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", BlackpoolOptions, function() CheckObjectiveRequest() end, nil)
+  --////Target Report to get target numbers and coordinates 
+  ScarletDawnTargetReport = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", BlackpoolOptions, function() TargetReport() end, nil)
+  --////Drop Smoke On The Target
+  ScarletDawnSmokeObj = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", BlackpoolOptions, function() SEF_TargetSmoke() end, nil)
 	
 	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--////CAP FLIGHTS
