@@ -85,9 +85,9 @@ RedRespawnTimerMin  = 900 --900
 RedRespawnTimerMax  = 1500 --1500
 
 RedFlightLevelMin = 5
-RedFlightLevelMax = 30
+RedFlightLevelMax = 20
 BlueFlightLevelMin = 5
-BlueFlightLevelMax = 30
+BlueFlightLevelMax = 20
 
 RedPatrolWaypointDistance = 60000 --46300
 RedPatrolWaypointInitial = 18520
