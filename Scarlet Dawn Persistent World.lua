@@ -181,10 +181,10 @@ function SEF_CAPAIRBASE(Airbase, Coalition)
 end
 -------------------------------------------------------------------------------------------------------------------------------------
 --////MAIN
-
+--[[
 SEFDeletedUnitCount = 0
 SEFDeletedStaticCount = 0
---[[
+
 --////LOAD UNITS
 if file_exists("ScarletDawnUnitInterment.lua") then	
 	

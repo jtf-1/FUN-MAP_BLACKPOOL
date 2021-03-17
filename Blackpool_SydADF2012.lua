@@ -42,7 +42,6 @@ local SA13count=SA13sam:Count()
 local SA15count=SA15sam:Count()
 local EWRcount=EWR:Count()
 
-
 --We will reduce the complement of the SAM's by the fixed percentage requested above by removing some
 
 
@@ -165,6 +164,7 @@ local EWRtoDestroy = EWRcount - EWRtoKeep
 
   end
 --end 
+
 -----------------
 -- REDFOR IADS --
 -----------------

@@ -8,8 +8,8 @@ trigger.action.outSound('Background Chatter.ogg')
 
 --////CARRIER GROUP PATROL ROUTE
 --////Set Carrier Group To Patrol Waypoints Indefinately
-if ( Group.getByName("CVN71") ) then
-GROUP:FindByName("CVN71"):PatrolRoute()
+if ( Group.getByName("CVN-71 Theodore Roosevelt") ) then
+GROUP:FindByName("CVN-71 Theodore Roosevelt"):PatrolRoute()
 end
 
 if ( Group.getByName("LHA-1") ) then

@@ -48,9 +48,9 @@ function SEF_SetukasSword()
 	env.info("Setsuka's Sword - Monitoring For Inactivity", false)
 
 	--////AWACS
-	if ( GROUP:FindByName(USAFAWACSGROUPNAME) ~= nil and GROUP:FindByName(USAFAWACSGROUPNAME):IsAlive() ) then				
+	if ( GROUP:FindByName(AWACS_MAGIC) ~= nil and GROUP:FindByName(AWACS_MAGIC):IsAlive() ) then				
 		
-		local SpawnUnits = GROUP:FindByName(USAFAWACSGROUPNAME):GetUnits()
+		local SpawnUnits = GROUP:FindByName(AWACS_MAGIC):GetUnits()
 	  
 		for UnitID, UnitData in pairs( SpawnUnits ) do
 	    
@@ -58,54 +58,54 @@ function SEF_SetukasSword()
 			local SpawnUnitName = SpawnUnit:GetName()			
 			
 			--////Existing Timestamp
-			if ( USAFAWACS_DATA[UnitID].Vec2 ~= nil and USAFAWACS_DATA[UnitID].TimeStamp ~= nil ) then
+			if ( AWACS_MAGIC_DATA[UnitID].Vec2 ~= nil and AWACS_MAGIC_DATA[UnitID].TimeStamp ~= nil ) then
 				--////On Ground And Stationary
 				if SpawnUnit:InAir() == false and SpawnUnit:GetVelocityKMH() < 1 then
 					local NewVec2 = SpawnUnit:GetVec2()
-					if USAFAWACS_DATA[UnitID].Vec2.x == NewVec2.x and USAFAWACS_DATA[UnitID].Vec2.y == NewVec2.y then
-						if USAFAWACS_DATA[UnitID].TimeStamp + CleanupTime < timer.getTime() then						
+					if AWACS_MAGIC_DATA[UnitID].Vec2.x == NewVec2.x and AWACS_MAGIC_DATA[UnitID].Vec2.y == NewVec2.y then
+						if AWACS_MAGIC_DATA[UnitID].TimeStamp + CleanupTime < timer.getTime() then						
 							env.info("AWACS Monitor - Deleting: "..SpawnUnitName.." Due To Inactivity", false)
-							USAFAWACS_DATA[UnitID].Vec2 = nil
-							USAFAWACS_DATA[UnitID].TimeStamp = nil
+							AWACS_MAGIC_DATA[UnitID].Vec2 = nil
+							AWACS_MAGIC_DATA[UnitID].TimeStamp = nil
 							Unit.getByName(SpawnUnit:GetName()):destroy()						
 						end
 					else
-						USAFAWACS_DATA[UnitID].TimeStamp = timer.getTime()
-						USAFAWACS_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
+						AWACS_MAGIC_DATA[UnitID].TimeStamp = timer.getTime()
+						AWACS_MAGIC_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
 					end    		
 				--////In Air Or On Ground And Moving On Taxi/Takeoff Etc
 				else
-					USAFAWACS_DATA[UnitID].Vec2 = nil
-					USAFAWACS_DATA[UnitID].TimeStamp = nil
+					AWACS_MAGIC_DATA[UnitID].Vec2 = nil
+					AWACS_MAGIC_DATA[UnitID].TimeStamp = nil
 				end
 			--////No Existing Timestamp
 			else
 				--////Not In Air
 				if SpawnUnit:InAir() == false then					
 					if SpawnUnit:GetVelocityKMH() < 1 then						
-						USAFAWACS_DATA[UnitID].TimeStamp = timer.getTime()
-						USAFAWACS_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
+						AWACS_MAGIC_DATA[UnitID].TimeStamp = timer.getTime()
+						AWACS_MAGIC_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
 					else
-						USAFAWACS_DATA[UnitID].TimeStamp = nil
-						USAFAWACS_DATA[UnitID].Vec2 = nil
+						AWACS_MAGIC_DATA[UnitID].TimeStamp = nil
+						AWACS_MAGIC_DATA[UnitID].Vec2 = nil
 					end
 				--////In Air
 				else
-					USAFAWACS_DATA[UnitID].TimeStamp = nil
-					USAFAWACS_DATA[UnitID].Vec2 = nil					
+					AWACS_MAGIC_DATA[UnitID].TimeStamp = nil
+					AWACS_MAGIC_DATA[UnitID].Vec2 = nil					
 				end
 			end
 		end			
 	--////AWACS NOT ALIVE SCRUB DATA
 	else
-		USAFAWACS_DATA[1].Vec2 = nil
-		USAFAWACS_DATA[1].TimeStamp = nil		
+		AWACS_MAGIC_DATA[1].Vec2 = nil
+		AWACS_MAGIC_DATA[1].TimeStamp = nil		
 	end
 		
 	--////TEXACO
-	if ( GROUP:FindByName(TEXACOGROUPNAME) ~= nil and GROUP:FindByName(TEXACOGROUPNAME):IsAlive() ) then				
+	if ( GROUP:FindByName(AWACS_DARKSTAR) ~= nil and GROUP:FindByName(AWACS_DARKSTAR):IsAlive() ) then				
 		
-		local SpawnUnits = GROUP:FindByName(TEXACOGROUPNAME):GetUnits()
+		local SpawnUnits = GROUP:FindByName(AWACS_DARKSTAR):GetUnits()
 	  
 		for UnitID, UnitData in pairs( SpawnUnits ) do
 	    
@@ -113,48 +113,48 @@ function SEF_SetukasSword()
 			local SpawnUnitName = SpawnUnit:GetName()			
 			
 			--////Existing Timestamp
-			if ( TEXACO_DATA[UnitID].Vec2 ~= nil and TEXACO_DATA[UnitID].TimeStamp ~= nil ) then
+			if ( AWACS_DARKSTAR_DATA[UnitID].Vec2 ~= nil and AWACS_DARKSTAR_DATA[UnitID].TimeStamp ~= nil ) then
 				--////On Ground And Stationary
 				if SpawnUnit:InAir() == false and SpawnUnit:GetVelocityKMH() < 1 then
 					local NewVec2 = SpawnUnit:GetVec2()
-					if TEXACO_DATA[UnitID].Vec2.x == NewVec2.x and TEXACO_DATA[UnitID].Vec2.y == NewVec2.y then
-						if TEXACO_DATA[UnitID].TimeStamp + CleanupTime < timer.getTime() then						
+					if AWACS_DARKSTAR_DATA[UnitID].Vec2.x == NewVec2.x and AWACS_DARKSTAR_DATA[UnitID].Vec2.y == NewVec2.y then
+						if AWACS_DARKSTAR_DATA[UnitID].TimeStamp + CleanupTime < timer.getTime() then						
 							env.info("TEXACO Monitor - Deleting: "..SpawnUnitName.." Due To Inactivity", false)
-							TEXACO_DATA[UnitID].Vec2 = nil
-							TEXACO_DATA[UnitID].TimeStamp = nil
+							AWACS_DARKSTAR_DATA[UnitID].Vec2 = nil
+							AWACS_DARKSTAR_DATA[UnitID].TimeStamp = nil
 							Unit.getByName(SpawnUnit:GetName()):destroy()						
 						end
 					else
-						TEXACO_DATA[UnitID].TimeStamp = timer.getTime()
-						TEXACO_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
+						AWACS_DARKSTAR_DATA[UnitID].TimeStamp = timer.getTime()
+						AWACS_DARKSTAR_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
 					end    		
 				--////In Air Or On Ground And Moving On Taxi/Takeoff Etc
 				else
-					TEXACO_DATA[UnitID].Vec2 = nil
-					TEXACO_DATA[UnitID].TimeStamp = nil
+					AWACS_DARKSTAR_DATA[UnitID].Vec2 = nil
+					AWACS_DARKSTAR_DATA[UnitID].TimeStamp = nil
 				end
 			--////No Existing Timestamp
 			else
 				--////Not In Air
 				if SpawnUnit:InAir() == false then					
 					if SpawnUnit:GetVelocityKMH() < 1 then
-						TEXACO_DATA[UnitID].TimeStamp = timer.getTime()
-						TEXACO_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
+						AWACS_DARKSTAR_DATA[UnitID].TimeStamp = timer.getTime()
+						AWACS_DARKSTAR_DATA[UnitID].Vec2 = SpawnUnit:GetVec2()
 					else
-						TEXACO_DATA[UnitID].TimeStamp = nil
-						TEXACO_DATA[UnitID].Vec2 = nil
+						AWACS_DARKSTAR_DATA[UnitID].TimeStamp = nil
+						AWACS_DARKSTAR_DATA[UnitID].Vec2 = nil
 					end
 				--////In Air
 				else
-					TEXACO_DATA[UnitID].TimeStamp = nil
-					TEXACO_DATA[UnitID].Vec2 = nil					
+					AWACS_DARKSTAR_DATA[UnitID].TimeStamp = nil
+					AWACS_DARKSTAR_DATA[UnitID].Vec2 = nil					
 				end
 			end
 		end			
 	--////TEXACO NOT ALIVE SCRUB DATA
 	else
-		TEXACO_DATA[1].Vec2 = nil
-		TEXACO_DATA[1].TimeStamp = nil		
+		AWACS_DARKSTAR_DATA[1].Vec2 = nil
+		AWACS_DARKSTAR_DATA[1].TimeStamp = nil		
 	end
 	
 	--////SHELL

@@ -50,11 +50,18 @@ RedSquadronName3 = "Gamma"
 RedSquadronName4 = "Delta"
 RedSquadronName5 = "Epsilon"
 
+HardSquadronName1 = "Hard1"
+HardSquadronName2 = "Hard2"
+
 REDSQUADRON1GROUPNAME = ""
 REDSQUADRON2GROUPNAME = ""
 REDSQUADRON3GROUPNAME = ""
 REDSQUADRON4GROUPNAME = ""
 REDSQUADRON5GROUPNAME = ""
+
+HARDSQUADRON1GROUPNAME = ""
+HARDSQUADRON2GROUPNAME = ""
+
 
 BlueSquadronName1 = "USN Fighter"
 BlueSquadronName2 = "USAF Fighter"
@@ -73,6 +80,8 @@ BLUESQUADRON5GROUPNAME = ""
 
 BlueSquadronsEnabled = 1
 RedSquadronsEnabled = 1
+
+HardSquadronsEnabled = 0
 
 BlueRespawnTimerInitialMin = 30 --300
 BlueRespawnTimerInitialMax = 60 --450
@@ -104,6 +113,10 @@ BetaStatus = "Beta Squadron\nAirspace Is Controlled By Syria\n"
 GammaStatus = "Gamma Squadron\nAirspace Is Controlled By Syria\n"
 DeltaStatus = "Delta Squadron\nAirspace Is Controlled By Syria\n"
 EpsilonStatus = "Epsilon Squadron\nAirspace Is Controlled By Syria\n"
+
+Hard1Status = "Hard1 Squadron\nAirspace Is Controlled By Syria\n"
+Hard2Status = "Hard2 Squadron\nAirspace Is Controlled By Syria\n"
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --////TABLES
@@ -246,19 +259,30 @@ CombinedRedCAP = {
 				 "VVS MiG-31", 
 				 "VVS Su-27", 
 				 "VVS Su-30", 
-				 "VVS Su-33", 
-				 }
+				 "VVS Su-33",
+	  		 }
+	  		 
+HardRedCAP = { 
+         "IRIAF F-14A", 
+         "VVS MiG-29S", 
+         "VVS MiG-31", 
+         "VVS Su-27", 
+         "VVS Su-30",
+         "VVS J-11",       
+         "VVS JF-17",       
+         "IRIAF Mirage F1",  
+         }
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-USAFAWACS_DATA = {}
-USAFAWACS_DATA[1] = {
+AWACS_MAGIC_DATA = {}
+AWACS_MAGIC_DATA[1] = {
 	TimeStamp 	= nil,
 	Vec2 		= nil	
 }
 
-TEXACO_DATA = {}
-TEXACO_DATA[1] = {
+AWACS_DARKSTAR_DATA = {}
+AWACS_DARKSTAR_DATA[1] = {
 	TimeStamp 	= nil,
 	Vec2		= nil
 }
@@ -323,6 +347,26 @@ REDSQUADRON5_DATA[1] = {
 REDSQUADRON5_DATA[2] = {
 	TimeStamp 	= nil,
 	Vec2		= nil
+}
+
+HARDSQUADRON1_DATA = {}
+HARDSQUADRON1_DATA[1] = {
+  TimeStamp   = nil,
+  Vec2    = nil
+}
+HARDSQUADRON1_DATA[2] = {
+  TimeStamp   = nil,
+  Vec2    = nil
+}
+
+HARDSQUADRON2_DATA = {}
+HARDSQUADRON2_DATA[1] = {
+  TimeStamp   = nil,
+  Vec2    = nil
+}
+HARDSQUADRON2_DATA[2] = {
+  TimeStamp   = nil,
+  Vec2    = nil
 }
 
 BLUESQUADRON1_DATA = {}
@@ -640,6 +684,18 @@ function SEF_BLUESQUADRONSTOGGLE()
 	end	
 end
 
+function SEF_HARDSQUADRONSTOGGLE()
+
+  if ( HardSquadronsEnabled == 1 ) then   
+    HardSquadronsEnabled = 0
+    trigger.action.outText("Hard Redfor CAP Flights Are Now Disabled", 15)    
+  elseif ( HardSquadronsEnabled == 0 ) then     
+    HardSquadronsEnabled = 1
+    trigger.action.outText("Hard Redfor CAP Flights Are Now Enabled", 15)
+  else
+  end 
+end
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --////RED SQUADRONS
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -717,6 +773,40 @@ function SEF_REDSQUADRON5_SCHEDULER()
 	else	
 		timer.scheduleFunction(SEF_REDSQUADRON5_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))		
 	end	
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--////HARD RED SQUADRONS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function SEF_HARDSQUADRON1_SCHEDULER()
+    
+  if ( HardSquadronsEnabled == 1 ) then
+    if ( GROUP:FindByName(HARDSQUADRON1GROUPNAME) ~= nil and GROUP:FindByName(HARDSQUADRON1GROUPNAME):IsAlive() ) then        
+      timer.scheduleFunction(SEF_HARDSQUADRON1_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))      
+    else
+      SEF_HARDSQUADRON1_INITIALISE()
+      
+      timer.scheduleFunction(SEF_HARDSQUADRON1_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))
+    end
+  else  
+    timer.scheduleFunction(SEF_HARDSQUADRON1_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))    
+  end 
+end
+
+function SEF_HARDSQUADRON2_SCHEDULER()
+    
+  if ( HardSquadronsEnabled == 1 ) then
+    if ( GROUP:FindByName(HARDSQUADRON2GROUPNAME) ~= nil and GROUP:FindByName(HARDSQUADRON2GROUPNAME):IsAlive() ) then        
+      timer.scheduleFunction(SEF_HARDSQUADRON2_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))      
+    else
+      SEF_HARDSQUADRON2_INITIALISE()
+      
+      timer.scheduleFunction(SEF_HARDSQUADRON2_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))
+    end
+  else  
+    timer.scheduleFunction(SEF_HARDSQUADRON2_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerMin, RedRespawnTimerMax))    
+  end 
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3634,6 +3724,884 @@ function SEF_REDSQUADRON5_DEPLOYMENT()
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--////HARD RED SQUADRONS
+
+function SEF_HARDSQUADRON1_SPAWN(DepartureAirbaseName, DestinationAirbaseName)
+  
+  if ( GROUP:FindByName(HARDSQUADRON1GROUPNAME) ~= nil and GROUP:FindByName(HARDSQUADRON1GROUPNAME):IsAlive() ) then
+    --trigger.action.outText("Red Squadron 5 Is Currently Active, Not Spawning A Replacement Yet",15) 
+  else
+    HARDSQUADRON1_DATA[1].Vec2 = nil
+    HARDSQUADRON1_DATA[1].TimeStamp = nil
+    HARDSQUADRON1_DATA[2].Vec2 = nil
+    HARDSQUADRON1_DATA[2].TimeStamp = nil
+    
+    local SpawnZone = AIRBASE:FindByName(DepartureAirbaseName):GetZone()
+    --local DestinationZone = AIRBASE:FindByName(DestinationAirbaseName):GetZone()
+    local DestinationZone = AIRBASE:FindByName(DestinationAirbaseName):GetZone()  
+    
+    local Randomiser = math.random(RedFlightLevelMin,RedFlightLevelMax)
+    HS1_FlightLevel = Randomiser * 1000
+        
+    local DepartureZoneVec2 = SpawnZone:GetVec2()
+    local TargetZoneVec2  = DestinationZone:GetVec2()
+          
+    local FlightDirection = math.random(1,100)
+          
+    if ( FlightDirection <= 50 ) then     
+      --////Clockwise
+      --Spawn Point
+      HS1_WP0X = DepartureZoneVec2.x
+      HS1_WP0Y = DepartureZoneVec2.y
+      --Initial Waypoint
+      HS1_WP1X = DepartureZoneVec2.x + RedPatrolWaypointInitial
+      HS1_WP1Y = DepartureZoneVec2.y      
+      --Perimeter Zone North Point
+      HS1_WP2X = TargetZoneVec2.x + RedPatrolWaypointDistance
+      HS1_WP2Y = TargetZoneVec2.y             
+      --Perimeter Zone East Point
+      HS1_WP3X = TargetZoneVec2.x
+      HS1_WP3Y = TargetZoneVec2.y + RedPatrolWaypointDistance           
+      --Perimeter Zone South Point
+      HS1_WP4X = TargetZoneVec2.x - RedPatrolWaypointDistance
+      HS1_WP4Y = TargetZoneVec2.y           
+      --Perimeter Zone West Point
+      HS1_WP5X = TargetZoneVec2.x
+      HS1_WP5Y = TargetZoneVec2.y - RedPatrolWaypointDistance               
+    else      
+      --////Anti-Clockwise
+      --Spawn Point
+      HS1_WP0X = DepartureZoneVec2.x
+      HS1_WP0Y = DepartureZoneVec2.y
+      --Initial Waypoint
+      HS1_WP1X = DepartureZoneVec2.x - RedPatrolWaypointInitial
+      HS1_WP1Y = DepartureZoneVec2.y      
+      --Perimeter Zone South Point
+      HS1_WP2X = TargetZoneVec2.x - RedPatrolWaypointDistance
+      HS1_WP2Y = TargetZoneVec2.y             
+      --Perimeter Zone East Point
+      HS1_WP3X = TargetZoneVec2.x
+      HS1_WP3Y = TargetZoneVec2.y + RedPatrolWaypointDistance           
+      --Perimeter Zone North Point
+      HS1_WP4X = TargetZoneVec2.x + RedPatrolWaypointDistance
+      HS1_WP4Y = TargetZoneVec2.y           
+      --Perimeter Zone West Point
+      HS1_WP5X = TargetZoneVec2.x
+      HS1_WP5Y = TargetZoneVec2.y - RedPatrolWaypointDistance         
+    end   
+    
+    HARDSQUADRON1 = SPAWN:NewWithAlias("VVS J-11", HardSquadronName1)
+              :InitRandomizeTemplate(HardRedCAP)              
+                
+    :OnSpawnGroup(
+      function( SpawnGroup )            
+        HARDSQUADRON1GROUPNAME = SpawnGroup.GroupName
+        HARDSQUADRON1GROUP = GROUP:FindByName(SpawnGroup.GroupName)              
+                          
+        --////CAP Mission Profile, Engage Targets Along Route Unrestricted Distance, Switch Waypoint From WP5 to WP2, 0.7Mach, Randomised Flight Level From Above Parameters
+        Mission = {
+          ["id"] = "Mission",
+          ["params"] = {    
+            ["route"] = 
+            {                                    
+              ["points"] = 
+              {
+                [1] = 
+                {
+                  ["alt"] = HS1_FlightLevel/2,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                        [1] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = true,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 1,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "EPLRS",
+                              ["params"] = 
+                              {
+                                ["value"] = true,
+                                ["groupId"] = 1,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [1]
+                        [2] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 2,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["variantIndex"] = 1,
+                                ["name"] = 5,
+                                ["formationIndex"] = 6,
+                                ["value"] = 393217,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [2]
+                        [3] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "EngageTargets",
+                          ["number"] = 3,
+                          ["params"] = 
+                          {
+                            ["targetTypes"] = 
+                            {
+                              [1] = "Air",
+                            }, -- end of ["targetTypes"]
+                            ["priority"] = 0,
+                            ["value"] = "Air;",
+                            ["noTargetTypes"] = 
+                            {
+                              [1] = "Cruise missiles",
+                              [2] = "Antiship Missiles",
+                              [3] = "AA Missiles",
+                              [4] = "AG Missiles",
+                              [5] = "SA Missiles",
+                            }, -- end of ["noTargetTypes"]
+                            ["maxDistEnabled"] = true,
+                            ["maxDist"] = EngagementDistance,
+                          }, -- end of ["params"]
+                        }, -- end of [3]
+                        [4] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 4,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = 3,
+                                ["name"] = 1,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [4]
+                        [5] = 
+                        {
+                          ["number"] = 5,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["enabled"] = true,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = 264241152,
+                                ["name"] = 10,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [5]
+                        [6] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 6,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = true,
+                                ["name"] = 19,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [6]
+                        [7] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 7,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = true,
+                                ["name"] = 6,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [7]
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 0,
+                  ["ETA_locked"] = true,
+                  ["y"] = HS1_WP0Y,
+                  ["x"] = HS1_WP0X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [1]
+                [2] = 
+                {
+                  ["alt"] = HS1_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 127.32626754758,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS1_WP1Y,
+                  ["x"] = HS1_WP1X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [2]
+                [3] = 
+                {
+                  ["alt"] = HS1_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 380.31328316984,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS1_WP2Y,
+                  ["x"] = HS1_WP2X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [3]
+                [4] = 
+                {
+                  ["alt"] = HS1_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 832.92276094724,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS1_WP3Y,
+                  ["x"] = HS1_WP3X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [4]
+                [5] = 
+                {
+                  ["alt"] = HS1_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 1289.20366255,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS1_WP4Y,
+                  ["x"] = HS1_WP4X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [5]
+                [6] = 
+                {
+                  ["alt"] = HS1_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                        [1] = 
+                        {
+                          ["number"] = 1,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["enabled"] = true,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "SwitchWaypoint",
+                              ["params"] = 
+                              {
+                                ["goToWaypointIndex"] = 3,
+                                ["fromWaypointIndex"] = 6,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [1]
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 1744.9128539618,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS1_WP5Y,
+                  ["x"] = HS1_WP5X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [6]
+              }, -- end of ["points"]
+            }, -- end of ["route"]
+          }, --end of ["params"]
+        }--end of Mission       
+        HARDSQUADRON1GROUP:SetTask(Mission)        
+      end
+    )
+    --:SpawnInZone( SpawnZone, false, RS5_FlightLevel, RS5_FlightLevel )
+    :SpawnAtAirbase( AIRBASE:FindByName( DepartureAirbaseName ), SPAWN.Takeoff.Hot, nil, AIRBASE.TerminalType.OpenBig ) --SPAWN.Takeoff.Hot SPAWN.Takeoff.Cold SPAWN.Takeoff.Runway
+    --trigger.action.outText("Red Squadron 5 Is Launching Fighters", 15)  
+  end
+end
+
+function SEF_HARDSQUADRON2_SPAWN(DepartureAirbaseName, DestinationAirbaseName)
+  
+  if ( GROUP:FindByName(HARDSQUADRON2GROUPNAME) ~= nil and GROUP:FindByName(HARDSQUADRON2GROUPNAME):IsAlive() ) then
+    --trigger.action.outText("Red Squadron 5 Is Currently Active, Not Spawning A Replacement Yet",15) 
+  else
+    HARDSQUADRON2_DATA[1].Vec2 = nil
+    HARDSQUADRON2_DATA[1].TimeStamp = nil
+    HARDSQUADRON2_DATA[2].Vec2 = nil
+    HARDSQUADRON2_DATA[2].TimeStamp = nil
+    
+    local SpawnZone = AIRBASE:FindByName(DepartureAirbaseName):GetZone()
+    --local DestinationZone = AIRBASE:FindByName(DestinationAirbaseName):GetZone()
+    local DestinationZone = AIRBASE:FindByName(DestinationAirbaseName):GetZone()  
+    
+    local Randomiser = math.random(RedFlightLevelMin,RedFlightLevelMax)
+    HS2_FlightLevel = Randomiser * 1000
+        
+    local DepartureZoneVec2 = SpawnZone:GetVec2()
+    local TargetZoneVec2  = DestinationZone:GetVec2()
+          
+    local FlightDirection = math.random(1,100)
+          
+    if ( FlightDirection <= 50 ) then     
+      --////Clockwise
+      --Spawn Point
+      HS2_WP0X = DepartureZoneVec2.x
+      HS2_WP0Y = DepartureZoneVec2.y
+      --Initial Waypoint
+      HS2_WP1X = DepartureZoneVec2.x + RedPatrolWaypointInitial
+      HS2_WP1Y = DepartureZoneVec2.y      
+      --Perimeter Zone North Point
+      HS2_WP2X = TargetZoneVec2.x + RedPatrolWaypointDistance
+      HS2_WP2Y = TargetZoneVec2.y             
+      --Perimeter Zone East Point
+      HS2_WP3X = TargetZoneVec2.x
+      HS2_WP3Y = TargetZoneVec2.y + RedPatrolWaypointDistance           
+      --Perimeter Zone South Point
+      HS2_WP4X = TargetZoneVec2.x - RedPatrolWaypointDistance
+      HS2_WP4Y = TargetZoneVec2.y           
+      --Perimeter Zone West Point
+      HS2_WP5X = TargetZoneVec2.x
+      HS2_WP5Y = TargetZoneVec2.y - RedPatrolWaypointDistance               
+    else      
+      --////Anti-Clockwise
+      --Spawn Point
+      HS2_WP0X = DepartureZoneVec2.x
+      HS2_WP0Y = DepartureZoneVec2.y
+      --Initial Waypoint
+      HS2_WP1X = DepartureZoneVec2.x - RedPatrolWaypointInitial
+      HS2_WP1Y = DepartureZoneVec2.y      
+      --Perimeter Zone South Point
+      HS2_WP2X = TargetZoneVec2.x - RedPatrolWaypointDistance
+      HS2_WP2Y = TargetZoneVec2.y             
+      --Perimeter Zone East Point
+      HS2_WP3X = TargetZoneVec2.x
+      HS2_WP3Y = TargetZoneVec2.y + RedPatrolWaypointDistance           
+      --Perimeter Zone North Point
+      HS2_WP4X = TargetZoneVec2.x + RedPatrolWaypointDistance
+      HS2_WP4Y = TargetZoneVec2.y           
+      --Perimeter Zone West Point
+      HS2_WP5X = TargetZoneVec2.x
+      HS2_WP5Y = TargetZoneVec2.y - RedPatrolWaypointDistance         
+    end   
+    
+    HARDSQUADRON2 = SPAWN:NewWithAlias("VVS J-11", HardSquadronName2)
+              :InitRandomizeTemplate(HardRedCAP)              
+                
+    :OnSpawnGroup(
+      function( SpawnGroup )            
+        HARDSQUADRON2GROUPNAME = SpawnGroup.GroupName
+        HARDSQUADRON2GROUP = GROUP:FindByName(SpawnGroup.GroupName)              
+                          
+        --////CAP Mission Profile, Engage Targets Along Route Unrestricted Distance, Switch Waypoint From WP5 to WP2, 0.7Mach, Randomised Flight Level From Above Parameters
+        Mission = {
+          ["id"] = "Mission",
+          ["params"] = {    
+            ["route"] = 
+            {                                    
+              ["points"] = 
+              {
+                [1] = 
+                {
+                  ["alt"] = HS2_FlightLevel/2,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                        [1] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = true,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 1,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "EPLRS",
+                              ["params"] = 
+                              {
+                                ["value"] = true,
+                                ["groupId"] = 1,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [1]
+                        [2] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 2,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["variantIndex"] = 1,
+                                ["name"] = 5,
+                                ["formationIndex"] = 6,
+                                ["value"] = 393217,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [2]
+                        [3] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "EngageTargets",
+                          ["number"] = 3,
+                          ["params"] = 
+                          {
+                            ["targetTypes"] = 
+                            {
+                              [1] = "Air",
+                            }, -- end of ["targetTypes"]
+                            ["priority"] = 0,
+                            ["value"] = "Air;",
+                            ["noTargetTypes"] = 
+                            {
+                              [1] = "Cruise missiles",
+                              [2] = "Antiship Missiles",
+                              [3] = "AA Missiles",
+                              [4] = "AG Missiles",
+                              [5] = "SA Missiles",
+                            }, -- end of ["noTargetTypes"]
+                            ["maxDistEnabled"] = true,
+                            ["maxDist"] = EngagementDistance,
+                          }, -- end of ["params"]
+                        }, -- end of [3]
+                        [4] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 4,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = 3,
+                                ["name"] = 1,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [4]
+                        [5] = 
+                        {
+                          ["number"] = 5,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["enabled"] = true,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = 264241152,
+                                ["name"] = 10,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [5]
+                        [6] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 6,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = true,
+                                ["name"] = 19,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [6]
+                        [7] = 
+                        {
+                          ["enabled"] = true,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["number"] = 7,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "Option",
+                              ["params"] = 
+                              {
+                                ["value"] = true,
+                                ["name"] = 6,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [7]
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 0,
+                  ["ETA_locked"] = true,
+                  ["y"] = HS2_WP0Y,
+                  ["x"] = HS2_WP0X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [1]
+                [2] = 
+                {
+                  ["alt"] = HS2_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 127.32626754758,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS2_WP1Y,
+                  ["x"] = HS2_WP1X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [2]
+                [3] = 
+                {
+                  ["alt"] = HS2_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 380.31328316984,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS2_WP2Y,
+                  ["x"] = HS2_WP2X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [3]
+                [4] = 
+                {
+                  ["alt"] = HS2_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 832.92276094724,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS2_WP3Y,
+                  ["x"] = HS2_WP3X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [4]
+                [5] = 
+                {
+                  ["alt"] = HS2_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 1289.20366255,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS2_WP4Y,
+                  ["x"] = HS2_WP4X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [5]
+                [6] = 
+                {
+                  ["alt"] = HS2_FlightLevel,
+                  ["action"] = "Turning Point",
+                  ["alt_type"] = "BARO",
+                  ["speed"] = 234.32754852983,
+                  ["task"] = 
+                  {
+                    ["id"] = "ComboTask",
+                    ["params"] = 
+                    {
+                      ["tasks"] = 
+                      {
+                        [1] = 
+                        {
+                          ["number"] = 1,
+                          ["auto"] = false,
+                          ["id"] = "WrappedAction",
+                          ["enabled"] = true,
+                          ["params"] = 
+                          {
+                            ["action"] = 
+                            {
+                              ["id"] = "SwitchWaypoint",
+                              ["params"] = 
+                              {
+                                ["goToWaypointIndex"] = 3,
+                                ["fromWaypointIndex"] = 6,
+                              }, -- end of ["params"]
+                            }, -- end of ["action"]
+                          }, -- end of ["params"]
+                        }, -- end of [1]
+                      }, -- end of ["tasks"]
+                    }, -- end of ["params"]
+                  }, -- end of ["task"]
+                  ["type"] = "Turning Point",
+                  ["ETA"] = 1744.9128539618,
+                  ["ETA_locked"] = false,
+                  ["y"] = HS2_WP5Y,
+                  ["x"] = HS2_WP5X,
+                  ["formation_template"] = "",
+                  ["speed_locked"] = true,
+                }, -- end of [6]
+              }, -- end of ["points"]
+            }, -- end of ["route"]
+          }, --end of ["params"]
+        }--end of Mission       
+        HARDSQUADRON2GROUP:SetTask(Mission)        
+      end
+    )
+    --:SpawnInZone( SpawnZone, false, RS5_FlightLevel, RS5_FlightLevel )
+    :SpawnAtAirbase( AIRBASE:FindByName( DepartureAirbaseName ), SPAWN.Takeoff.Hot, nil, AIRBASE.TerminalType.OpenBig ) --SPAWN.Takeoff.Hot SPAWN.Takeoff.Cold SPAWN.Takeoff.Runway
+    --trigger.action.outText("Red Squadron 5 Is Launching Fighters", 15)  
+  end
+end
+
+function SEF_HARDSQUADRON1_INITIALISE()
+
+  --Retrieve The Standard Deployment For The Squadron
+  SEF_HARDSQUADRON1_DEPLOYMENT()
+  
+  SET_AIRFIELDPERIMETERCLIENTS = SET_CLIENT:New():FilterCoalitions("blue"):FilterCategories( { "plane", "helicopter" } ):FilterActive():FilterOnce()
+  
+  Hard1PrimaryPerimeterCount = 0      
+      
+  --EPSILON 
+  SET_AIRFIELDPERIMETERCLIENTS:ForEachClientInZone(ZONE:FindByName(Hard1PrimaryAirbase.." Perimeter Zone"), function ( GroupObject )
+    Hard1PrimaryPerimeterCount = Hard1PrimaryPerimeterCount + 1
+    end
+  ) 
+    
+  --////EPSILON
+  if ( Hard1PrimaryPerimeterCount > 0 ) then    
+    Hard1Status = Hard1PrimaryAirbase.." - Epsilon Squadron\nAirspace Is Being Contested By The Allies\n"   
+    SEF_HARDSQUADRON1_SPAWN("Palmyra", Hard1DestinationAirbase)  
+  else
+    Hard1Status = Hard1PrimaryAirbase.." - Epsilon Squadron\nAirspace Is Controlled By Syria\n"
+    SEF_HARDSQUADRON1_SPAWN(Hard1PrimaryAirbase, Hard1DestinationAirbase)
+  end   
+end
+
+function SEF_HARDSQUADRON1_DEPLOYMENT()  
+  
+  --EPSILON
+  if ( Airbase.getByName("Palmyra"):getCoalition() == 1 and ( Airbase.getByName("Hama"):getCoalition() == 1 or Airbase.getByName("Abu al-Duhur"):getCoalition() == 1  ) ) then
+    --Set Epsilon To Tiyas and patrol Tiyas, Hold The Forward Line
+    Hard1PrimaryAirbase = "Palmyra"
+    Hard1DestinationAirbase = "Hatay"
+  else
+    --Set Epsilon To Palmyra and patrol Tiyas
+    Hard1PrimaryAirbase = "Palmyra"
+    Hard1DestinationAirbase = "Hama"
+  end
+  --END EPSILON 
+end
+
+function SEF_HARDSQUADRON2_INITIALISE()
+
+  --Retrieve The Standard Deployment For The Squadron
+  SEF_HARDSQUADRON2_DEPLOYMENT()
+  
+  SET_AIRFIELDPERIMETERCLIENTS = SET_CLIENT:New():FilterCoalitions("blue"):FilterCategories( { "plane", "helicopter" } ):FilterActive():FilterOnce()
+  
+  Hard2PrimaryPerimeterCount = 0      
+      
+  --EPSILON 
+  SET_AIRFIELDPERIMETERCLIENTS:ForEachClientInZone(ZONE:FindByName(Hard2PrimaryAirbase.." Perimeter Zone"), function ( GroupObject )
+    Hard2PrimaryPerimeterCount = Hard2PrimaryPerimeterCount + 1
+    end
+  ) 
+    
+  --////EPSILON
+  if ( Hard2PrimaryPerimeterCount > 0 ) then    
+    Hard2Status = Hard2PrimaryAirbase.." - Epsilon Squadron\nAirspace Is Being Contested By The Allies\n"   
+    SEF_HARDSQUADRON2_SPAWN("Palmyra", Hard2DestinationAirbase)  
+  else
+    Hard2Status = Hard2PrimaryAirbase.." - Epsilon Squadron\nAirspace Is Controlled By Syria\n"
+    SEF_HARDSQUADRON2_SPAWN(Hard2PrimaryAirbase, Hard2DestinationAirbase)
+  end   
+end
+
+function SEF_HARDSQUADRON2_DEPLOYMENT()  
+  
+  --EPSILON
+  if ( Airbase.getByName("Palmyra"):getCoalition() == 1 and ( Airbase.getByName("Al Qusayr"):getCoalition() == 1 or Airbase.getByName("An Nasiriyah"):getCoalition() == 1  ) ) then
+    --Set Epsilon To Tiyas and patrol Tiyas, Hold The Forward Line
+    Hard2PrimaryAirbase = "Palmyra"
+    Hard2DestinationAirbase = "Kiryat Shmona"
+  else
+    --Set Epsilon To Palmyra and patrol Tiyas
+    Hard2PrimaryAirbase = "Palmyra"
+    Hard2DestinationAirbase = "An Nasiriyah"
+  end
+  --END EPSILON 
+end
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --////BLUE SQUADRONS
 
 function SEF_BLUESQUADRON1_SCHEDULER()
@@ -5733,6 +6701,11 @@ timer.scheduleFunction(SEF_REDSQUADRON2_SCHEDULER, nil, timer.getTime() + math.r
 timer.scheduleFunction(SEF_REDSQUADRON3_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerInitialMin, RedRespawnTimerInitialMax))
 timer.scheduleFunction(SEF_REDSQUADRON4_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerInitialMin, RedRespawnTimerInitialMax))
 timer.scheduleFunction(SEF_REDSQUADRON5_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerInitialMin, RedRespawnTimerInitialMax))
+
+--////HARD RED CAP INITIALIZE
+timer.scheduleFunction(SEF_HARDSQUADRON1_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerInitialMin, RedRespawnTimerInitialMax))
+timer.scheduleFunction(SEF_HARDSQUADRON2_SCHEDULER, nil, timer.getTime() + math.random(RedRespawnTimerInitialMin, RedRespawnTimerInitialMax))
+
 
 --////BLUE CAP INITIALISE
 timer.scheduleFunction(SEF_BLUESQUADRON1_SCHEDULER, nil, timer.getTime() + math.random(BlueRespawnTimerInitialMin, BlueRespawnTimerInitialMax))
