@@ -1,12 +1,7 @@
---///////////////////////////////////////////////////////////////////////////////////
--- Name: Operation Scarlet Dawn - Persistence Module
--- Author: Surrexen via Pikey's Simple Group Saving Script  ༼ つ ◕_◕ ༽つ    (づ｡◕‿◕｡)づ 
---///////////////////////////////////////////////////////////////////////////////////
-
 ----------------------------------------------------------
 SaveScheduleUnits = 300 --Seconds between each table write
 ----------------------------------------------------------
-  
+ 
 function IntegratedbasicSerialize(s)
     if s == nil then
 		return "\"\""
@@ -73,7 +68,7 @@ function SEF_GetTableLength(Table)
 	for _ in pairs(Table) do TableLengthCount = TableLengthCount + 1 end
 	return TableLengthCount
 end
---[[
+
 --////SAVE FUNCTION FOR UNITS
 function SEF_SaveUnitIntermentTable(timeloop, time)
 	IntermentMissionStr = IntegratedserializeWithCycles("ScarletDawnUnitInterment", ScarletDawnUnitInterment)
@@ -99,7 +94,7 @@ function SEF_SaveStaticIntermentTableNoArgs()
 	IntermentMissionStrStatic = IntegratedserializeWithCycles("ScarletDawnStaticInterment", ScarletDawnStaticInterment)
 	writemission(IntermentMissionStrStatic, "ScarletDawnStaticInterment.lua")	
 end
-]]--
+
 function SEF_SaveAirbasesTable(timeloop, time)
 	SEF_PERSISTENTAIRBASES(PersistentAirbases)
 	AirbaseStr = IntegratedserializeWithCycles("ScarletDawnAirbases", ScarletDawnAirbases)
@@ -181,10 +176,10 @@ function SEF_CAPAIRBASE(Airbase, Coalition)
 end
 -------------------------------------------------------------------------------------------------------------------------------------
 --////MAIN
---[[
+
 SEFDeletedUnitCount = 0
 SEFDeletedStaticCount = 0
-
+--[[
 --////LOAD UNITS
 if file_exists("ScarletDawnUnitInterment.lua") then	
 	
@@ -273,7 +268,6 @@ else
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-
 --SCHEDULE
 --trigger.action.outText("Persistent World Functions Schedulers Are Currently Disabled", 15)
 --timer.scheduleFunction(SEF_SaveUnitIntermentTable, 53, timer.getTime() + SaveScheduleUnits)
