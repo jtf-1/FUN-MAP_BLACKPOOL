@@ -169,7 +169,7 @@ local EWRtoDestroy = EWRcount - EWRtoKeep
 -- REDFOR IADS --
 -----------------
 redIADS = SkynetIADS:create('SYRIA')
-redIADS:setUpdateInterval(15)
+redIADS:setUpdateInterval(5)
 redIADS:addEarlyWarningRadarsByPrefix('EWR')
 redIADS:addSAMSitesByPrefix('SAM')
 redIADS:getSAMSitesByNatoName('SA-2'):setGoLiveRangeInPercent(80)
@@ -187,5 +187,6 @@ local sa152 = redIADS:getSAMSiteByGroupName('SAM-SA15-2')
 redIADS:getSAMSiteByGroupName('SAM-SA10-1'):addPointDefence(sa152)
 local sa153 = redIADS:getSAMSiteByGroupName('SAM-SA15-3')
 redIADS:getSAMSiteByGroupName('SAM-SA10-2'):addPointDefence(sa153)
+redIADS:addRadioMenu()  
 
 redIADS:activate()    
