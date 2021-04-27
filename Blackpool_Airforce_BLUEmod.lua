@@ -1,7 +1,4 @@
---//////////////////////////////////////////////////////////
--- Name: Operation Scarlet Dawn - Airforce Module
--- Author: Surrexen    à¼¼ ã�¤ â—•_â—• à¼½ã�¤    (ã�¥ï½¡â—•â€¿â—•ï½¡)ã�¥
---//////////////////////////////////////////////////////////
+env.info("Airforce Loading", false)
 
 --[[
 "Abu al-Duhur"
@@ -6714,3 +6711,4 @@ timer.scheduleFunction(SEF_BLUESQUADRON4_SCHEDULER, nil, timer.getTime() + math.
 timer.scheduleFunction(SEF_BLUESQUADRON5_SCHEDULER, nil, timer.getTime() + math.random(BlueRespawnTimerInitialMin, BlueRespawnTimerInitialMax))
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+env.info("Airforce Complete", false)

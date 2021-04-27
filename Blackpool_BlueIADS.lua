@@ -1,3 +1,5 @@
+env.info("BLUE IADS Loading", false)
+
 --assert(loadfile("F:\\_Google Drive\\DCS Missions\\SydADF2012.lua"))()
 --SA6 % availability - 100% is full complement
 --SA2 % availability
@@ -86,6 +88,8 @@ blueIADS:addEarlyWarningRadarsByPrefix('blueEWR')
 blueIADS:addSAMSitesByPrefix('bSAM')
 blueIADS:getSAMSitesByNatoName('Patriot str'):setEngagementZone(SkynetIADSAbstractRadarElement.GO_LIVE_WHEN_IN_SEARCH_RANGE)
 blueIADS:getSAMSitesByNatoName('Hawk str'):setEngagementZone(SkynetIADSAbstractRadarElement.GO_LIVE_WHEN_IN_SEARCH_RANGE)
-blueIADS:addRadioMenu()  
+--blueIADS:addRadioMenu()  
 
 blueIADS:activate()    
+
+env.info("BLUE IADS Complete", false)

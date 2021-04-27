@@ -1,3 +1,6 @@
+env.info("BASECAP Loading", false)
+
+
 function SEF_BASECAP_REMOVE ()
   env.info("BASECAP Remove Starting", false)
   
@@ -80,3 +83,6 @@ end
   
 timer.scheduleFunction(SEF_BASECAP_REMOVE, nil, timer.getTime() + 15)
 timer.scheduleFunction(SEF_BASECAP_RESPAWN, nil, timer.getTime() + 20)
+
+env.info("BASECAP Complete", false)
+

@@ -1,7 +1,4 @@
---////////////////////////////////////////////////////////////////
--- Name: Operation Scarlet Dawn - Mission Logic Module
--- Author: Surrexen    à¼¼ ã�¤ â—•_â—• à¼½ã�¤    (ã�¥ï½¡â—•â€¿â—•ï½¡)ã�¥ 
---////////////////////////////////////////////////////////////////
+env.info("Mission Loading", false)
 
 --////VARIABLES
 
@@ -3845,7 +3842,7 @@ function SEF_RadioMenuSetup()
 	BlackpoolBLUECAPToggle = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle Allied AI CAP Flights", BlackpoolCAPOptions, function() SEF_BLUESQUADRONSTOGGLE() end, nil)
 	BlackpoolHARDCAPToggle = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle HARD RED CAP Flights", BlackpoolCAPOptions, function() SEF_HARDSQUADRONSTOGGLE() end, nil)  
 	BlackpoolToggleCustomSounds = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle Custom Sounds", BlackpoolSNDOptions, function() SEF_ToggleCustomSounds() end, nil)	
-	--ScarletDawnClearCarrierFighters  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Clear Carrier Deck Of Fighters", BlackpoolOptions, function() SEF_ClearAIFightersFromCarrierDeck() end, nil)
+	ScarletDawnClearCarrierFighters  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Clear Carrier Deck Of Fighters", BlackpoolOptions, function() SEF_ClearAIFightersFromCarrierDeck() end, nil)
 	--ScarletDawnClearCarrierTankers  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Clear Carrier Deck Of Tankers", BlackpoolOptions, function() SEF_ClearAITankersFromCarrierDeck() end, nil)
 	ScarletDawnPhaseCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Battle Phase", BlackpoolOptions, function() SEF_BattlePhaseCheck() end, nil)
 	ScarletDawnSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", BlackpoolOptions, function() SEF_SkipScenario() end, nil)	
@@ -5180,3 +5177,4 @@ AL-DUMAYR
 GOLAN HEIGHTS
 
 ]]--
+env.info("Mission Complete", false)

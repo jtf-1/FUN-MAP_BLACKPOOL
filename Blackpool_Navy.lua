@@ -1,16 +1,13 @@
---//////////////////////////////////////////////////////
--- Name: Operation Scarlet Dawn - Navy Module
--- Author: Surrexen    à¼¼ ã�¤ â—•_â—• à¼½ã�¤    (ã�¥ï½¡â—•â€¿â—•ï½¡)ã�¥ 
---//////////////////////////////////////////////////////
---////MAIN
+env.info("Navy Loading", false)
+
 
 trigger.action.outSound('Background Chatter.ogg')
 
 --////CARRIER GROUP PATROL ROUTE
 --////Set Carrier Group To Patrol Waypoints Indefinately
-if ( Group.getByName("CVN-71 Theodore Roosevelt") ) then
-GROUP:FindByName("CVN-71 Theodore Roosevelt"):PatrolRoute()
-end
+--if ( Group.getByName("CVN-71 Theodore Roosevelt") ) then
+--GROUP:FindByName("CVN-71 Theodore Roosevelt"):PatrolRoute()
+--end
 
 if ( Group.getByName("LHA-1") ) then
 GROUP:FindByName("LHA-1"):PatrolRoute()
@@ -46,15 +43,7 @@ end
 --AIRBOSS:SetICLS(2, TWA)
 --airbossTarawa:Start()
 
----------------------
--- RECOVERY TNAKER --
----------------------
-local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CVN-71 Theodore Roosevelt"), "Tanker_S3-B_Arco1")
-ArcoRoosevelt:SetTakeoffAir()
-ArcoRoosevelt:SetTACAN(106, "ARC")
-ArcoRoosevelt:SetRadio(251.500, "AM")
-ArcoRoosevelt:SetCallsign(2,1)
-ArcoRoosevelt:Start()
+
 
 function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 
@@ -84,12 +73,25 @@ function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 end -- function
 -------------------------------------------------------------------------------------------
 
+---------------------
+-- RECOVERY TNAKER --
+---------------------
+
+local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CVN-71 Theodore Roosevelt"), "Tanker_S3-B_Arco1")
+ArcoRoosevelt:SetTakeoffAir()
+ArcoRoosevelt:SetTACAN(106, "ARC")
+ArcoRoosevelt:SetRadio(251.500, "AM")
+ArcoRoosevelt:SetCallsign(2,1)
+ArcoRoosevelt:Start()
+
+-------------------------------------------------------------------------------------------
+
 local airbossRoosevelt=AIRBOSS:New("CVN-71 Theodore Roosevelt")
 airbossRoosevelt:SetSoundfilesFolder("Airboss Soundfiles/")
 airbossRoosevelt:SetVoiceOversLSOByRaynor()
 airbossRoosevelt:SetVoiceOversMarshalByRaynor()
 airbossRoosevelt:SetRespawnAI(true)
-airbossRoosevelt:SetStaticWeather(false)
+airbossRoosevelt:SetStaticWeather(true)
 airbossRoosevelt:SetRecoveryTanker(ArcoRoosevelt)
 airbossRoosevelt:SetTACAN(71, "X", "RSV")
 airbossRoosevelt:SetICLS(1, "RSV")
@@ -123,16 +125,15 @@ airbossRoosevelt:AddRecoveryWindow("19:15", "19:45", 1, nil, true, 28, true)
 airbossRoosevelt:AddRecoveryWindow("20:15", "20:45", 3, nil, true, 28, true)
 airbossRoosevelt:AddRecoveryWindow("21:15", "21:45", 3, nil, true, 28, true)
 airbossRoosevelt:AddRecoveryWindow("22:15", "22:45", 3, nil, true, 28, true)
---airbossRoosevelt:SetPatrolAdInfinitum(switch)
+airbossRoosevelt:SetPatrolAdInfinitum(true)
 airbossRoosevelt:SetDefaultPlayerSkill("Flight Student")
 airbossRoosevelt:SetMenuSmokeZones(false)
 airbossRoosevelt:SetMenuMarkZones(false)
 airbossRoosevelt:SetMenuSingleCarrier(true)
 airbossRoosevelt:SetMenuRecovery(30, 28, true, 30)
 airbossRoosevelt:SetAirbossNiceGuy(true)
-airbosstruman:Load(nil, "Syria_Roosevelt_LSOgrades.csv")
-airbosstruman:SetAutoSave(nil, "Syria_Roosevelt_LSOgrades.csv")
---airbossRoosevelt:SetTrapSheet("C:\\AirbossGrades\\TrapSheets\\", "trap")
+airbossRoosevelt:Load(nil, "Syria_Roosevelt_LSOgrades.csv")
+airbossRoosevelt:SetAutoSave(nil, "Syria_Roosevelt_LSOgrades.csv")
 airbossRoosevelt:Start()
 
-
+env.info("Navy Complete", false)

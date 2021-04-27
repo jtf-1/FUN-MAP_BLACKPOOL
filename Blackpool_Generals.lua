@@ -1,7 +1,4 @@
---//////////////////////////////////////////////////////////
--- Name: Operation Scarlet Dawn - Generals Module
--- Author: Surrexen    à¼¼ ã�¤ â—•_â—• à¼½ã�¤    (ã�¥ï½¡â—•â€¿â—•ï½¡)ã�¥ 
---//////////////////////////////////////////////////////////
+env.info("Generals Loading", false)
 
 --[[
 	"Abu al-Duhur"
@@ -3148,5 +3145,6 @@ world.addEventHandler(SEF_ONDEADEVENTHANDLER)
 
 --////END EVENT HANDLERS
 --trigger.action.outText("Event Handlers Started", 15)
-env.info("Surrexen's Event Handlers Loaded Successfully", false)
+env.info("Generals Complete", false)
+
 -------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,8 +1,5 @@
---//////////////////////////////////////////////////////
--- Name: Operation Scarlet Dawn - Navy Module
--- Author: Surrexen    à¼¼ ã�¤ â—•_â—• à¼½ã�¤    (ã�¥ï½¡â—•â€¿â—•ï½¡)ã�¥ 
---//////////////////////////////////////////////////////
---////MAIN
+env.info("Tankers Loading", false)
+
 -----------------
 -- AWACS SPAWN --
 -----------------
@@ -25,7 +22,8 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      Shell3:CommandSetCallsign(3,3)
      end 
      )
-     local Tanker_KC135_Texaco3 = SPAWN
+     
+local Tanker_KC135_Texaco3 = SPAWN
    :New( "Tanker_KC135_Texaco3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
@@ -36,7 +34,8 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      Texaco3:CommandSetCallsign(1,3)
      end 
      )
-     local Tanker_C130_Arco3 = SPAWN
+     
+local Tanker_C130_Arco3 = SPAWN
    :New( "Tanker_C130_Arco3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
@@ -47,7 +46,8 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      Arco3:CommandSetCallsign(2,3)
      end 
      )
-     local Tanker_KC135MPRS_Shell2 = SPAWN
+     
+local Tanker_KC135MPRS_Shell2 = SPAWN
    :New( "Tanker_KC135MPRS_Shell2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
@@ -58,9 +58,9 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      Shell2:CommandSetCallsign(3,2)
      end 
      )
-     local Tanker_KC135_Texaco2 = SPAWN
+
+local Tanker_KC135_Texaco2 = SPAWN
    :New( "Tanker_KC135_Texaco2" )
-   --:InitRadioFrequency(317.725)
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
    :InitRadioFrequency(317.725)
@@ -70,7 +70,8 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      Texaco2:CommandSetCallsign(1,2)
      end 
      )
-     local Tanker_C130_Arco2 = SPAWN
+
+local Tanker_C130_Arco2 = SPAWN
    :New( "Tanker_C130_Arco2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
@@ -82,6 +83,4 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
      end 
      )
      
-
-
-
+env.info("Tankers Complete", false)

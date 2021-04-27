@@ -1,3 +1,5 @@
+env.info("Persistent World Loading", false)
+
 ----------------------------------------------------------
 SaveScheduleUnits = 300 --Seconds between each table write
 ----------------------------------------------------------
@@ -285,5 +287,5 @@ end
 --timer.scheduleFunction(SEF_SaveUnitIntermentTable, 53, timer.getTime() + SaveScheduleUnits)
 --timer.scheduleFunction(SEF_SaveStaticIntermentTable, 53, timer.getTime() + (SaveScheduleUnits + 3))
 timer.scheduleFunction(SEF_SaveAirbasesTable, 53, timer.getTime() + (SaveScheduleUnits + 5))
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------
+env.info("Persistent World Complete", false)
