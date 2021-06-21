@@ -124,7 +124,7 @@ PersistentAirbases = {
   "Eyn Shemer",
   --"Gaziantep",
   --"H4",
-  "Haifa",
+  --"Haifa",
   "Hama",
   "Hatay",
   --"Incirlik",

@@ -34,7 +34,7 @@ Cargo.Container_Enclosed = false
 Cargo.offload_cargo = false
 Cargo.all_cargo_survive_to_the_ground = false
 Cargo.all_cargo_gets_destroyed = false
-Cargo.destroy_cargo_dropped_without_parachute = true
+Cargo.destroy_cargo_dropped_without_parachute = false
 Cargo.scheduleFunctionID = 0
 
 local CargoHeading = 0

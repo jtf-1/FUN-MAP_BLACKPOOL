@@ -15,7 +15,7 @@ local Tanker_KC135MPRS_Shell3 = SPAWN
    :New( "Tanker_KC135MPRS_Shell3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
-   :InitRadioFrequency(276.1)
+   :InitRadioFrequency(317.775)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Shell3 )
@@ -27,7 +27,7 @@ local Tanker_KC135_Texaco3 = SPAWN
    :New( "Tanker_KC135_Texaco3" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
-   :InitRadioFrequency(276.15)
+   :InitRadioFrequency(317.750)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Texaco3 )
@@ -51,7 +51,7 @@ local Tanker_KC135MPRS_Shell2 = SPAWN
    :New( "Tanker_KC135MPRS_Shell2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
-   :InitRadioFrequency(317.775)
+   :InitRadioFrequency(317.725)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Shell2 )
@@ -63,7 +63,7 @@ local Tanker_KC135_Texaco2 = SPAWN
    :New( "Tanker_KC135_Texaco2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
-   :InitRadioFrequency(317.725)
+   :InitRadioFrequency(317.650)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Texaco2 )
@@ -75,7 +75,7 @@ local Tanker_C130_Arco2 = SPAWN
    :New( "Tanker_C130_Arco2" )
    :InitLimit( 1, 99 )
    :InitRepeatOnLanding()
-   :InitRadioFrequency(317.75)
+   :InitRadioFrequency(276.100)
    :SpawnScheduled( 15, 1 )
    :OnSpawnGroup(
      function( Arco2 )

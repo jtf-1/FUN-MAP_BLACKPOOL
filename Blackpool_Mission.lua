@@ -3819,13 +3819,21 @@ function SEF_RadioMenuSetup()
 
 	--////Setup Submenu For Support Requests
 	SupportMenuMain = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Support", nil)
-	SupportMenuAbort = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Abort Directives", nil)
+	SupportMenuAbort = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Abort Support", nil)
 	SupportMenuCAP  = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Fighter Support", SupportMenuMain)
 	SupportMenuCAS  = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Close Air Support", SupportMenuMain)
 	SupportMenuSEAD = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request SEAD Support", SupportMenuMain)
 	SupportMenuASS = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Anti-Shipping Support", SupportMenuMain)
-	SupportMenuPIN = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request A Pinpoint Strike", SupportMenuMain)
-	SupportMenuDRONE = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request An MQ-9 Reaper Drone", SupportMenuMain)
+	SupportMenuPIN = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request Pinpoint Strike", SupportMenuMain)
+	SupportMenuDRONE = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Request MQ-9 Reaper Drone", SupportMenuMain)
+	
+		--////Objective Options
+  ObjectiveInfo = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Objective Info", nil)
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", ObjectiveInfo, function() CheckObjectiveRequest() end, nil)
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", ObjectiveInfo, function() TargetReport() end, nil)
+  missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", ObjectiveInfo, function() SEF_TargetSmoke() end, nil)
+  ScarletDawnPhaseCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Battle Phase", ObjectiveInfo, function() SEF_BattlePhaseCheck() end, nil)
+  ScarletDawnSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", ObjectiveInfo, function() SEF_SkipScenario() end, nil)
 	
 	--////AI Support Flights Mission Abort Codes
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Fighter Screen", SupportMenuAbort, function() AbortCAPMission() end, nil)	
@@ -3835,23 +3843,27 @@ function SEF_RadioMenuSetup()
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Pinpoint Strike", SupportMenuAbort, function() AbortPINMission() end, nil)
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission MQ-9 Reaper Drone", SupportMenuAbort, function() AbortDroneMission() end, nil)	
 	
-	--////Scarlet Dawn Mission Options
+	--////Blackpool Mission Options
 	BlackpoolOptions = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Blackpool Options", nil)
 	BlackpoolCAPOptions = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Blackpool CAP Options", BlackpoolOptions)
-	BlackpoolSNDOptions = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Blackpool Sound Options", BlackpoolOptions)
+	--BlackpoolSNDOptions = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Blackpool Sound Options", BlackpoolOptions)
 	BlackpoolBLUECAPToggle = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle Allied AI CAP Flights", BlackpoolCAPOptions, function() SEF_BLUESQUADRONSTOGGLE() end, nil)
 	BlackpoolHARDCAPToggle = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle HARD RED CAP Flights", BlackpoolCAPOptions, function() SEF_HARDSQUADRONSTOGGLE() end, nil)  
-	BlackpoolToggleCustomSounds = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle Custom Sounds", BlackpoolSNDOptions, function() SEF_ToggleCustomSounds() end, nil)	
+	--BlackpoolToggleCustomSounds = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle Custom Sounds", BlackpoolSNDOptions, function() SEF_ToggleCustomSounds() end, nil)	
 	ScarletDawnClearCarrierFighters  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Clear Carrier Deck Of Fighters", BlackpoolOptions, function() SEF_ClearAIFightersFromCarrierDeck() end, nil)
 	--ScarletDawnClearCarrierTankers  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Clear Carrier Deck Of Tankers", BlackpoolOptions, function() SEF_ClearAITankersFromCarrierDeck() end, nil)
-	ScarletDawnPhaseCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Battle Phase", BlackpoolOptions, function() SEF_BattlePhaseCheck() end, nil)
-	ScarletDawnSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", BlackpoolOptions, function() SEF_SkipScenario() end, nil)	
+	--ScarletDawnPhaseCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Battle Phase", BlackpoolOptions, function() SEF_BattlePhaseCheck() end, nil)
+	--ScarletDawnSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", BlackpoolOptions, function() SEF_SkipScenario() end, nil)	
+	 
 	 --////Setup Menu Option To Get The Current Objective
-  ScarletDawnCheckObj = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", BlackpoolOptions, function() CheckObjectiveRequest() end, nil)
+  --ScarletDawnCheckObj = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", BlackpoolOptions, function() CheckObjectiveRequest() end, nil)
   --////Target Report to get target numbers and coordinates 
-  ScarletDawnTargetReport = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", BlackpoolOptions, function() TargetReport() end, nil)
+  --ScarletDawnTargetReport = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", BlackpoolOptions, function() TargetReport() end, nil)
   --////Drop Smoke On The Target
-  ScarletDawnSmokeObj = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", BlackpoolOptions, function() SEF_TargetSmoke() end, nil)
+  --ScarletDawnSmokeObj = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", BlackpoolOptions, function() SEF_TargetSmoke() end, nil)
+  AdminOptions = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Admin Options", BlackpoolOptions)
+  RemoveBlueBaseCAP  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Remove BLUE BASECAP", AdminOptions, function() SEF_BASECAP_REMOVE () end, nil)
+  RespawnBlueBaseCAP  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Respawn BLUE BASECAP", AdminOptions, function() SEF_BASECAP_RESPAWN () end, nil)
 	
 	--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--////CAP FLIGHTS
