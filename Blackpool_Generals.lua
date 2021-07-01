@@ -2722,51 +2722,51 @@ function SEF_LANDINGHANDLER:onEvent(Event)
 			if (LandedUnitCoalition == 1) then																					--Red Air Landed				
 				if string.find(LandedUnitGroupName, "SyAAF An%-26B") then
 					if ( LandedPlace ~= nil ) then											
-						trigger.action.outText("A Syrian "..LandedUnitTypeName.." Landed At "..LandedPlace, 15)
+						--trigger.action.outText("A Syrian "..LandedUnitTypeName.." Landed At "..LandedPlace, 15)
 						SEF_CAPAIRBASE(LandedPlace, LandedUnitCoalition)
 					else
-						trigger.action.outText("A Syrian "..LandedUnitTypeName.." Has Landed", 15)
+						--trigger.action.outText("A Syrian "..LandedUnitTypeName.." Has Landed", 15)
 					end										
 				elseif string.find(LandedUnitGroupName, "IRIAF Mi%-8MTV2") then
 					if ( LandedPlace ~= nil ) then
-						trigger.action.outText("A Syrian "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15) 
+						--trigger.action.outText("A Syrian "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15) 
 						SEF_CAPAIRBASEWITHHELO(LandedUnitName, LandedUnitCoalition)
 					else
-						trigger.action.outText("A Syrian "..LandedUnitTypeName.." Has Landed", 15)
+						--trigger.action.outText("A Syrian "..LandedUnitTypeName.." Has Landed", 15)
 						SEF_CAPAIRBASEWITHHELO(LandedUnitName, LandedUnitCoalition)
 					end					
 				else
 					if ( LandedPlace ~= nil ) then											
-						trigger.action.outText("An "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)					
+						--trigger.action.outText("An "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)					
 					end
 				end
 			elseif (LandedUnitCoalition == 2) then																				--Blue Air Landed					
 				if string.find(LandedUnitGroupName, "USAF C%-130") then
 					if ( LandedPlace ~= nil ) then					
-						trigger.action.outText("An American "..LandedUnitTypeName.." Landed At "..LandedPlace, 15)
+						--trigger.action.outText("An American "..LandedUnitTypeName.." Landed At "..LandedPlace, 15)
 						SEF_CAPAIRBASE(LandedPlace, LandedUnitCoalition)
 					else
-						trigger.action.outText("An American "..LandedUnitTypeName.." Has Landed", 15)
+						--trigger.action.outText("An American "..LandedUnitTypeName.." Has Landed", 15)
 					end										
 				elseif string.find(LandedUnitGroupName, "USAF UH%-60A") then
 					if ( LandedPlace ~= nil ) then
-						trigger.action.outText("An American "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)											
+						--trigger.action.outText("An American "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)											
 						SEF_CAPAIRBASEWITHHELO(LandedUnitName, LandedUnitCoalition)
 					else
-						trigger.action.outText("An American "..LandedUnitTypeName.." Has Landed", 15)
+						--trigger.action.outText("An American "..LandedUnitTypeName.." Has Landed", 15)
 						SEF_CAPAIRBASEWITHHELO(LandedUnitName, LandedUnitCoalition)
 					end				
 				else
 					if ( LandedPlace ~= nil ) then
-						trigger.action.outText("An "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)
+						--trigger.action.outText("An "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)
 					else
 					end	
 				end			
 			else																												--Neutral Air Landed
 				if ( LandedPlace ~= nil ) then
-					trigger.action.outText("An "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)
+					--trigger.action.outText("An "..LandedUnitTypeName.." Has Landed At "..LandedPlace,15)
 				else
-					trigger.action.outText("An "..LandedUnitTypeName.." Has Landed", 15)
+					--trigger.action.outText("An "..LandedUnitTypeName.." Has Landed", 15)
 				end	
 			end	
 		end	
@@ -2806,9 +2806,9 @@ function SEF_CRASHEDHANDLER:onEvent(Event)
 				end
 
 				if string.find(CrashedUnitGroupName, "SyAAF An%-26B") then
-					trigger.action.outText("A Syrian Antonov An-26B Has Crashed!", 15)					
+					--trigger.action.outText("A Syrian Antonov An-26B Has Crashed!", 15)					
 				elseif string.find(CrashedUnitGroupName, "IRIAF Mi%-8MTV2") then
-					trigger.action.outText("A Syrian Mi-8MTV2 Has Crashed!", 15)					
+					--trigger.action.outText("A Syrian Mi-8MTV2 Has Crashed!", 15)					
 				else
 				end
 			elseif ( CrashedUnitCoalition == 2 ) then 												-- Allied Plane Down
@@ -2855,15 +2855,15 @@ function SEF_KILLEDHANDLER:onEvent(Event)
 			
 			if ( KillerUnitCategory == 0 or KillerUnitCategory == 1 ) then
 				if ( TargetUnitCategory == 0 or TargetUnitCategory == 1 ) then
-					trigger.action.outText("A "..KillerUnitTypeName.." Has Killed An "..TargetUnitTypeName, 15)
+					--trigger.action.outText("A "..KillerUnitTypeName.." Has Killed An "..TargetUnitTypeName, 15)
 				else
-					trigger.action.outText("A "..KillerUnitTypeName.." Has Killed An "..TargetUnitName, 15)
+					--trigger.action.outText("A "..KillerUnitTypeName.." Has Killed An "..TargetUnitName, 15)
 				end			
 			elseif ( KillerUnitCategory == 2 or KillerUnitCategory == 3 ) then
 				if ( TargetUnitCategory == 0 or TargetUnitCategory == 1 ) then
-					trigger.action.outText(KillerUnitName.." Has Killed An "..TargetUnitTypeName, 15)
+					--trigger.action.outText(KillerUnitName.." Has Killed An "..TargetUnitTypeName, 15)
 				else
-					trigger.action.outText(KillerUnitName.." Has Killed An "..TargetUnitTypeName, 15)
+					--trigger.action.outText(KillerUnitName.." Has Killed An "..TargetUnitTypeName, 15)
 				end				
 			else
 			end			
