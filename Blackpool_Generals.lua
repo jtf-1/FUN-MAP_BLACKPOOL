@@ -2702,6 +2702,7 @@ timer.scheduleFunction(SEF_BLUEGENERAL_ATTACKAIRBASE, 53, timer.getTime() + math
 -------------------------------------------------------------------------------------------------------------------------------------------------
 --////EVENT HANDLERS
 
+--[[
 SEF_LANDINGHANDLER = {}
 function SEF_LANDINGHANDLER:onEvent(Event)
 
@@ -2871,6 +2872,7 @@ function SEF_KILLEDHANDLER:onEvent(Event)
 	end	
 end
 world.addEventHandler(SEF_KILLEDHANDLER)
+]]--
 
 SEF_BASECAPTUREDEVENTHANDLER = {}
 function SEF_BASECAPTUREDEVENTHANDLER:onEvent(Event)
